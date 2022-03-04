@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "575168640840",
+    "firebase_url": "https://ingrid-fa-default-rtdb.firebaseio.com",
+    "project_id": "ingrid-fa",
+    "storage_bucket": "ingrid-fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575168640840:android:cf6c63753c7c577cd5657d",
+        "android_client_info": {
+          "package_name": "br.com.hbrsoftware.cuidadosFA.cuidados_fibrilacao_atrial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575168640840-e2su3m6faoupjhofoaps8h4lrlq0n912.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAow8Saif5exxi37QFN2thrjw5FBLNhcso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575168640840-e2su3m6faoupjhofoaps8h4lrlq0n912.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
