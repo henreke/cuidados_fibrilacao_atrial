@@ -1,0 +1,137 @@
+import 'package:cuidados_fibrilacao_atrial/data/user.dart';
+import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/validators.dart';
+import 'package:flutter/material.dart';
+
+class CadUserScreen extends StatefulWidget {
+  const CadUserScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CadUserScreen> createState() => _CadUserScreenState();
+}
+
+class _CadUserScreenState extends State<CadUserScreen> {
+
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
+  final TextEditingController confirmacaoSenhaController = TextEditingController();
+  int _tipoUsuario = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cadastro de Usuário'),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Form(
+            key: formkey,
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: true,
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'Nome:'),
+                  autocorrect: false,
+                  controller: nomeController,
+                  validator: (nome){
+                    if (nome!.isEmpty){
+                      return 'Preencha seu nome';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'e-mail'),
+                  keyboardType: TextInputType.emailAddress,
+                  autocorrect: false,
+                  controller: emailController,
+                  validator: (email){
+                    if (!emailValid(email)){
+                      return 'e-mail inválido';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16,),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'senha'),
+                  autocorrect: false,
+                  obscureText: true,
+                  controller: senhaController,
+                  validator: (senha){
+                    if (senha!.isEmpty || senha.length < 6) {
+                      return 'senha inválida';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'confirmação de senha'),
+                  autocorrect: false,
+                  obscureText: true,
+                  controller: confirmacaoSenhaController,
+                  validator: (senha){
+                    if (senha!.isEmpty || senha.length < 6) {
+                      return 'senha inválida';
+                    }
+                    if (senha != senhaController.text) {
+                      return 'senhas não são iguais';
+                    }
+                    return null;
+                  },
+                ),
+                Row(
+                  children: [
+                    ChoiceChip(
+                      label: const Text('Paciente'),
+                      selected: TipoUser.PACIENTE == _tipoUsuario,
+                      onSelected: (bool value){
+                          setState(() {
+                            _tipoUsuario = TipoUser.PACIENTE;
+                          });
+                      },
+                    ),
+                    ChoiceChip(
+                      label: const Text('Médica(o)'),
+                      selected: TipoUser.MEDICO == _tipoUsuario,
+                      onSelected: (bool value){
+                          setState(() {
+                            _tipoUsuario = TipoUser.MEDICO;
+                          });
+                      },
+                    ),
+                    ChoiceChip(
+                      label: const Text('Enfermeira(o)'),
+                      selected: TipoUser.ENFERMEIRO == _tipoUsuario,
+                      onSelected: (bool value){
+                          setState(() {
+                            _tipoUsuario = TipoUser.ENFERMEIRO;
+                          });
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16,),
+                ElevatedButton(
+                    onPressed: (){
+                      if (formkey.currentState!.validate()){
+                        Users user = Users(email: emailController.text, senha: senhaController.text,nome: nomeController.text,tipo: _tipoUsuario);
+                        UserManager userm = UserManager();
+
+                      }
+                    },
+                    child: const Text('Cadastrar',style: TextStyle(fontSize: 18),)
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
