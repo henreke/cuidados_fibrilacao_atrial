@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (formkey.currentState!.validate()){
                           Users user = Users(email: emailController.text, senha: senhaController.text);
                           UserManager userm = UserManager();
-                          userm.login(user: user,onFail:  (e)=>print(e),onSuccess: ()=>print('sucesso'));
+                          userm.login(user: user,onFail:  (){},onSuccess: ()=>print('sucesso'));
                       }
                     },
                     child: const Text('Entrar',style: TextStyle(fontSize: 18),)
