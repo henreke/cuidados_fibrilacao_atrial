@@ -53,12 +53,19 @@ class UserManager {
     );
     print(response.body);
     var mapa = jsonDecode(response.body);
-    _user.isLogged = mapa['id'] != '';
-    _user.id = mapa['id'];
-    _user.nome = mapa['nome'];
-    _user.tipo = mapa['tipo'];
-    print('sucesso');
-    _blcisLoading.add(false);
-    return 1;
+    _user.isLogged = mapa['id'] != '-1';
+    if (_user.isLogged) {
+      _user.id = mapa['id'];
+      _user.nome = mapa['nome'];
+      _user.tipo = mapa['tipo'];
+      print('sucesso');
+      _blcisLoading.add(false);
+      onSuccess();
+      return 1;
+    }else{
+      _blcisLoading.add(false);
+      onFail();
+      return 0;
+    }
   }
 }
