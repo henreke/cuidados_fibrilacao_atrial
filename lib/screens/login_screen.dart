@@ -22,6 +22,11 @@ class _LoginScreenState extends State<LoginScreen> {
     final UserManager userManager = Provider.of<UserManager>(context);
     if (_userManager != userManager) {
       _userManager = userManager;
+      _userManager?.carregarLogin().then((infoLogin){
+        emailController.text = infoLogin['email']!;
+        senhaController.text = infoLogin['senha']!;
+      } );
+
     }
   }
 
@@ -98,8 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text('Login efetuado com sucesso.',style: TextStyle(color: Colors.black),),
 
-                                ));
-                              });
+                                )
+                                );
+                                Navigator.pop(context);
+                              }
+                              );
                           }
                         },
                         child: _isLoading ? const Center(

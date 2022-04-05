@@ -1,16 +1,13 @@
 import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'utils/firebase_config.dart';
+
 Future<void> main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
   runApp(const MyApp());
-  FirebaseFirestore.instance.collection('teste').add({'teste':'teste'});
 }
 
 class MyApp extends StatelessWidget {
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const LoginScreen(),
+        home: const MainScreen(),
       ),
     );
   }

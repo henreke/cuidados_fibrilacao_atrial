@@ -6,12 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import  'package:flutter_secure_storage/flutter_secure_storage.dart';
 class UserManager {
 
   Users _user = Users(nome: '',email: '',senha: '',dtnascimento: 0,tipo: 0);
+
   BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
   Stream<bool> get isLoading =>_blcisLoading.stream;
 
+  BehaviorSubject<bool> _blcisLogged = BehaviorSubject<bool>.seeded(false);
+  Stream<bool> get isLogged =>_blcisLogged.stream;
 
 
   Future<int> cadUser({required VoidCallback onSuccess, required VoidCallback onFail, required Users user}) async {
@@ -42,6 +46,7 @@ class UserManager {
   }
   void dispose(){
     _blcisLoading.close();
+    _blcisLogged.close();
   }
 
   Future<int> login({required Users user, required void Function() onSuccess, required void Function() onFail}) async{
@@ -58,7 +63,10 @@ class UserManager {
       _user.id = mapa['id'];
       _user.nome = mapa['nome'];
       _user.tipo = mapa['tipo'];
-      print('sucesso');
+      _user.email = user.email;
+      _user.senha = user.senha;
+      salvarLogin();
+      _blcisLogged.add(_user.isLogged);
       _blcisLoading.add(false);
       onSuccess();
       return 1;
@@ -67,5 +75,29 @@ class UserManager {
       onFail();
       return 0;
     }
+  }
+
+  logout(){
+    _user.email = '';
+    _user.senha = '';
+    _user.isLogged = false;
+    _blcisLogged.add(false);
+  }
+
+  Future<bool> salvarLogin() async{
+    if (!_user.isLogged){
+      return false;
+    }
+    final storege = new FlutterSecureStorage();
+    await storege.write(key: 'email', value: _user.email);
+    await storege.write(key: 'senha', value: _user.senha);
+    return true;
+  }
+
+  Future<Map<String,String>> carregarLogin() async{
+    final storege = new FlutterSecureStorage();
+    _user.email = (await storege.read(key: 'email'))!;
+    _user.senha = (await storege.read(key: 'senha'))!;
+    return {'email':_user.email, 'senha':_user.senha};
   }
 }
