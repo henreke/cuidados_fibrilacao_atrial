@@ -22,4 +22,26 @@ class MedicamentoManager{
     return lista;
   }
 
+  Future<List<MedicamentoPaciente>> getMedicamentosPacienteAtual({required String idPaciente}) async{
+    List<MedicamentoPaciente> lista = <MedicamentoPaciente>[];
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/medicamentos/getMedicamentosPacienteAtual.php"),
+      body: json.encode({'idPaciente':idPaciente}),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    List<dynamic> mapa = jsonDecode(response.body);
+
+    print(mapa.runtimeType);
+    mapa.forEach((medicamento) {
+      lista.add(MedicamentoPaciente(id: medicamento['id'],
+          dose: medicamento['dose'],
+          data: medicamento['data'],
+          frequencia: medicamento['frequencia'],
+      medicamento: Medicamento(nome: medicamento['nome'],dose: medicamento['dose'])));
+    });
+
+    return lista;
+  }
+
 }
