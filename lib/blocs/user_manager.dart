@@ -1,6 +1,6 @@
 import 'package:cuidados_fibrilacao_atrial/utils/firebase_erros.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
-import 'user.dart';
+import '../data/user.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -100,4 +100,6 @@ class UserManager {
     _user.senha = (await storege.read(key: 'senha'))!;
     return {'email':_user.email, 'senha':_user.senha};
   }
+
+  String get uid => _user.id;
 }

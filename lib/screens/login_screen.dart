@@ -1,5 +1,6 @@
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
-import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +88,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child:TextButton(
                         onPressed: (){},
                         child: const Text('Esqueci minha senha'),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child:TextButton(
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CadUserScreen()));
+                        },
+                        child: const Text('Cadastar'),
                       ),
                     ),
                     const SizedBox(height: 16,),

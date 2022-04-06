@@ -1,5 +1,5 @@
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
-import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

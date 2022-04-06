@@ -1,6 +1,7 @@
-import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/enviar_exame.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/minhas_medicacoes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class MainScreen extends StatefulWidget {
@@ -61,6 +62,9 @@ class _MainScreenState extends State<MainScreen> {
                 TextButton(
                     onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
                     child: const Text('Enviar exame')),
+                TextButton(
+                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
+                    child: const Text('Minhas medicações'))
               ],
             )
           ],

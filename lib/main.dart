@@ -1,4 +1,4 @@
-import 'package:cuidados_fibrilacao_atrial/data/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/main_screen.dart';
