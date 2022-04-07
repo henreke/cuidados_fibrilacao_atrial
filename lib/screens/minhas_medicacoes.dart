@@ -25,8 +25,15 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
     final UserManager userManager = Provider.of<UserManager>(context);
     if (_userManager != userManager) {
       _userManager = userManager;
-      _medicamentoManager.getMedicamentosPacienteAtual(idPaciente: _userManager!.uid).then((lista) => lista_medicamentos = lista);
+      _medicamentoManager.getMedicamentosPacienteAtual(idPaciente: _userManager!.uid);
     }
+  }
+
+
+  @override
+  void dispose() {
+    _medicamentoManager.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,21 +46,28 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
       ),
       body: ListView(
           children: [
-            TextButton(child: const Text('clqiue'),onPressed: (){
-              MedicamentoManager _mManager = MedicamentoManager();
-              _mManager.getMedicamentos();
-            },),
-            ListView.builder(
-                itemCount: lista_medicamentos.length,
-                shrinkWrap: true,
-                itemBuilder: (context,item){
-                  return MedicamentosTile(
-                    data: lista_medicamentos[item].data,
-                    dose: lista_medicamentos[item].dose,
-                    nome: lista_medicamentos[item].medicamento!.nome,
-                    frequencia: lista_medicamentos[item].frequencia,
-                  );
+            StreamBuilder<List<MedicamentoPaciente>>(
+              stream: _medicamentoManager.listMedicamentosPaciente,
+              builder: (context, snapshot) {
+                if (snapshot.hasData || snapshot.data != null) {
+                  lista_medicamentos = snapshot.data!;
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                      itemCount: lista_medicamentos.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, item) {
+                        return MedicamentosTile(
+                          data: lista_medicamentos[item].data,
+                          dose: lista_medicamentos[item].dose,
+                          nome: lista_medicamentos[item].medicamento!.nome,
+                          frequencia: lista_medicamentos[item].frequencia,
+                          dose_tomadas: lista_medicamentos[item].dose_tomada,
+                        );
+                      });
+                } else{
+                  return Container();
                 }
+              }
             ),
           ],
         ),

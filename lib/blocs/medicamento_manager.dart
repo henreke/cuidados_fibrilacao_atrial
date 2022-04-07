@@ -7,6 +7,13 @@ import 'package:rxdart/rxdart.dart';
 class MedicamentoManager{
 
 
+  BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosPaciente =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
+  Stream<List<MedicamentoPaciente>> get listMedicamentosPaciente=>_blcMedicamentosPaciente.stream;
+
+  void dispose(){
+    _blcMedicamentosPaciente.close();
+  }
+
   Future<List<Medicamento>> getMedicamentos() async{
     List<Medicamento> lista = <Medicamento>[];
     var response = await http.post(
@@ -37,11 +44,22 @@ class MedicamentoManager{
       lista.add(MedicamentoPaciente(id: medicamento['id'],
           dose: medicamento['dose'],
           data: medicamento['data'],
+          dose_tomada: medicamento['dose_tomada'],
           frequencia: medicamento['frequencia'],
       medicamento: Medicamento(nome: medicamento['nome'],dose: medicamento['dose'])));
     });
-
+    _blcMedicamentosPaciente.add(lista);
     return lista;
+  }
+
+  Future<int> tomarMedicacao({required String idMedicamentoPaciente, required String idPaciente}) async{
+
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/medicamentos/tomarMedicamento.php"),
+      body: json.encode({'idMedicamentoPaciente':idMedicamentoPaciente,'idPaciente':idPaciente}),
+      headers: {'Content-Type': 'application/json'},
+    );
+    return 1;
   }
 
 }

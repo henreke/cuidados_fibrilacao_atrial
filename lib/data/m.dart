@@ -13,6 +13,7 @@ class MedicamentoPaciente{
   late int? dose;
   late int? data;
   late int? idPaciente;
+  late int? dose_tomada;
 
   MedicamentoPaciente(
       {this.id,
@@ -20,5 +21,6 @@ class MedicamentoPaciente{
       this.frequencia,
       this.dose,
       this.data,
-      this.idPaciente});
+      this.idPaciente,
+      this.dose_tomada});
 }
