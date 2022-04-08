@@ -1,4 +1,5 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/buscar_pacientes_centro_medico.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/enviar_exame.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/minhas_medicacoes.dart';
@@ -66,7 +67,14 @@ class _MainScreenState extends State<MainScreen> {
                     onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
                     child: const Text('Minhas medicações'))
               ],
-            )
+            ),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
+                    child: const Text('Visualizar Pacientes')),
+              ],
+            ),
           ],
         ),
       ),

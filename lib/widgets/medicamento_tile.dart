@@ -1,14 +1,16 @@
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class MedicamentosTile extends StatefulWidget {
 
   late String? nome;
+  late String? nome_medico;
   late int? data;
   late int? dose;
   late int? frequencia;
   late int? dose_tomadas;
-
-  MedicamentosTile({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas}) : super(key: key);
+  late void Function() tomarMedicacao;
+  MedicamentosTile({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.tomarMedicacao,required this.nome_medico}) : super(key: key);
 
 
 
@@ -41,13 +43,15 @@ class _MedicamentosTileState extends State<MedicamentosTile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Data de início: ${widget.data}'),
+                Text('Data de início: ${Utils.epochToString(widget.data!)}'),
                 Text('Dose: ${widget.dose}mg'),
               ],
             ),
             const SizedBox(height: 8,),
+            Text('Prescrito por:\n${widget.nome_medico ?? ''}'),
+            const SizedBox(height: 8,),
             Text(faltaTomar ? 'Ainda faltam ${widget.frequencia! - widget.dose_tomadas!} hoje.' : 'Parabéns você já tomou sua medicação completa hoje'),
-            if (faltaTomar)TextButton(onPressed: (){}, child: const Text('Tomei minha medicação')),
+            if (faltaTomar)TextButton(onPressed: ()=>widget.tomarMedicacao(), child: const Text('Tomei minha medicação')),
           ],
         ),
       ),

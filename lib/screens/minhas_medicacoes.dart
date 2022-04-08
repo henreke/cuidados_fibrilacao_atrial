@@ -1,6 +1,6 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
-import 'package:cuidados_fibrilacao_atrial/data/m.dart';
+import 'package:cuidados_fibrilacao_atrial/data/medicamento.dart';
 import 'package:cuidados_fibrilacao_atrial/widgets/medicamento_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,8 +60,25 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
                           data: lista_medicamentos[item].data,
                           dose: lista_medicamentos[item].dose,
                           nome: lista_medicamentos[item].medicamento!.nome,
+                          nome_medico:  lista_medicamentos[item].nome_medico,
                           frequencia: lista_medicamentos[item].frequencia,
                           dose_tomadas: lista_medicamentos[item].dose_tomada,
+                          tomarMedicacao: (){
+                            _medicamentoManager.tomarMedicacao(
+                                idMedicamentoPaciente: lista_medicamentos[item].id!,
+                                idPaciente: _userManager!.uid,
+                                onSuccess: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Anotado!'),
+                                      ));
+                                  _medicamentoManager.getMedicamentosPacienteAtual(idPaciente: _userManager!.uid);
+                                },
+                                onFail: ()=>ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text('Ocorreu uma falha, verifique sua conexão com a internet',style: TextStyle(color: Colors.black),),
+
+                                )));
+                          },
                         );
                       });
                 } else{

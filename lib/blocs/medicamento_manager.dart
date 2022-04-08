@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:cuidados_fibrilacao_atrial/data/m.dart';
+import 'package:cuidados_fibrilacao_atrial/data/medicamento.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -39,27 +39,35 @@ class MedicamentoManager{
 
     List<dynamic> mapa = jsonDecode(response.body);
 
-    print(mapa.runtimeType);
+
     mapa.forEach((medicamento) {
       lista.add(MedicamentoPaciente(id: medicamento['id'],
           dose: medicamento['dose'],
           data: medicamento['data'],
           dose_tomada: medicamento['dose_tomada'],
           frequencia: medicamento['frequencia'],
+      nome_medico: medicamento['medico'],
       medicamento: Medicamento(nome: medicamento['nome'],dose: medicamento['dose'])));
     });
     _blcMedicamentosPaciente.add(lista);
     return lista;
   }
 
-  Future<int> tomarMedicacao({required String idMedicamentoPaciente, required String idPaciente}) async{
+  Future<int> tomarMedicacao({required int idMedicamentoPaciente, required String idPaciente,required void Function() onSuccess, required void Function() onFail}) async{
 
     var response = await http.post(
       Uri.parse("${Utils.server_path}/medicamentos/tomarMedicamento.php"),
       body: json.encode({'idMedicamentoPaciente':idMedicamentoPaciente,'idPaciente':idPaciente}),
       headers: {'Content-Type': 'application/json'},
     );
-    return 1;
+    var mapa = jsonDecode(response.body);
+
+    if (mapa['success'] == 1){
+      onSuccess();
+      return 1;
+    }
+    onFail();
+    return 0;
   }
 
 }

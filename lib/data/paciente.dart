@@ -1,9 +1,14 @@
-class Paciente{
-  late String nome;
-  late String email;
-  late String senha;
-  late int genero;
+import 'package:cuidados_fibrilacao_atrial/data/exame.dart';
+import 'package:cuidados_fibrilacao_atrial/data/medicamento.dart';
 
-  Paciente(this.nome, this.email, this.senha, this.genero);
+class Paciente{
+  late String? nome;
+  late String? email;
+  late String? senha;
+  late int? genero;
+  late List<MedicamentoPaciente>? listaMedicamentos;
+  late Exame? ultimoExame;
+
+  Paciente({this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame});
 
 }
