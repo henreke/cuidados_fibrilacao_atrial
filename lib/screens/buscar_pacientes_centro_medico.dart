@@ -1,7 +1,10 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/centro_medico_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/paciente_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/centro_medico.dart';
+import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
+import 'package:cuidados_fibrilacao_atrial/widgets/paciente_tile.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 class BuscarPacientesCentroMedicoScreen extends StatefulWidget {
   const BuscarPacientesCentroMedicoScreen({Key? key}) : super(key: key);
 
@@ -11,6 +14,15 @@ class BuscarPacientesCentroMedicoScreen extends StatefulWidget {
 
 class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentroMedicoScreen> {
   CentroMedicoManager _centroMedicoManager = CentroMedicoManager();
+
+  PacienteManager _pacienteManager = PacienteManager();
+
+
+  @override
+  void dispose() {
+    _pacienteManager.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +38,9 @@ class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentr
                 return ComboCentroMedico(
                     lista: snapshot.data as List<CentroMedico>,
                   escolherCentro: (int id){
-                      print(id);
+                    Map<String,dynamic> exameMapa = jsonDecode('{"valor":899,"foto":"624d9b5e69963.png","data":1649253287610}');
+
+                    _pacienteManager.getPacientesCentroMedico(idCentroMedico: id);
                   },
                 );
               }
@@ -35,6 +49,22 @@ class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentr
             }
             },
             future: _centroMedicoManager.getAll(),
+          ),
+          StreamBuilder<List<Paciente>>(
+            stream: _pacienteManager.listPacienteCentroMedico,
+            builder: (context, snapshot) {
+              List<Paciente> lista = snapshot.data as List<Paciente>;
+
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: lista.length,
+                itemBuilder: (context,item){
+                  return PacienteTile(
+                    paciente: lista[item],
+                  );
+                },
+              );
+            }
           ),
         ],
       ),

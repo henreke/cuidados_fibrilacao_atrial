@@ -1,10 +1,10 @@
-import 'package:cuidados_fibrilacao_atrial/data/user.dart';
+import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class PacienteTile extends StatelessWidget {
 
-  final Users? paciente;
+  final Paciente? paciente;
   const PacienteTile({this.paciente,Key? key}) : super(key: key);
 
   @override
