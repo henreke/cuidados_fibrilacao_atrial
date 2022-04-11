@@ -34,4 +34,42 @@ class ExameManager{
     return mapa["success"];
 
   }
+
+  Future<int> updateValorExame({required Exame exame, required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+    _blcisLoading.add(true);
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/exames/updateValorExame.php"),
+      body: json.encode({'idExame':exame.id,'valor':exame.valor,'idUser':idUser}),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
+    if (mapa['success'] == 1){
+      onSuccess();
+      return 1;
+    } else{
+      onFail();
+      return 0;
+    }
+  }
+
+    Future<int> marcarTratadoExame({required Exame exame, required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+      _blcisLoading.add(true);
+      var response = await http.post(
+        Uri.parse("${Utils.server_path}/exames/marcarTratadoExame.php"),
+        body: json.encode({'idExame':exame.id,'idUser':idUser}),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      var mapa = jsonDecode(response.body);
+      _blcisLoading.add(false);
+      if (mapa['success'] == 1){
+        onSuccess();
+        return 1;
+      } else{
+        onFail();
+        return 0;
+      }
+    }
 }

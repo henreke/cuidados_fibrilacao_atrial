@@ -9,7 +9,8 @@ class Paciente{
   late int? genero;
   late List<MedicamentoPaciente>? listaMedicamentos;
   late Exame? ultimoExame;
+  late int? dtnascimento;
 
-  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame});
+  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame,this.dtnascimento});
 
 }

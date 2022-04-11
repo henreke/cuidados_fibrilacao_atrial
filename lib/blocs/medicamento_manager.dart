@@ -70,4 +70,26 @@ class MedicamentoManager{
     return 0;
   }
 
+  Future<int> alterarMedicacao({required int idMedicamento,required int dose, required String idPaciente,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/medicamentos/alterarMedicamento.php"),
+      body: json.encode({
+        'idMedicamento':idMedicamento,
+        'idPaciente':idPaciente,
+        'dose':dose,
+        'idUser':idUser
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+    var mapa = jsonDecode(response.body);
+
+    if (mapa['success'] == 1){
+      onSuccess();
+      return 1;
+    }
+    onFail();
+    return 0;
+  }
+
 }
