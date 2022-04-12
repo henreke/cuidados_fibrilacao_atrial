@@ -40,7 +40,7 @@ class PacienteManager{
         exame.tratado = exameMapa['tratado'];
         exame.id = exameMapa['idExame'];
       }
-      lista.add(Paciente(uid: paciente['id'],dtnascimento: paciente['dtnascimento'], nome: paciente['nome'], ultimoExame: exame,listaMedicamentos: paciente['listaMedicamentos']));
+      lista.add(Paciente(uid: paciente['idPaciente'],dtnascimento: paciente['dtnascimento'], nome: paciente['nome'], ultimoExame: exame,listaMedicamentos: paciente['listaMedicamentos']));
     });
 
     _blcPacienteCentroMedico.add(lista);

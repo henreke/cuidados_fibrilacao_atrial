@@ -9,8 +9,12 @@ class ExameManager{
     BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
     Stream<bool> get isLoading =>_blcisLoading.stream;
 
+    BehaviorSubject<List<Exame>> _blcListaExame = BehaviorSubject<List<Exame>>.seeded(<Exame>[]);
+    Stream<List<Exame>> get listaExamesPaciente => _blcListaExame.stream;
+
     void dispose(){
       _blcisLoading.close();
+      _blcListaExame.close();
     }
 
     Future<int> cadExame({required Exame exame,required void Function() onSuccess, required void Function() onFail}) async{
@@ -71,5 +75,29 @@ class ExameManager{
         onFail();
         return 0;
       }
+    }
+
+    Future<List<Exame>> getListaExamesPaciente({required String id,required String idUser}) async{
+      _blcisLoading.add(true);
+      List<Exame> lista = <Exame>[];
+      var response = await http.post(
+        Uri.parse("${Utils.server_path}/exames/getListaExamesPaciente.php"),
+        body: json.encode({'idPaciente':id,'idUser':idUser}),
+        headers: {'Content-Type': 'application/json'},
+      );
+      List<dynamic> mapa = jsonDecode(response.body);
+      mapa.forEach((exame) {
+        lista.add(Exame(
+            id: exame['id'],
+          valor: exame['valor'],
+          tratado: exame['tratado'],
+          data: exame['data'],
+          data_tratado: exame['data_tratado']
+        ),
+        );
+      });
+      _blcisLoading.add(false);
+      _blcListaExame.add(lista);
+      return lista;
     }
 }

@@ -9,12 +9,19 @@ class MedicamentoManager{
 
   BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosPaciente =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
   Stream<List<MedicamentoPaciente>> get listMedicamentosPaciente=>_blcMedicamentosPaciente.stream;
+  BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
+  Stream<bool> get isLoading =>_blcisLoading.stream;
 
+  BehaviorSubject<List<Medicamento>> _blcMedicamentoList = BehaviorSubject<List<Medicamento>>.seeded(<Medicamento>[]);
+  Stream<List<Medicamento>> get listMedicamentos => _blcMedicamentoList.stream;
   void dispose(){
     _blcMedicamentosPaciente.close();
+    _blcisLoading.close();
+    _blcMedicamentoList.close();
   }
 
   Future<List<Medicamento>> getMedicamentos() async{
+    _blcisLoading.add(true);
     List<Medicamento> lista = <Medicamento>[];
     var response = await http.post(
       Uri.parse("${Utils.server_path}/medicamentos/getAll.php"),
@@ -25,11 +32,13 @@ class MedicamentoManager{
     mapa.forEach((medicamento) {
       lista.add(Medicamento(id: medicamento['id'], nome: medicamento['nome'], dose: medicamento['dose']));
     });
-
+    _blcMedicamentoList.add(lista);
+    _blcisLoading.add(false);
     return lista;
   }
 
   Future<List<MedicamentoPaciente>> getMedicamentosPacienteAtual({required String idPaciente}) async{
+    _blcisLoading.add(true);
     List<MedicamentoPaciente> lista = <MedicamentoPaciente>[];
     var response = await http.post(
       Uri.parse("${Utils.server_path}/medicamentos/getMedicamentosPacienteAtual.php"),
@@ -47,9 +56,10 @@ class MedicamentoManager{
           dose_tomada: medicamento['dose_tomada'],
           frequencia: medicamento['frequencia'],
       nome_medico: medicamento['medico'],
-      medicamento: Medicamento(nome: medicamento['nome'],dose: medicamento['dose'])));
+      medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose'])));
     });
     _blcMedicamentosPaciente.add(lista);
+    _blcisLoading.add(false);
     return lista;
   }
 
@@ -70,20 +80,24 @@ class MedicamentoManager{
     return 0;
   }
 
-  Future<int> alterarMedicacao({required int idMedicamento,required int dose, required String idPaciente,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+  Future<int> alterarMedicacao({int? idMedicamentoPacienteAnterior, required int idMedicamento,required int dose, required int frequencia, required String idPaciente,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
 
+    _blcisLoading.add(true);
     var response = await http.post(
       Uri.parse("${Utils.server_path}/medicamentos/alterarMedicamento.php"),
       body: json.encode({
         'idMedicamento':idMedicamento,
         'idPaciente':idPaciente,
         'dose':dose,
-        'idUser':idUser
+        'frequencia':frequencia,
+        'idUser':idUser,
+        'idMedicamentoPacienteAnterior': idMedicamentoPacienteAnterior ?? 0
       }),
       headers: {'Content-Type': 'application/json'},
     );
-    var mapa = jsonDecode(response.body);
 
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
     if (mapa['success'] == 1){
       onSuccess();
       return 1;

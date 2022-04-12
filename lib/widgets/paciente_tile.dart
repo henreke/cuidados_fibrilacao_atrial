@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,14 @@ class PacienteTile extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8,),
-            Center(child: TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto'))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
+                TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen(paciente: paciente,))), child: Text('Histórico de Exames')),
+              ],
+            ),
+
           ],
         ),
       ),

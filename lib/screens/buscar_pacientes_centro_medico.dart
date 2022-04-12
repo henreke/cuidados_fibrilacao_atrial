@@ -4,6 +4,7 @@ import 'package:cuidados_fibrilacao_atrial/blocs/paciente_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/centro_medico.dart';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/alterar_medicamento.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/visualizar_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/widgets/paciente_tile.dart';
 import 'package:flutter/material.dart';
@@ -51,16 +52,17 @@ class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentr
       ),
       body: ListView(
         children: [
-          FutureBuilder(builder: (context, snapshot) {
+          FutureBuilder<List<CentroMedico>>(builder: (context, snapshot) {
             if (snapshot.hasData) {
-                return ComboCentroMedico(
-                    lista: snapshot.data as List<CentroMedico>,
-                  escolherCentro: (int id){
-                    Map<String,dynamic> exameMapa = jsonDecode('{"valor":899,"foto":"624d9b5e69963.png","data":1649253287610}');
-
-                    _pacienteManager.getPacientesCentroMedico(idCentroMedico: id);
-                  },
-                );
+              if (snapshot.data!.isNotEmpty) {
+                  return ComboCentroMedico(
+                    lista: snapshot.data,
+                    escolherCentro: (int id) => _pacienteManager
+                        .getPacientesCentroMedico(idCentroMedico: id),
+                  );
+                } else{
+                return Container();
+              }
               }
             else{
               return Container();
@@ -79,12 +81,12 @@ class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentr
               return ListView.builder(
                 shrinkWrap: true,
                 itemCount: lista.length,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context,item){
-
                   return PacienteTile(
                     paciente: lista[item],
                     visualizarExame: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>VisualizarExamesScreen(paciente: lista[item],))),
-                    alterarMedicacao: (){},
+                    alterarMedicacao: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>AlterarMedicamentoScreen(paciente: lista[item],))),
                     marcarVisto: ()=>_exameManager.marcarTratadoExame(
                         exame: lista[item].ultimoExame!,
                         idUser: _userManager!.uid,
@@ -118,21 +120,21 @@ class ComboCentroMedico extends StatefulWidget {
 
 class _ComboCentroMedicoState extends State<ComboCentroMedico> {
 
-  CentroMedicoManager _centroMedicoManager = CentroMedicoManager();
   CentroMedico? _centroMedico;
 
   @override
   Widget build(BuildContext context) {
 
-    _centroMedico ??= widget.lista!.first;
+    //_centroMedico ??= widget.lista!.first;
+    print(_centroMedico);
     return DropdownButton<CentroMedico>(
           value: _centroMedico,
           onChanged: (CentroMedico? newValue){
             setState(() {
-              _centroMedico = newValue ?? _centroMedico;
+            _centroMedico = newValue ?? _centroMedico;
 
             });
-            widget.escolherCentro(_centroMedico!.id!);
+            widget.escolherCentro(newValue!.id!);
           },
           items: widget.lista!.map<DropdownMenuItem<CentroMedico>>((centromedico){
             return DropdownMenuItem(child: Text(centromedico.nome!),value: centromedico,);
