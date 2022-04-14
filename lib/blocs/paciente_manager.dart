@@ -28,17 +28,20 @@ class PacienteManager{
     print(response.body);
     List<dynamic> mapa = jsonDecode(response.body);
     mapa.forEach((paciente) {
-      String exames = paciente['exameJson'];
+      Exame exame = Exame(valor: 0,foto: '',data: 0);
+      String exames = paciente['exameJson'] ?? '';
       exames = exames.replaceAll("'", "\"");
       print(exames);
-      Map<String,dynamic> exameMapa =  jsonDecode(exames);
-      Exame exame = Exame(valor: 0,foto: '',data: 0);
-      if (exameMapa.isNotEmpty) {
-        exame.valor = exameMapa['valor'];
-        exame.data = exameMapa['data'];
-        exame.foto = paciente['base64'];
-        exame.tratado = exameMapa['tratado'];
-        exame.id = exameMapa['idExame'];
+      if (exames.isNotEmpty) {
+        Map<String, dynamic> exameMapa = jsonDecode(exames);
+
+        if (exameMapa.isNotEmpty) {
+          exame.valor = exameMapa['valor'];
+          exame.data = exameMapa['data'];
+          exame.foto = paciente['base64'];
+          exame.tratado = exameMapa['tratado'];
+          exame.id = exameMapa['idExame'];
+        }
       }
       lista.add(Paciente(uid: paciente['idPaciente'],dtnascimento: paciente['dtnascimento'], nome: paciente['nome'], ultimoExame: exame,listaMedicamentos: paciente['listaMedicamentos']));
     });
