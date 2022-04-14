@@ -15,4 +15,8 @@ class Utils{
     int anos = (DateTime.now().difference(data).inDays/365).round();
     return (anos);
   }
+
+  static int valorExameAlto = -1;
+  static int valorExameBaixo = -1;
+
 }

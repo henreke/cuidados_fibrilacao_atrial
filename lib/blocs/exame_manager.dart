@@ -100,4 +100,15 @@ class ExameManager{
       _blcListaExame.add(lista);
       return lista;
     }
+
+    Future<void> getParamExame() async{
+      var response = await http.post(
+        Uri.parse("${Utils.server_path}/exames/getParamValorExame.php"),
+        body: json.encode('{}'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      Map<String,dynamic> mapa = jsonDecode(response.body);
+      Utils.valorExameAlto = mapa['alto'];
+      Utils.valorExameBaixo = mapa['baixo'];
+    }
 }

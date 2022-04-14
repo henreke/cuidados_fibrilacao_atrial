@@ -102,6 +102,18 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                                 }
                               });
                           },
+                          excluirMedicacao: (){
+                            _medicamentoManager.excluirMedicacao(
+                                idUser: _userManager!.uid,
+                                idMedicamentoPaciente: lista_medicamentos[item].id!,
+                                onSuccess: (){
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: Text('Medicamento exlcuído com sucesso!'),
+                                  ));
+                                  _medicamentoManager.getMedicamentosPacienteAtual(idPaciente: widget.paciente.uid!);
+                                },
+                                onFail: (){});
+                          },
                         );
                       });
                 } else{

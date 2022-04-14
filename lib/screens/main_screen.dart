@@ -1,8 +1,10 @@
+import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/buscar_pacientes_centro_medico.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/enviar_exame.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/minhas_medicacoes.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class MainScreen extends StatefulWidget {
@@ -16,6 +18,15 @@ class _MainScreenState extends State<MainScreen> {
 
   UserManager? _userManager;
 
+  ExameManager _exameManager = ExameManager();
+
+  @override
+  void initState() {
+    super.initState();
+    if (Utils.valorExameAlto == -1){
+      _exameManager.getParamExame();
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -25,6 +36,12 @@ class _MainScreenState extends State<MainScreen> {
     if (_userManager != userManager) {
       _userManager = userManager;
     }
+  }
+
+  @override
+  void dispose() {
+    _exameManager.dispose();
+    super.dispose();
   }
 
   @override

@@ -10,7 +10,8 @@ class MedicamentosTileEdicao extends StatefulWidget {
   late int? frequencia;
   late int? dose_tomadas;
   late void Function() alterarMedicacao;
-  MedicamentosTileEdicao({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.alterarMedicacao,required this.nome_medico}) : super(key: key);
+  late void Function() excluirMedicacao;
+  MedicamentosTileEdicao({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.alterarMedicacao,required this.excluirMedicacao,required this.nome_medico}) : super(key: key);
 
 
 
@@ -51,7 +52,14 @@ class _MedicamentosTileEdicaoState extends State<MedicamentosTileEdicao> {
             const SizedBox(height: 8,),
             Text('Prescrito por:\n${widget.nome_medico ?? ''}'),
             const SizedBox(height: 8,),
-            Center(child: TextButton(onPressed: ()=>widget.alterarMedicacao(), child: const Text('Alterar medicação'))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 20,),
+                TextButton(onPressed: ()=>widget.alterarMedicacao(), child: const Text('Alterar medicação')),
+                IconButton(onPressed: ()=>widget.excluirMedicacao(),icon: const Icon(Icons.delete,color: Colors.redAccent,)),
+              ],
+            ),
           ],
         ),
       ),

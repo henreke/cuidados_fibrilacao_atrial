@@ -106,4 +106,26 @@ class MedicamentoManager{
     return 0;
   }
 
+  Future<int> excluirMedicacao({required String idUser,required int idMedicamentoPaciente,required void Function() onSuccess, required void Function() onFail}) async{
+
+    _blcisLoading.add(true);
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/medicamentos/excluirMedicamento.php"),
+      body: json.encode({
+        'idUser':idUser,
+        'idMedicamentoPaciente': idMedicamentoPaciente
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
+    if (mapa['success'] == 1){
+      onSuccess();
+      return 1;
+    }
+    onFail();
+    return 0;
+  }
+
 }

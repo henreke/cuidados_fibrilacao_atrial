@@ -6,6 +6,7 @@ import 'package:cuidados_fibrilacao_atrial/data/centro_medico.dart';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/alterar_medicamento.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/visualizar_exames.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:cuidados_fibrilacao_atrial/widgets/paciente_tile.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -51,6 +52,7 @@ class _BuscarPacientesCentroMedicoScreenState extends State<BuscarPacientesCentr
         centerTitle: true,
       ),
       body: ListView(
+        padding: const EdgeInsets.all(8),
         children: [
           FutureBuilder<List<CentroMedico>>(builder: (context, snapshot) {
             if (snapshot.hasData) {
