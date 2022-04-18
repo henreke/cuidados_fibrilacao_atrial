@@ -44,4 +44,17 @@ class ChatManager{
     _blcListChat.add(chats);
     return chats;
   }
+  Future<bool> enviarChatPaciente({required String idUser,required String idPaciente,required String msg}) async{
+    _blcisLoading.add(true);
+    List<Chat> chats = <Chat>[];
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/chat/enviarChatPaciente.php"),
+      body: json.encode({'idTo':idPaciente,'idFrom':idUser,'msg':msg}),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
+    return mapa['success'] == 1;
+  }
 }

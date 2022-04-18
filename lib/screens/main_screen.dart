@@ -1,6 +1,7 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/buscar_pacientes_centro_medico.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chat_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/enviar_exame.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
