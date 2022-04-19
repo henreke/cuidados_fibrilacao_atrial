@@ -17,6 +17,7 @@ class UserManager {
   BehaviorSubject<bool> _blcisLogged = BehaviorSubject<bool>.seeded(false);
   Stream<bool> get isLogged =>_blcisLogged.stream;
 
+  Timer? timerJWT;
 
   Future<int> cadUser({required VoidCallback onSuccess, required VoidCallback onFail, required Users user}) async {
     _blcisLoading.add(true);
@@ -65,9 +66,14 @@ class UserManager {
       _user.tipo = mapa['tipo'];
       _user.email = user.email;
       _user.senha = user.senha;
+      _user.jwt = mapa['jwt'];
+      print(mapa['tokenExpiry']);
       salvarLogin();
       _blcisLogged.add(_user.isLogged);
       _blcisLoading.add(false);
+      timerJWT = Timer.periodic(const Duration(seconds: 60), (timer) {
+        renovarJWT();
+      });
       onSuccess();
       return 1;
     }else{
@@ -101,5 +107,17 @@ class UserManager {
     return {'email':_user.email, 'senha':_user.senha};
   }
 
+  void renovarJWT() async{
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/Users/refreshToken.php"),
+      body: json.encode({'jwt':jwt}),
+      headers: {'Content-Type': 'application/json'},
+    );
+    try{
+      var mapa = jsonDecode(response.body);
+      _user.jwt = mapa['token'];
+    } catch(e){}
+  }
   String get uid => _user.id;
+  String get jwt => _user.jwt!;
 }

@@ -6,7 +6,8 @@ class jwtManager{
     //let logoutEventName = 'anjus-logout';
     //let refreshEndpoint = '/refresh-token';
     //let refreshTimeOutId;
-    late int tipo_user = null;
+    //region Description
+   /* late int tipo_user = null;
 
 
     // This countdown feature is used to renew the JWT before it's no longer valid
@@ -107,6 +108,7 @@ class jwtManager{
     eraseTipo_user(){
         tipo_user = null;
         return true;
-    }
+    }*/
+//endregion
 
 }

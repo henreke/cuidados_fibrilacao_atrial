@@ -11,35 +11,12 @@ class Users{
   late int? dtnascimento = 0;
   late String id = '';
   bool isLogged = false;
+  late String? jwt;
 
-  Users({required this.email, required this.senha, this.nome, this.tipo,this.dtnascimento});
+  Users({required this.email, required this.senha, this.nome, this.tipo,this.dtnascimento,this.jwt});
 
   Map<String,dynamic> toJson() => {"nome":nome,"email":email, "senha":senha,"tipo":tipo,"dtnascimento":dtnascimento};
 
-  Future<int> cadUser({required VoidCallback onSuccess, required VoidCallback onFail}) async {
-    print(toJson());
-    var response = await http.post(
-      Uri.parse("${Utils.server_path}/Users/loginJWT.php"),
-      body: json.encode(toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-
-    var mapa = jsonDecode(response.body);
-    var sucesso = mapa['success'];
-    switch (sucesso) {
-      case 0:
-        break;
-      case 1:
-        print('sucesso');
-        //await Login();
-        //this.islogged = true;
-        break;
-      case 2:
-        break;
-    }
-    return sucesso;
-
-  }
 }
 
 class TipoUser{

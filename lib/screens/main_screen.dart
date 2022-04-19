@@ -1,5 +1,6 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/associar_paciente_centromedico_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/buscar_pacientes_centro_medico.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chat_screen.dart';
@@ -92,6 +93,16 @@ class _MainScreenState extends State<MainScreen> {
                 TextButton(
                     onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
                     child: const Text('Visualizar Pacientes')),
+                TextButton(
+                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
+                    child: const Text('Orientações')),
+              ],
+            ),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const AssociarPacienteCentroMedicoScreen())),
+                    child: const Text('Associar Pacientes Centro Médico')),
                 TextButton(
                     onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
                     child: const Text('Orientações')),

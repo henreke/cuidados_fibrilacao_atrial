@@ -56,7 +56,7 @@ class MedicamentoManager{
           dose_tomada: medicamento['dose_tomada'],
           frequencia: medicamento['frequencia'],
       nome_medico: medicamento['medico'],
-      medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose'])));
+      medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose_medicamento'])));
     });
     _blcMedicamentosPaciente.add(lista);
     _blcisLoading.add(false);
@@ -80,7 +80,7 @@ class MedicamentoManager{
     return 0;
   }
 
-  Future<int> alterarMedicacao({int? idMedicamentoPacienteAnterior, required int idMedicamento,required int dose, required int frequencia, required String idPaciente,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+  Future<int> alterarMedicacao({int? idMedicamentoPacienteAnterior, required int idMedicamento,required int dose, required int frequencia, required String idPaciente,required String jwt,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
 
     _blcisLoading.add(true);
     var response = await http.post(
@@ -91,11 +91,11 @@ class MedicamentoManager{
         'dose':dose,
         'frequencia':frequencia,
         'idUser':idUser,
+        'jwt':jwt,
         'idMedicamentoPacienteAnterior': idMedicamentoPacienteAnterior ?? 0
       }),
       headers: {'Content-Type': 'application/json'},
     );
-
     var mapa = jsonDecode(response.body);
     _blcisLoading.add(false);
     if (mapa['success'] == 1){

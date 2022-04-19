@@ -9,8 +9,9 @@ class MedicamentosTile extends StatefulWidget {
   late int? dose;
   late int? frequencia;
   late int? dose_tomadas;
+  late int? dose_prescrita;
   late void Function() tomarMedicacao;
-  MedicamentosTile({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.tomarMedicacao,required this.nome_medico}) : super(key: key);
+  MedicamentosTile({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.tomarMedicacao,required this.nome_medico,required this.dose_prescrita}) : super(key: key);
 
 
 
@@ -53,16 +54,17 @@ class _MedicamentosTileState extends State<MedicamentosTile> {
             Text(faltaTomar ? 'Ainda faltam ${widget.frequencia! - widget.dose_tomadas!} hoje.' : 'Parabéns você já tomou sua medicação completa hoje'),
             if (faltaTomar)TextButton(onPressed: ()=>widget.tomarMedicacao(), child: const Text('Tomei minha medicação')),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   height: 50,
                   child: CustomPaint(
-                    painter: comprimidoRetangulo(perc: 0.5),
+                    painter: comprimidoRetangulo(perc: (widget.dose!/widget.dose_prescrita!),deslocamento_horizontal: 10,deslocamento_vertical: 15),
                   ),
                 ),
                 SizedBox(
                   height: 50,
-                  child: CustomPaint(painter: comprimidoCirculo(perc: 0.25),),
+                  child: CustomPaint(painter: comprimidoCirculo(perc: (widget.dose!/widget.dose_prescrita!),deslocamento_horizontal: -150,deslocamento_vertical: 0),),
                 ),
               ],
             ),
@@ -72,17 +74,39 @@ class _MedicamentosTileState extends State<MedicamentosTile> {
     );
   }
 
+
+
 }
 
 class comprimidoRetangulo extends CustomPainter {
 
   double? perc;
+  double? deslocamento_horizontal;
+  double? deslocamento_vertical;
 
-
-  comprimidoRetangulo({this.perc = 1});
+  comprimidoRetangulo({this.perc = 1,this.deslocamento_horizontal = 0,this.deslocamento_vertical = 0});
 
   @override
   void paint(Canvas canvas, Size size) {
+
+    int inteiros = perc!.truncate();
+    double fracao = perc! - perc!.truncate();
+    if (perc! >= 1){
+      for (int i = 0; i<inteiros; i++){
+        desenhar(canvas: canvas,deslocamento_horizontal: (i*70)+this.deslocamento_horizontal!,deslocamento_vertical: this.deslocamento_vertical!);
+      }
+
+    }
+    if (fracao != 0.0) {
+      desenhar(
+          canvas: canvas,
+          perc: perc! - perc!.truncate(),
+          deslocamento_horizontal: (perc!.truncate() * 70)+this.deslocamento_horizontal!,
+          deslocamento_vertical: this.deslocamento_vertical!);
+    }
+  }
+
+  void desenhar({required Canvas canvas,double perc = 1,double deslocamento_horizontal = 0,double deslocamento_vertical = 0}){
     var paint1 = Paint()
       ..color = Colors.greenAccent
       ..style = PaintingStyle.fill;
@@ -90,14 +114,14 @@ class comprimidoRetangulo extends CustomPainter {
     var paint2 = Paint()
       ..color = Colors.redAccent
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(10,10), 10, paint1);
-    if (perc! < 0.8) {
-      canvas.drawCircle(Offset(60, 10), 10, paint2);
+    canvas.drawCircle(Offset(10+deslocamento_horizontal,10+deslocamento_vertical), 10, paint1);
+    if (perc < 0.99) {
+      canvas.drawCircle(Offset(60+deslocamento_horizontal, 10+deslocamento_vertical), 10, paint2);
     } else {
-      canvas.drawCircle(Offset(60, 10), 10, paint1);
+      canvas.drawCircle(Offset(60+deslocamento_horizontal, 10+deslocamento_vertical), 10, paint1);
     }
-    canvas.drawRect( Rect.fromLTRB(10, 0, (10+50*perc!), 20), paint1);
-    canvas.drawRect( Rect.fromLTRB((10+50*perc!), 0, 60, 20), paint2);
+    canvas.drawRect( Rect.fromLTRB(10+deslocamento_horizontal, 0+deslocamento_vertical, (10+50*perc)+deslocamento_horizontal, 20+deslocamento_vertical), paint1);
+    canvas.drawRect( Rect.fromLTRB((10+50*perc)+deslocamento_horizontal, 0+deslocamento_vertical, 60+deslocamento_horizontal, 20+deslocamento_vertical), paint2);
   }
 
   @override
@@ -107,12 +131,31 @@ class comprimidoRetangulo extends CustomPainter {
 class comprimidoCirculo extends CustomPainter {
 
   double? perc;
+  double? deslocamento_horizontal;
+  double? deslocamento_vertical;
 
-
-  comprimidoCirculo({this.perc = 1});
+  comprimidoCirculo({this.perc = 1,this.deslocamento_horizontal = 0,this.deslocamento_vertical = 0});
 
   @override
   void paint(Canvas canvas, Size size) {
+    int inteiros = perc!.truncate();
+    double fracao = perc! - perc!.truncate();
+    if (perc! >= 1){
+      for (int i = 0; i<inteiros; i++){
+        desenhar(canvas: canvas,deslocamento_horizontal: (i*52)+this.deslocamento_horizontal!,deslocamento_vertical: this.deslocamento_vertical!);
+      }
+
+    }
+    if (fracao != 0.0) {
+      desenhar(
+          canvas: canvas,
+          perc: perc! - perc!.truncate(),
+          deslocamento_horizontal: (perc!.truncate() * 52)+this.deslocamento_horizontal!);
+    }
+  }
+
+  void desenhar({required Canvas canvas,double perc = 1,double deslocamento_horizontal = 0,double deslocamento_vertical = 0}){
+
     var paint1 = Paint()
       ..color = Colors.greenAccent
       ..style = PaintingStyle.fill;
@@ -122,10 +165,9 @@ class comprimidoCirculo extends CustomPainter {
       ..style = PaintingStyle.fill;
     //canvas.drawCircle(Offset(100,10), 10, paint1);
 
-    canvas.drawArc(Rect.fromLTRB(150, 0, 200, 50), 4.71, -2*3.14*perc!, true, paint1);
-    canvas.drawArc(Rect.fromLTRB(150, 0, 200, 50), 4.71, 2*3.14*(1-perc!), true, paint2);
+    canvas.drawArc(Rect.fromLTRB(deslocamento_horizontal, 0+deslocamento_vertical, 50+deslocamento_horizontal, 50+deslocamento_vertical), 4.71, -2*3.14*perc, true, paint1);
+    canvas.drawArc(Rect.fromLTRB(deslocamento_horizontal, 0+deslocamento_vertical,50+deslocamento_horizontal, 50+deslocamento_vertical), 4.71, 2*3.14*(1-perc), true, paint2);
   }
-
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

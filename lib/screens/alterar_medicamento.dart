@@ -91,6 +91,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                                           int.parse(frequenciaController.text),
                                       idPaciente: widget.paciente.uid!,
                                       idUser: _userManager!.uid,
+                                      jwt: _userManager!.jwt,
                                       onSuccess: () {
                                         Navigator.pop(context);
                                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -134,6 +135,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                     int.parse(frequenciaController2.text),
                     idPaciente: widget.paciente.uid!,
                     idUser: _userManager!.uid,
+                    jwt: _userManager!.jwt,
                     onSuccess: () {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

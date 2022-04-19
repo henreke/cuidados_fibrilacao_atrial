@@ -55,7 +55,9 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
                     padding: const EdgeInsets.all(8),
                       itemCount: lista_medicamentos.length,
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, item) {
+
                         return MedicamentosTile(
                           data: lista_medicamentos[item].data,
                           dose: lista_medicamentos[item].dose,
@@ -63,6 +65,7 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
                           nome_medico:  lista_medicamentos[item].nome_medico,
                           frequencia: lista_medicamentos[item].frequencia,
                           dose_tomadas: lista_medicamentos[item].dose_tomada,
+                          dose_prescrita: lista_medicamentos[item].medicamento!.dose,
                           tomarMedicacao: (){
                             _medicamentoManager.tomarMedicacao(
                                 idMedicamentoPaciente: lista_medicamentos[item].id!,
