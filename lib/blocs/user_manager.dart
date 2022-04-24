@@ -48,6 +48,9 @@ class UserManager {
   void dispose(){
     _blcisLoading.close();
     _blcisLogged.close();
+    if (timerJWT != null){
+      timerJWT!.cancel();
+    }
   }
 
   Future<int> login({required Users user, required void Function() onSuccess, required void Function() onFail}) async{
@@ -57,7 +60,7 @@ class UserManager {
       body: json.encode({'email':user.email,'senha':user.senha}),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    //print(response.body);
     var mapa = jsonDecode(response.body);
     _user.isLogged = mapa['id'] != '-1';
     if (_user.isLogged) {
@@ -67,7 +70,6 @@ class UserManager {
       _user.email = user.email;
       _user.senha = user.senha;
       _user.jwt = mapa['jwt'];
-      print(mapa['tokenExpiry']);
       salvarLogin();
       _blcisLogged.add(_user.isLogged);
       _blcisLoading.add(false);
@@ -120,4 +122,5 @@ class UserManager {
   }
   String get uid => _user.id;
   String get jwt => _user.jwt!;
+  String get nome=> _user.nome!;
 }

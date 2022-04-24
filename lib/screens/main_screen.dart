@@ -1,4 +1,7 @@
+import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/associar_paciente_centromedico_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/buscar_pacientes_centro_medico.dart';
@@ -7,6 +10,7 @@ import 'package:cuidados_fibrilacao_atrial/screens/chat_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/enviar_exame.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/minhas_medicacoes.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/notification_service.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   UserManager? _userManager;
 
   ExameManager _exameManager = ExameManager();
-
+  NotificationService _notificationService = NotificationService();
   @override
   void initState() {
     super.initState();
@@ -75,42 +79,134 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
-                    child: const Text('Enviar exame')),
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
-                    child: const Text('Minhas medicações'))
-              ],
-            ),
-            Row(
-              children: [
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
-                    child: const Text('Visualizar Pacientes')),
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
-                    child: const Text('Orientações')),
-              ],
-            ),
-            Row(
-              children: [
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const AssociarPacienteCentroMedicoScreen())),
-                    child: const Text('Associar Pacientes Centro Médico')),
-                TextButton(
-                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
-                    child: const Text('Orientações')),
-              ],
-            ),
-          ],
+      body: formatoLinha(),
+    );
+  }
+  Widget formatoLinha(){
+    return ListView(
+      padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+      children: [
+        tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
+          titulo: 'Enviar exame',
+          img: "ico/clinic-history.png",
+        ),
+        tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
+          titulo: 'Minhas medicações',
+          img: "ico/medicacao.png",
+        ),
+        tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
+          titulo: 'Visualizar Pacientes',
+          img: "ico/examination.png",
+        ),
+        tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
+          titulo: 'Orientações',
+          img: "ico/orientacoes-pessoais.png",
+        ),
+      ],
+    );
+  }
+  Widget tileMenu({required void click(), String img = '', String titulo = ''}){
+    return InkWell(
+      onTap: ()=>click(),
+      child: Card(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Image.asset(img,height: 75),
+              Text(titulo, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+            ],
+          ),
         ),
       ),
+    );
+  }
+  Widget formatoGrid(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              child: Column(
+                children: [
+                  Image.asset("ico/clinic-history.png",height: 75),
+                  const Text('Enviar exame'),
+                ],
+              ),
+              onPressed:  ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
+            ),
+
+            TextButton(
+              onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
+              child: Column(
+                children: [
+                  Image.asset("ico/medicacao.png",height: 75,),
+                  const Text('Minhas medicações'),
+                ],
+              ),
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
+                child: Column(
+                  children: [
+                    Image.asset("ico/examination.png",height: 75,),
+                    const Text('Visualizar Pacientes'),
+                  ],
+                )
+            ),
+            //https://www.flaticon.com/premium-icon/telemedicine_4430171?related_id=4430171
+            TextButton(
+              onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
+              child: Column(
+                children: [
+                  Image.asset("ico/orientacoes-pessoais.png",width: 90,),
+                  const Text('Orientações'),
+                ],
+              ),
+            )
+          ],
+        ),
+        if (false)Row(
+          children: [
+            TextButton(
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const AssociarPacienteCentroMedicoScreen())),
+                child: const Text('Associar Pacientes Centro Médico')),
+            TextButton(
+                onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
+                child: const Text('Orientações')
+            ),
+
+          ],
+        ),
+        TextButton(
+            onPressed: (){
+              print('tempo armado');
+              Timer tempo = Timer(const Duration(minutes: 10),(){
+                MedicamentoManager mm = MedicamentoManager();
+                mm.verificarAlteracaoMedicamento(idPaciente: _userManager!.uid, nomePaciente: _userManager!.nome);
+              });
+
+              Timer.periodic(Duration(seconds: 10), (timer) {
+                MedicamentoManager mm = MedicamentoManager();
+                mm.verificarAlteracaoMedicamento(idPaciente: _userManager!.uid, nomePaciente: _userManager!.nome);
+              });
+
+            },
+            child: const Text('Teste Notificacao')
+        ),
+      ],
     );
   }
 }
