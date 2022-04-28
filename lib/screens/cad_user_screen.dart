@@ -147,9 +147,9 @@ class _CadUserScreenState extends State<CadUserScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text('Cadastro Efetuado com sucesso!'),
                               ));
-                            }, onFail: (){
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                content: Text('Falha no cadastro verifique sua conexão com a internet.',style: TextStyle(color: Colors.black),),
+                            }, onFail: (String falha){
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(falha,style: const TextStyle(color: Colors.black),),
 
                               ));
                             }, user: user);

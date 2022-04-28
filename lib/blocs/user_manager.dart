@@ -19,7 +19,7 @@ class UserManager {
 
   Timer? timerJWT;
 
-  Future<int> cadUser({required VoidCallback onSuccess, required VoidCallback onFail, required Users user}) async {
+  Future<int> cadUser({required VoidCallback onSuccess, required void Function(String texto) onFail, required Users user}) async {
     _blcisLoading.add(true);
     //await Future.delayed(Duration(seconds: 5));
     var response = await http.post(
@@ -32,13 +32,13 @@ class UserManager {
     var sucesso = mapa['success'];
     switch (sucesso) {
       case -1:
-        onFail();
+        onFail("e-mail já cadastrado, caso queira reenviar o código ativação cliquem em Renviar Código");
         break;
       case 1:
         onSuccess();
         break;
       case 2:
-        onFail();
+        onFail("Falha de conexão");
         break;
     }
     _blcisLoading.add(false);
@@ -53,6 +53,17 @@ class UserManager {
     }
   }
 
+  Future<void> recuperarSenha({required String email, required void Function() onSuccess, required void Function() onFail})async{
+      _blcisLoading.add(true);
+      var response = await http.post(
+        Uri.parse("${Utils.server_path}/Users/recuperarsenha.php"),
+        body: json.encode({'email':email}),
+        headers: {'Content-Type': 'application/json'},
+      );
+      var mapa = jsonDecode(response.body);
+      mapa["success"] == 1 ? onSuccess() : onFail();
+      _blcisLoading.add(false);
+  }
   Future<int> login({required Users user, required void Function() onSuccess, required void Function() onFail}) async{
     _blcisLoading.add(true);
     var response = await http.post(
@@ -89,6 +100,8 @@ class UserManager {
     _user.email = '';
     _user.senha = '';
     _user.isLogged = false;
+    _user.tipo = 0;
+    _user.jwt = '';
     _blcisLogged.add(false);
   }
 
@@ -123,4 +136,5 @@ class UserManager {
   String get uid => _user.id;
   String get jwt => _user.jwt!;
   String get nome=> _user.nome!;
+  int get tipo => _user.tipo ?? 0;
 }

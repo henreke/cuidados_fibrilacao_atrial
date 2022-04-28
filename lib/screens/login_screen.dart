@@ -86,7 +86,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.centerRight,
                       child:TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                                _userManager!.recuperarSenha(
+                                    email: emailController.text,
+                                    onSuccess: ()=>ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                      content: Text('Enviado e-mail com sua nova senha, verifique também sua caixa de spam.',style: TextStyle(color: Colors.black),),
+
+                                    )),
+                                    onFail: ()=>ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                      content: Text('esse e-mail não está cadastrado.',style: TextStyle(color: Colors.black),),
+
+                                    ))
+                                );
+                        },
                         child: const Text('Esqueci minha senha'),
                       ),
                     ),

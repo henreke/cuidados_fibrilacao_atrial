@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:cuidados_fibrilacao_atrial/data/user.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
@@ -64,13 +66,19 @@ class _MainScreenState extends State<MainScreen> {
               bool isLogged = snapshot.data ?? false;
               return IconButton(onPressed: (){
                     if (isLogged){
+                      setState(() {
                         _userManager!.logout();
+                      });
+
                     }
                     else{
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginScreen())
-                      );
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginScreen())
+                        ).then((value) => setState((){}));
+
+
                     }
               },
                   icon: isLogged ? const Icon(Icons.person) : const Icon(Icons.login),
@@ -86,25 +94,30 @@ class _MainScreenState extends State<MainScreen> {
     return ListView(
       padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
       children: [
-        tileMenu(
+       if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
           titulo: 'Enviar exame',
           img: "ico/clinic-history.png",
         ),
-        tileMenu(
+        if (_userManager?.tipo == TipoUser.PACIENTE)tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
           titulo: 'Minhas medicações',
           img: "ico/medicacao.png",
         ),
-        tileMenu(
+        if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const BuscarPacientesCentroMedicoScreen())),
           titulo: 'Visualizar Pacientes',
           img: "ico/examination.png",
         ),
-        tileMenu(
+        if (_userManager?.tipo == TipoUser.PACIENTE)tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
           titulo: 'Orientações',
           img: "ico/orientacoes-pessoais.png",
+        ),
+        tileMenu(
+            click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrientacoesGeraisScreen())),
+          titulo: "Orientações Gerais",
+          img: "ico/telemedicine.png"
         ),
       ],
     );
@@ -119,7 +132,8 @@ class _MainScreenState extends State<MainScreen> {
           child: Row(
             children: [
               Image.asset(img,height: 75),
-              Text(titulo, style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+              const SizedBox(width: 10,),
+              Text(titulo, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
             ],
           ),
         ),
