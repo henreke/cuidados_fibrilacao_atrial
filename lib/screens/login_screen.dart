@@ -118,12 +118,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Users user = Users(email: emailController.text, senha: senhaController.text);
                               _userManager!.login(user: user,onFail:  (){
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                  content: Text('Falha no login senha ou e-mail errado.',style: TextStyle(color: Colors.black),),
+                                  content: Text('Falha no login senha ou e-mail errado.',),
 
                                 ));
                               },onSuccess: (){
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                  content: Text('Login efetuado com sucesso.',style: TextStyle(color: Colors.black),),
+                                  content: Text('Login efetuado com sucesso.',),
+                                  backgroundColor: Colors.green,
 
                                 )
                                 );

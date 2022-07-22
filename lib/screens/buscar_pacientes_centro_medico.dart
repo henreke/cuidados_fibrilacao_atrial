@@ -68,6 +68,7 @@ class _BuscarPacientesCentroMedicoScreenState
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: [
+          Text("Escolha o Centro médico"),
           ComboCentroMedico(
             lista: _listacentromedico,
             escolherCentro: (int id) =>
@@ -88,7 +89,7 @@ class _BuscarPacientesCentroMedicoScreenState
                   itemBuilder: (context, item) {
                     return PacienteTile(
                       paciente: lista[item],
-                      visualizarExame: () => Navigator.push(
+                      visualizarExame:  () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => VisualizarExamesScreen(
@@ -103,10 +104,13 @@ class _BuscarPacientesCentroMedicoScreenState
                       marcarVisto: () => _exameManager.marcarTratadoExame(
                           exame: lista[item].ultimoExame!,
                           idUser: _userManager!.uid,
-                          onSuccess: () => ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Exame marcado como visto!'),
-                              )),
+                          onSuccess: () {
+                            _pacienteManager.refreshListaPacientes(lista);
+                            ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(
+                      content: Text('Exame marcado como visto!'+lista[item].ultimoExame!.tratado.toString()),
+                      ));
+                            },
                           onFail: () => ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
                                 content: Text('Falha na marcação!'),
@@ -124,7 +128,8 @@ class _BuscarPacientesCentroMedicoScreenState
 class ComboCentroMedico extends StatefulWidget {
   final List<CentroMedico>? lista;
   final void Function(int) escolherCentro;
-  const ComboCentroMedico(
+  CentroMedico? _centroMedico = null;
+  ComboCentroMedico(
       {required this.lista, required this.escolherCentro, Key? key})
       : super(key: key);
 
@@ -133,17 +138,17 @@ class ComboCentroMedico extends StatefulWidget {
 }
 
 class _ComboCentroMedicoState extends State<ComboCentroMedico> {
-  CentroMedico? _centroMedico;
+
 
   @override
   Widget build(BuildContext context) {
     //_centroMedico ??= widget.lista!.first;
-    print(_centroMedico);
+    print(widget._centroMedico);
     return DropdownButton<CentroMedico>(
-      value: _centroMedico,
+      value: widget._centroMedico,
       onChanged: (CentroMedico? newValue) {
         setState(() {
-          _centroMedico = newValue ?? _centroMedico;
+          widget._centroMedico = newValue ?? widget._centroMedico;
         });
         widget.escolherCentro(newValue!.id!);
       },

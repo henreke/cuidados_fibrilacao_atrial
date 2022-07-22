@@ -25,7 +25,7 @@ class PacienteManager{
       body: json.encode({'idCentroMedico':idCentroMedico}),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    //print(response.body);
     List<dynamic> mapa = jsonDecode(response.body);
     mapa.forEach((paciente) {
       Exame exame = Exame(valor: 0,foto: '',data: 0);
@@ -43,10 +43,23 @@ class PacienteManager{
           exame.id = exameMapa['idExame'];
         }
       }
-      lista.add(Paciente(uid: paciente['idPaciente'],dtnascimento: paciente['dtnascimento'], nome: paciente['nome'], ultimoExame: exame,listaMedicamentos: paciente['listaMedicamentos']));
+      lista.add(
+          Paciente(
+              uid: paciente['idPaciente'],
+              dtnascimento: paciente['dtnascimento'],
+              nome: paciente['nome'],
+              ultimoExame: exame,
+              listaMedicamentos: paciente['listaMedicamentos'],
+              data_ultima_prescricao: paciente['data_ultima_prescricao'] ?? 0
+          )
+      );
     });
 
     _blcPacienteCentroMedico.add(lista);
     _blcisLoading.add(false);
+  }
+
+  void refreshListaPacientes(List<Paciente> lista){
+      _blcPacienteCentroMedico.add(lista);
   }
 }

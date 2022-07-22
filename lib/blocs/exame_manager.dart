@@ -69,6 +69,7 @@ class ExameManager{
       var mapa = jsonDecode(response.body);
       _blcisLoading.add(false);
       if (mapa['success'] == 1){
+        exame.tratado = 1;
         onSuccess();
         return 1;
       } else{

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/historico_exames2.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -18,7 +19,7 @@ class PacienteTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Badge(
       badgeContent: const Icon(Icons.dangerous),
-      showBadge: (paciente!.ultimoExame!.valor! > Utils.valorExameAlto || paciente!.ultimoExame!.valor! < Utils.valorExameBaixo),
+      showBadge: ((paciente!.ultimoExame!.valor! > Utils.valorExameAlto || paciente!.ultimoExame!.valor! < Utils.valorExameBaixo) && paciente!.ultimoExame!.tratado == 0),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -47,25 +48,25 @@ class PacienteTile extends StatelessWidget {
                 children: [
                   const Text('Último exame:'),
 
-                  Text('Data: ${Utils.epochToString(paciente!.ultimoExame!.data!)}'),
+                  Text('Data: ${paciente!.ultimoExame!.data! == 0 ? '------------' :Utils.epochToString(paciente!.ultimoExame!.data!)}'),
                 ],
               ),
               const SizedBox(height: 4,),
 
-              Text('Valor: ${paciente!.ultimoExame?.valor ?? 'Sem valor cadastrado'}'),
+              Text('Valor: ${paciente!.ultimoExame?.valor == 0 ? 'Sem valor cadastrado' : paciente!.ultimoExame?.valor}'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Última dose prescrição:'),
 
-                  Text('Data: ${Utils.epochToString(paciente!.ultimoExame!.data!)}'),
+                  Text('Data: ${paciente!.data_ultima_prescricao! == 0 ? '------------' : Utils.epochToString(paciente!.data_ultima_prescricao!)}'),
                 ],
               ),
               const SizedBox(height: 4,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: ()=>visualizarExame(), child: Text('Visualizar Exame')),
+                  TextButton(onPressed: paciente!.ultimoExame!.data == 0 ? null : ()=>visualizarExame(), child: Text('Visualizar Exame')),
                   TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicação')),
                 ],
               ),
@@ -74,7 +75,7 @@ class PacienteTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
-                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen(paciente: paciente,))), child: Text('Histórico de Exames')),
+                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen2(paciente: paciente,))), child: Text('Histórico de Exames')),
                 ],
               ),
               Center(

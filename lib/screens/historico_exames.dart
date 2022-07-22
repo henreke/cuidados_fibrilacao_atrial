@@ -64,7 +64,7 @@ class _HistoricoExamesScreenState extends State<HistoricoExamesScreen> {
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: AspectRatio(
-            aspectRatio: 2,
+            aspectRatio: 1,
             child: StreamBuilder<List<Exame>>(
               stream: _exameManager.listaExamesPaciente,
               builder: (context, snapshot) {
@@ -98,7 +98,7 @@ class _HistoricoExamesScreenState extends State<HistoricoExamesScreen> {
                             }
                         ),
 
-                      )
+                      ),
                       );
                     } else{
                     return Container();
