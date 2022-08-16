@@ -102,6 +102,7 @@ class UserManager {
     _user.isLogged = false;
     _user.tipo = 0;
     _user.jwt = '';
+    _user.id = '';
     _blcisLogged.add(false);
   }
 

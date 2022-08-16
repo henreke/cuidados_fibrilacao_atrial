@@ -1,3 +1,4 @@
+import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
@@ -14,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   UserManager? _userManager;
-
+  MedicamentoManager? _medicamentoManager;
 
   @override
   void didChangeDependencies() {
@@ -28,6 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
         senhaController.text = infoLogin['senha']!;
       } );
 
+    }
+    final MedicamentoManager medicamentoManager = Provider.of<MedicamentoManager>(context);
+    if (_medicamentoManager != medicamentoManager) {
+      _medicamentoManager = medicamentoManager;
     }
   }
 
@@ -122,6 +127,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 ));
                               },onSuccess: (){
+
+
+                                if (_userManager!.uid != '' && !_medicamentoManager!.tempoAtivado){
+                                  _medicamentoManager!.ativarVerificacao(idPaciente: _userManager!.uid, nomePaciente: _userManager!.nome);
+                                }
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text('Login efetuado com sucesso.',),
                                   backgroundColor: Colors.green,

@@ -4,6 +4,7 @@ import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames2.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/historico_medicacoes.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -78,9 +79,14 @@ class PacienteTile extends StatelessWidget {
                   TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen2(paciente: paciente,))), child: Text('Histórico de Exames')),
                 ],
               ),
-              Center(
-                child: TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações')),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações')),
+                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoMedicacoesScreen(paciente: paciente!,))), child: Text('Histórico Medicações')),
+                ],
               ),
+
             ],
           ),
         ),

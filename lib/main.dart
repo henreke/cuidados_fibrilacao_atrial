@@ -1,3 +1,4 @@
+import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/login_screen.dart';
@@ -21,10 +22,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
     return MultiProvider(
         providers: [
           Provider<UserManager>(
             create: (_) => UserManager(),
+            dispose: (context,value) => value.dispose(),
+          ),
+          Provider<MedicamentoManager>(
+            create: (_) => MedicamentoManager(),
             dispose: (context,value) => value.dispose(),
           ),
         ],

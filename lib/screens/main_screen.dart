@@ -26,7 +26,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   UserManager? _userManager;
-
+  MedicamentoManager? _medicamentoManager;
   ExameManager _exameManager = ExameManager();
   NotificationService _notificationService = NotificationService();
   @override
@@ -45,7 +45,16 @@ class _MainScreenState extends State<MainScreen> {
     if (_userManager != userManager) {
       _userManager = userManager;
     }
+    final MedicamentoManager medicamentoManager = Provider.of<MedicamentoManager>(context);
+    if (_medicamentoManager != medicamentoManager) {
+      _medicamentoManager = medicamentoManager;
+    }
+    if (_userManager!.uid != '' && !_medicamentoManager!.tempoAtivado){
+      _medicamentoManager!.ativarVerificacao(idPaciente: _userManager!.uid, nomePaciente: _userManager!.nome);
+    }
   }
+
+
 
   @override
   void dispose() {
@@ -55,6 +64,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fibrilação Atrial'),
@@ -68,6 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                     if (isLogged){
                       setState(() {
                         _userManager!.logout();
+                        _medicamentoManager!.cancelarTempoVerificacao();
                       });
 
                     }

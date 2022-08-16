@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:cuidados_fibrilacao_atrial/utils/notification_service.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,15 @@ class MedicamentoManager{
 
   BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosPaciente =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
   Stream<List<MedicamentoPaciente>> get listMedicamentosPaciente=>_blcMedicamentosPaciente.stream;
+
+  BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosHistorico =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
+  Stream<List<MedicamentoPaciente>> get listMedicamentosHistorico=>_blcMedicamentosHistorico.stream;
+
+
   BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
   Stream<bool> get isLoading =>_blcisLoading.stream;
+  Timer? tempoVerificacao;
+  bool tempoAtivado = false;
 
   BehaviorSubject<List<Medicamento>> _blcMedicamentoList = BehaviorSubject<List<Medicamento>>.seeded(<Medicamento>[]);
   Stream<List<Medicamento>> get listMedicamentos => _blcMedicamentoList.stream;
@@ -19,6 +27,7 @@ class MedicamentoManager{
     _blcMedicamentosPaciente.close();
     _blcisLoading.close();
     _blcMedicamentoList.close();
+    _blcMedicamentosHistorico.close();
   }
 
   Future<List<Medicamento>> getMedicamentos() async{
@@ -44,11 +53,13 @@ class MedicamentoManager{
       body: json.encode({'idPaciente':idPaciente}),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
+    print("Verificando alteracoes ${response.body}");
     var resposta = jsonDecode(response.body);
+    print(" respostaLinhas  ${resposta['nlinhas']} idPaciente ${idPaciente}");
     if (resposta['nlinhas'] != 0){
       final storege = new FlutterSecureStorage();
       int nlinhas_ant = int.parse((await storege.read(key: 'nmedicamentos')) ?? '0');
+      print("linhas anterior ${nlinhas_ant} respostaLinhas  ${resposta['nlinhas']}");
       if (nlinhas_ant != resposta['nlinhas']){
         storege.write(key: 'nmedicamentos', value: resposta['nlinhas'].toString());
         NotificationService _ns = NotificationService();
@@ -57,17 +68,31 @@ class MedicamentoManager{
           msg: 'Sua medicação mudou confira na sua lista.',
           payload: "{'tabpage':'lista_medicamentos'}",
         );
-      } else{
-        NotificationService _ns = NotificationService();
-        _ns.showNotifications(
-          titulo: nomePaciente,
-          msg: 'Nada mudou mudou confira na sua lista.',
-          payload: "{'tabpage':'lista_medicamentos'}",
-        );
       }
 
     }
     return 0;
+  }
+
+  void ativarVerificacao({required String idPaciente, required String nomePaciente}){
+
+    if (tempoVerificacao != null){
+      tempoVerificacao!.cancel();
+    }
+
+    tempoVerificacao = Timer.periodic(Duration(seconds: 30), (timer) {
+
+      verificarAlteracaoMedicamento(idPaciente: idPaciente, nomePaciente: nomePaciente);
+    });
+
+    tempoAtivado = true;
+  }
+
+  void cancelarTempoVerificacao(){
+    if (tempoVerificacao != null){
+      tempoVerificacao!.cancel();
+      tempoAtivado = false;
+    }
   }
   Future<List<MedicamentoPaciente>> getMedicamentosPacienteAtual({required String idPaciente}) async{
     _blcisLoading.add(true);
@@ -91,6 +116,36 @@ class MedicamentoManager{
       medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose_medicamento'])));
     });
     _blcMedicamentosPaciente.add(lista);
+    _blcisLoading.add(false);
+    return lista;
+  }
+
+  Future<List<MedicamentoPaciente>> getMedicamentosHistoricoPaciente({required String idPaciente, required int datai, required dataf}) async{
+    _blcisLoading.add(true);
+    List<MedicamentoPaciente> lista = <MedicamentoPaciente>[];
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/medicamentos/getHistoricoMedicamentoPaciente.php"),
+      body: json.encode({
+        'idPaciente':idPaciente,
+        'datai': datai,
+        'dataf': dataf
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    List<dynamic> mapa = jsonDecode(response.body);
+
+
+    mapa.forEach((medicamento) {
+      lista.add(MedicamentoPaciente(id: medicamento['id'],
+          dose: medicamento['dose'],
+          data: medicamento['data'],
+          dose_tomada: medicamento['dose_tomada'],
+          frequencia: medicamento['frequencia'],
+          nome_medico: medicamento['medico'],
+          medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose_medicamento'])));
+    });
+    _blcMedicamentosHistorico.add(lista);
     _blcisLoading.add(false);
     return lista;
   }
