@@ -135,7 +135,7 @@ class MedicamentoManager{
 
     List<dynamic> mapa = jsonDecode(response.body);
 
-
+    print(response.body);
     mapa.forEach((medicamento) {
       lista.add(MedicamentoPaciente(id: medicamento['id'],
           dose: medicamento['dose'],
