@@ -25,3 +25,17 @@ class MedicamentoPaciente{
       this.dose_tomada,
       this.nome_medico});
 }
+class MedicamentoTomado{
+  late int? frequencia_tomada;
+  late int? data;
+
+  MedicamentoTomado({this.frequencia_tomada, this.data});
+}
+
+class HistoricoMedicamentoTomado{
+  late MedicamentoPaciente? medicamentoPaciente;
+  late List<MedicamentoTomado>? medicamentoTomado;
+
+  HistoricoMedicamentoTomado(
+      {this.medicamentoPaciente, this.medicamentoTomado});
+}

@@ -12,8 +12,8 @@ class MedicamentoManager{
   BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosPaciente =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
   Stream<List<MedicamentoPaciente>> get listMedicamentosPaciente=>_blcMedicamentosPaciente.stream;
 
-  BehaviorSubject<List<MedicamentoPaciente>> _blcMedicamentosHistorico =  BehaviorSubject<List<MedicamentoPaciente>>.seeded(<MedicamentoPaciente>[]);
-  Stream<List<MedicamentoPaciente>> get listMedicamentosHistorico=>_blcMedicamentosHistorico.stream;
+  BehaviorSubject<List<HistoricoMedicamentoTomado>> _blcMedicamentosHistorico =  BehaviorSubject<List<HistoricoMedicamentoTomado>>.seeded(<HistoricoMedicamentoTomado>[]);
+  Stream<List<HistoricoMedicamentoTomado>> get listMedicamentosHistorico=>_blcMedicamentosHistorico.stream;
 
 
   BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
@@ -120,9 +120,9 @@ class MedicamentoManager{
     return lista;
   }
 
-  Future<List<MedicamentoPaciente>> getMedicamentosHistoricoPaciente({required String idPaciente, required int datai, required dataf}) async{
+  Future<List<HistoricoMedicamentoTomado>> getMedicamentosHistoricoPaciente({required String idPaciente, required int datai, required dataf}) async{
     _blcisLoading.add(true);
-    List<MedicamentoPaciente> lista = <MedicamentoPaciente>[];
+    List<HistoricoMedicamentoTomado> lista = <HistoricoMedicamentoTomado>[];
     var response = await http.post(
       Uri.parse("${Utils.server_path}/medicamentos/getHistoricoMedicamentoPaciente.php"),
       body: json.encode({
@@ -137,13 +137,29 @@ class MedicamentoManager{
 
     print(response.body);
     mapa.forEach((medicamento) {
-      lista.add(MedicamentoPaciente(id: medicamento['id'],
-          dose: medicamento['dose'],
-          data: medicamento['data'],
-          dose_tomada: medicamento['dose_tomada'],
-          frequencia: medicamento['frequencia'],
-          nome_medico: medicamento['medico'],
-          medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose_medicamento'])));
+      print(medicamento);
+      List<dynamic> medicamentotomado = medicamento['tomados'];
+      List<MedicamentoTomado> listaMedicamentTomado = <MedicamentoTomado>[];
+      medicamentotomado.forEach((medicamento_tomado) {
+        listaMedicamentTomado.add(MedicamentoTomado(
+          data: medicamento_tomado['data'],
+          frequencia_tomada: medicamento_tomado['frequencia_tomada']
+        ));
+      });
+      lista.add(
+
+        HistoricoMedicamentoTomado(
+          medicamentoPaciente: MedicamentoPaciente(id: medicamento['id'],
+              dose: medicamento['dose'],
+              data: medicamento['data'],
+              dose_tomada: medicamento['dose_tomada'],
+              frequencia: medicamento['frequencia'],
+              nome_medico: medicamento['medico'],
+              medicamento: Medicamento(id: medicamento['idMedicamento'],nome: medicamento['nome'],dose: medicamento['dose_medicamento'])),
+              medicamentoTomado: listaMedicamentTomado
+
+        )
+      );
     });
     _blcMedicamentosHistorico.add(lista);
     _blcisLoading.add(false);
