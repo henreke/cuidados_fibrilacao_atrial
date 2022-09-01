@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/medicamento.dart';
@@ -19,7 +19,7 @@ class HistoricoMedicacoesScreen extends StatefulWidget {
 class _HistoricoMedicacoesScreenState extends State<HistoricoMedicacoesScreen> {
 
   MedicamentoManager _medicamentoManager = MedicamentoManager();
-  DateTime? datai,dataf;
+  DateTime? datai;
 
 
 
@@ -57,7 +57,7 @@ class _HistoricoMedicacoesScreenState extends State<HistoricoMedicacoesScreen> {
               ],
             ),
             if (datai != null)const SizedBox(height: 8,),
-            Text("Legenda"),
+            const Text("Legenda"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
