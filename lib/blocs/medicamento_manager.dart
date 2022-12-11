@@ -135,7 +135,7 @@ class MedicamentoManager{
 
     List<dynamic> mapa = jsonDecode(response.body);
 
-    //print(response.body);
+    print(response.body);
     //print(mapa);
     mapa.forEach((medicamento) {
       //print(medicamento);
@@ -143,7 +143,7 @@ class MedicamentoManager{
       List<MedicamentoTomado> listaMedicamentTomado = <MedicamentoTomado>[];
       medicamentotomado.forEach((medicamento_tomado) {
         listaMedicamentTomado.add(MedicamentoTomado(
-          data: medicamento_tomado['data'] != "null" ?  (DateTime.parse(medicamento_tomado['data']).millisecondsSinceEpoch/1000).round() : 0,
+          data: medicamento_tomado['data'] != null ?  (DateTime.parse(medicamento_tomado['data']).millisecondsSinceEpoch/1000).round() : 0,
           frequencia_tomada: medicamento_tomado['frequencia_tomada']
         ));
       });

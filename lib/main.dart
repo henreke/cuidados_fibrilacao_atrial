@@ -7,11 +7,39 @@ import 'package:cuidados_fibrilacao_atrial/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmanager/workmanager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+void callbackDispatcher(){
+  Workmanager().executeTask((taskName, inputData) async{
+    int? totalExecutions;
+    final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
 
+    try { //add code execution
+      totalExecutions = _sharedPreference.getInt("totalExecutions");
+      _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
+      print('Executando $totalExecutions');
+    } catch(err) {
+      //Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
+      print('errorrr');
+      throw Exception(err);
+    }
 
+    return Future.value(true);
+  });
+}
 Future<void> main() async{
+  print('msin');
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().init();
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: false,
+  );
+  Workmanager().registerPeriodicTask(
+    'Teste workmanager',
+    'Teste workmanager',
+    initialDelay: Duration(seconds: 10),
+  );
   runApp(const MyApp());
 }
 
