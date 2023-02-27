@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
-import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais/orientacoes_gerais_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/medicamento_manager.dart';
