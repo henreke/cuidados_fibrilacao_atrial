@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais/orientacoes_gerais_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
@@ -109,6 +110,11 @@ class _MainScreenState extends State<MainScreen> {
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
           titulo: 'Enviar exame',
           img: "ico/clinic-history.png",
+        ),
+        if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreen())),
+          titulo: 'Auto Avaliação',
+          img: "ico/check-up.png",
         ),
         if (_userManager?.tipo == TipoUser.PACIENTE)tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const MinhasMedicacoesScreen())),
