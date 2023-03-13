@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/escore_chads_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais/orientacoes_gerais_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
@@ -135,6 +136,11 @@ class _MainScreenState extends State<MainScreen> {
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrientacoesGeraisScreen())),
           titulo: "Orientações Gerais",
           img: "ico/telemedicine.png"
+        ),
+        tileMenu(
+            click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreChadScreen())),
+            titulo: "Escore CHADS",
+            img: "ico/telemedicine.png"
         ),
       ],
     );
