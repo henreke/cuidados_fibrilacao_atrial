@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/escore_chads_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/escore_has_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais/orientacoes_gerais_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/exame_manager.dart';
@@ -137,10 +138,15 @@ class _MainScreenState extends State<MainScreen> {
           titulo: "Orientações Gerais",
           img: "ico/telemedicine.png"
         ),
-        tileMenu(
+        if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreChadScreen())),
-            titulo: "Escore CHADS",
-            img: "ico/telemedicine.png"
+            titulo: "CHADS-VASC",
+            img: "ico/score.png"
+        ),
+        if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
+            click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreHasBledScreen())),
+            titulo: "HAS-BLED",
+            img: "ico/score.png"
         ),
       ],
     );

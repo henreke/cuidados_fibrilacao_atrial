@@ -37,6 +37,7 @@ class _BuscarPacientesCentroMedicoScreenState
     if (_userManager != userManager) {
       _userManager = userManager;
     }
+    _pacienteManager.getPacientesCentroMedico(idCentroMedico: 1);
   }
 
   @override

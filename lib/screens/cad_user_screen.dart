@@ -106,7 +106,9 @@ class _CadUserScreenState extends State<CadUserScreen> {
                         return null;
                       },
                     ),
+                    SizedBox(height: 10,),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ChoiceChip(
                           label: const Text('Paciente'),
@@ -147,6 +149,7 @@ class _CadUserScreenState extends State<CadUserScreen> {
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text('Cadastro Efetuado com sucesso!'),
                               ));
+                              Navigator.pop(context);
                             }, onFail: (String falha){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(falha,style: const TextStyle(color: Colors.black),),
