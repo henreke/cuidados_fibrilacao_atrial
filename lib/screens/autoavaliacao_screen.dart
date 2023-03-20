@@ -16,6 +16,15 @@ class AutoAvaliacaoScreen extends StatefulWidget {
 
 class _AutoAvaliacaoScreenState extends State<AutoAvaliacaoScreen> {
   UserManager? _userManager;
+  AvaliacaoManager avaliacao_manager = AvaliacaoManager();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final UserManager userManager = Provider.of<UserManager>(context);
+    if (_userManager != userManager) {
+      _userManager = userManager;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,27 +47,40 @@ class _AutoAvaliacaoScreenState extends State<AutoAvaliacaoScreen> {
             TilePerguntas(indice: 7, perguntas: _perguntas),
             TilePerguntas(indice: 8, perguntas: _perguntas),
             TilePerguntas(indice: 9, perguntas: _perguntas),
-            TextButton(
-                onPressed: () {
-                  AvaliacaoManager avaliacao_manager = AvaliacaoManager();
-                  Avaliacao avaliacao = Avaliacao(
-                      perguntas: _perguntas, idPaciente: _userManager!.uid);
-                  avaliacao_manager.cadAvaliacao(
-                      avaliacao: avaliacao, onSuccess: () {}, onFail: () {});
-                },
-                child: Text('Enviar')),
+            StreamBuilder<bool>(
+                stream: avaliacao_manager.isLoading,
+                builder: (context,snapshot) {
+                  bool _isLoading = snapshot.hasData ? snapshot.data! : false;
+                  if (!_isLoading) {
+                    return TextButton(
+                        onPressed: () {
+
+                          Avaliacao avaliacao = Avaliacao(
+                              perguntas: _perguntas, idPaciente: _userManager!.uid);
+                          avaliacao_manager.cadAvaliacao(
+                              avaliacao: avaliacao, onSuccess: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Sua avaliação foi enviada com sucesso!'),
+                                ));
+                          }, onFail: () {});
+                        },
+                        child: Text('Enviar')
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Colors.green),
+                    ),
+                  );
+                }
+            ),
+
           ],
         ),
       ),
     );
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final UserManager userManager = Provider.of<UserManager>(context);
-    if (_userManager != userManager) {
-      _userManager = userManager;
-    }
-  }
+
 }

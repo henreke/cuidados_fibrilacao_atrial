@@ -46,6 +46,11 @@ class _MinhasMedicacoesScreenState extends State<MinhasMedicacoesScreen> {
       ),
       body: ListView(
           children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Paciente, as figuras abaixo servem para ajudar a dividir o medicamento, você vai tomar a parte pintada de verde. Há duas formas"
+                  " de medicamento, uma Redonda e outra Retangular, verifique qual é a forma do seu medicamento."),
+            ),
             StreamBuilder<List<MedicamentoPaciente>>(
               stream: _medicamentoManager.listMedicamentosPaciente,
               builder: (context, snapshot) {
