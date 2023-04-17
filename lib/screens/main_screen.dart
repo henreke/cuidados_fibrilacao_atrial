@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/escore_chads_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/escore_has_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/orientacoes_gerais/orientacoes_gerais_screen.dart';
@@ -108,6 +109,39 @@ class _MainScreenState extends State<MainScreen> {
     return ListView(
       padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
       children: [
+        StreamBuilder<bool>(
+          stream: _userManager!.isLogged,
+            builder:
+        (context,snapshot){
+            print('teste');
+            print(snapshot.data);
+            bool logado = snapshot.data ?? false;
+          if (logado){
+            return Container();
+          } else {
+            return InkWell(
+              onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CadUserScreen())),
+              child: Card(
+                child:
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Image.asset('ico/patient.png',width: 200),
+                    const SizedBox(height: 10,),
+                    const Text(
+                      'Você é novo por aqui? Clique aqui faça aqui seu cadastro para ter acesso a todas as funcionalidades do Aplicativo.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,),
+                    )
+                  ],
+                ),
+              ),
+              ),
+            );
+          }
+        }
+        ),
        if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const EnviarExameScreen())),
           titulo: 'Enviar exame',
