@@ -4,7 +4,7 @@ class EscoreChadScreen extends StatefulWidget {
   EscoreChadScreen({Key? key}) : super(key: key);
   List<bool> checks = [false,false,false,false,false,false,false,false];
   int escore = 0;
-  String risco ="";
+  String risco ="anticoagulação plena (warfarina, para INR entre 2,0 e 3,0)";
   @override
   State<EscoreChadScreen> createState() => _EscoreChadScreenState();
 }

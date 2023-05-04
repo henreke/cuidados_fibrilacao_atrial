@@ -4,7 +4,7 @@ class EscoreHasBledScreen extends StatefulWidget {
   EscoreHasBledScreen({Key? key}) : super(key: key);
   List<bool> checks = [false,false,false,false,false,false,false,false,false];
   int escore = 0;
-  String risco ="";
+  String risco ="Baixo Risco";
   @override
   State<EscoreHasBledScreen> createState() => _EscoreHasBledScreenState();
 }
@@ -23,6 +23,12 @@ class _EscoreHasBledScreenState extends State<EscoreHasBledScreen> {
       indice++;
     });
     widget.escore = total;
+    if (widget.escore == 0){
+      widget.risco = "Baixo Risco";
+    }
+    if (widget.escore <= 2 && widget.escore > 0){
+      widget.risco = "Risco Moderado";
+    }
     if (widget.escore >= 3){
       widget.risco = "Risco Alto";
     }
