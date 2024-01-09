@@ -71,33 +71,42 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fibrilação Atrial'),
+        title: const Text('Fibrilação Atrial (FA)'),
         centerTitle: true,
         actions: <Widget>[
           StreamBuilder<bool>(
             stream: _userManager!.isLogged,
             builder: (context, snapshot) {
               bool isLogged = snapshot.data ?? false;
-              return IconButton(onPressed: (){
-                    if (isLogged){
-                      setState(() {
-                        _userManager!.logout();
-                        _medicamentoManager!.cancelarTempoVerificacao();
-                      });
+              return InkWell(
+                onTap: (){
+                  if (isLogged){
+                    setState(() {
+                      _userManager!.logout();
+                      _medicamentoManager!.cancelarTempoVerificacao();
+                    });
 
-                    }
-                    else{
+                  }
+                  else{
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const LoginScreen())
-                        ).then((value) => setState((){}));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen())
+                    ).then((value) => setState((){}));
 
 
-                    }
-              },
-                  icon: isLogged ? const Icon(Icons.person) : const Icon(Icons.login),
-                  tooltip: 'login');
+                  }
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Icon(isLogged ? Icons.person : Icons.login),
+                    Text(isLogged ? "Sair": "Entrar"),
+                    const SizedBox(width: 8,),
+                  ],
+                ),
+              );
             }
           ),
         ],
@@ -119,25 +128,42 @@ class _MainScreenState extends State<MainScreen> {
           if (logado){
             return Container();
           } else {
-            return InkWell(
-              onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CadUserScreen())),
-              child: Card(
-                child:
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Image.asset('ico/patient.png',width: 200),
-                    const SizedBox(height: 10,),
-                    const Text(
-                      'Você é novo por aqui? Clique aqui faça aqui seu cadastro para ter acesso a todas as funcionalidades do Aplicativo.',
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,),
-                    )
-                  ],
-                ),
+            return Card(
+              child:
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Image.asset('ico/patient.png',width: 200),
+                  const SizedBox(height: 10,),
+                  const Text(
+                    'Você é novo por aqui? Faça seu cadastro para ter acesso a todas as funcionalidades do Aplicativo.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CadUserScreen())),
+                    child: const Text('Faça Aqui seu Cadastro'),
+                    style: ButtonStyle(
+                        textStyle: MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.pressed)){
+                            return TextStyle(color: Colors.black);
+                          }
+                          return TextStyle(color: Colors.white);
+                        }),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                        backgroundColor: MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.pressed)){
+                            return Colors.green[50];
+                          }
+                          return Theme.of(context).primaryColor;
+                        })
+                    ),
+                  ),
+                ],
               ),
-              ),
+            ),
             );
           }
         }

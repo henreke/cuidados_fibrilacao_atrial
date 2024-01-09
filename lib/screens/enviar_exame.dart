@@ -78,7 +78,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                       keyboardType: TextInputType.number,
                       enabled: !isLoading,
                     ),
-                    TextButton(onPressed: isLoading ? null : () async{
+                    ElevatedButton(onPressed: isLoading ? null : () async{
                       XFile? foto = await _picker.pickImage(source: ImageSource.gallery);
                       final imageBytes =  await foto!.readAsBytes();
                       _baseimage = base64.encode(imageBytes);
@@ -94,9 +94,75 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                       }
 
                     },
-                        child: const Text('Abrir foto')),
+                        child: const Text('Carregar foto da galeria'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return TextStyle(color: Colors.black);
+                            }
+                            return TextStyle(color: Colors.white);
+                          }),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                          backgroundColor: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return Colors.green[50];
+                            }
+                            return Theme.of(context).primaryColor;
+                          })
+                      ),
+                    ),
 
-                    TextButton(onPressed: isLoading ? null : (){
+                    ElevatedButton(onPressed: isLoading ? null : () async{
+                      XFile? foto = await _picker.pickImage(source: ImageSource.camera);
+                      final imageBytes =  await foto!.readAsBytes();
+                      _baseimage = base64.encode(imageBytes);
+                      _extensao = foto.name.substring(foto.name.length-3);
+                      if (foto.name.isNotEmpty){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Foto carregada com sucesso!'),
+                        ));
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Falha ao carregar foto!'),
+                        ));
+                      }
+
+                    },
+                      child: const Text('Abrir câmera para tirar foto'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return TextStyle(color: Colors.black);
+                            }
+                            return TextStyle(color: Colors.white);
+                          }),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                          backgroundColor: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return Colors.green[50];
+                            }
+                            return Theme.of(context).primaryColor;
+                          })
+                      ),
+                    ),
+
+                    ElevatedButton(
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return TextStyle(color: Colors.black);
+                            }
+                            return TextStyle(color: Colors.white);
+                          }),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                          backgroundColor: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return Colors.green[50];
+                            }
+                            return Theme.of(context).primaryColor;
+                          })
+                        ),
+                        onPressed: isLoading ? null : (){
                       Exame exame = Exame(idUser: _userManager!.uid,foto: _baseimage,extensao: _extensao,data: selectedDate.millisecondsSinceEpoch,valor: int.parse(valorController.text));
 
                       _exameManager.cadExame(exame: exame, onSuccess: (){

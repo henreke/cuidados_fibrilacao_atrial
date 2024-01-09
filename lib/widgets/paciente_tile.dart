@@ -5,6 +5,7 @@ import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames2.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/historico_exames3.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_medicacoes.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/resultado_avaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
@@ -46,22 +47,23 @@ class PacienteTile extends StatelessWidget {
                 child: Divider(color: Colors.black,height: 8,),
               ),
               const SizedBox(height: 6,),
+              const Text('Resultado do Último Exame do Índice Normalizado Internacional (INR):'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Último exame:'),
+                  Text('Valor: ${paciente!.ultimoExame?.valor == 0 ? 'Sem valor cadastrado' : paciente!.ultimoExame?.valor}'),
 
                   Text('Data: ${paciente!.ultimoExame!.data! == 0 ? '--------------' :Utils.epochToString(paciente!.ultimoExame!.data!)}'),
                 ],
               ),
               const SizedBox(height: 4,),
 
-              Text('Valor: ${paciente!.ultimoExame?.valor == 0 ? 'Sem valor cadastrado' : paciente!.ultimoExame?.valor}'),
+
               const SizedBox(height: 4,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Última dose prescrição:'),
+                  const Text('Última Dose Prescrita:'),
 
                   Text('Data: ${paciente!.data_ultima_prescricao! == 0 ? '--------------' : Utils.epochToString(paciente!.data_ultima_prescricao!)}'),
                 ],
@@ -87,7 +89,7 @@ class PacienteTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
-                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen2(paciente: paciente,))), child: Text('Histórico de Exames')),
+                  TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>ResultadoAvaliacaoScreen(avaliacao: paciente!.avaliacao!,))), child: const Text('Visualizar Auto-Avaliação'))
                 ],
               ),
               Row(
@@ -100,7 +102,13 @@ class PacienteTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>ResultadoAvaliacaoScreen(avaliacao: paciente!.avaliacao!,))), child: const Text('Visualizar Auto-Avaliação'))
+                  TextButton(
+                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoExamesScreen3(paciente: paciente,))),
+                      child: Text(
+                        'Histórico do Resultado do Exame INR\n(Deve estar entre os valores 2 e 3)',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,)),
+
                 ],
               ),
 

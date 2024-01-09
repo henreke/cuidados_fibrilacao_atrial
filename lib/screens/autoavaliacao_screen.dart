@@ -52,7 +52,7 @@ class _AutoAvaliacaoScreenState extends State<AutoAvaliacaoScreen> {
                 builder: (context,snapshot) {
                   bool _isLoading = snapshot.hasData ? snapshot.data! : false;
                   if (!_isLoading) {
-                    return TextButton(
+                    return ElevatedButton(
                         onPressed: () {
 
                           Avaliacao avaliacao = Avaliacao(
@@ -65,7 +65,22 @@ class _AutoAvaliacaoScreenState extends State<AutoAvaliacaoScreen> {
                                 ));
                           }, onFail: () {});
                         },
-                        child: Text('Enviar')
+                        child: Text('Enviar'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return TextStyle(color: Colors.black);
+                            }
+                            return TextStyle(color: Colors.white);
+                          }),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                          backgroundColor: MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)){
+                              return Colors.green[50];
+                            }
+                            return Theme.of(context).primaryColor;
+                          })
+                      ),
                     );
                   }
                   return const Center(
