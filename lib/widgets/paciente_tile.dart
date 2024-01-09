@@ -77,27 +77,36 @@ class PacienteTile extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 4,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(onPressed: paciente!.ultimoExame!.data == 0 ? null : ()=>visualizarExame(), child: Text('Visualizar Exame')),
-                  TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicação')),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  children: [
+                    TextButton(onPressed: paciente!.ultimoExame!.data == 0 ? null : ()=>visualizarExame(), child: Text('Visualizar Exame')),
+                    TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicações (Segunda a Domingo)')),
+                  ],
+                ),
               ),
               const SizedBox(height: 8,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
-                  TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>ResultadoAvaliacaoScreen(avaliacao: paciente!.avaliacao!,))), child: const Text('Visualizar Auto-Avaliação'))
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  children: [
+                    TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
+                    TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>ResultadoAvaliacaoScreen(avaliacao: paciente!.avaliacao!,))), child: const Text('Visualizar Auto Avaliação Semanal'))
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações')),
-                  TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoMedicacoesScreen(paciente: paciente!,))), child: Text('Histórico Medicações')),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  children: [
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações')),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoMedicacoesScreen(paciente: paciente!,))), child: Text('Histórico de Adesão ao Tratamento Medicamentoso')),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

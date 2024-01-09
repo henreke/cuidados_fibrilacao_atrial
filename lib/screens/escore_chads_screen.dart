@@ -37,7 +37,7 @@ class _EscoreChadScreenState extends State<EscoreChadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CHADS-VASc"),
+        title: Text("Ferramenta CHADS-VASc"),
         centerTitle: true,
       ),
       body: ListView(
@@ -86,7 +86,7 @@ class _EscoreChadScreenState extends State<EscoreChadScreen> {
             },
           ),
           CheckboxListTile(
-            title: Text("AIT ou AVC prévio"),
+            title: Text("Acidente Isquêmico Transitório (AIT) ou Acidente Vascular Cerebral (AVC) prévio"),
             value: widget.checks[4],
             onChanged: (valor){
               setState(() {

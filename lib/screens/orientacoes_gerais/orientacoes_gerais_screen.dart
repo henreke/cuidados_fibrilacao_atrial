@@ -157,7 +157,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Como prevenir e reduzir riscos de Fibrilação Atrial?',textAlign: TextAlign.center),
+              child: const Text('Como prevenir e reduzir riscos de Fibrilação Atrial',textAlign: TextAlign.center),
               style: styleButton,
             ),
           ],

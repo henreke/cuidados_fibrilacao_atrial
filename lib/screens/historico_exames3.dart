@@ -206,11 +206,12 @@ class HistoricoExamesScreen3State extends State<HistoricoExamesScreen3> {
   }
   
   LineChartData mainLineData(List<Exame> lista){
-    
+
+    int i = 0;
     return LineChartData(
       lineBarsData: [
         LineChartBarData(
-          spots: lista.map((e) => FlSpot(e.data!.toDouble(),e.valor!.toDouble())).toList(),
+          spots: lista.map((e) => FlSpot((i++).toDouble(),e.valor!.toDouble())).toList(),
           isCurved: true,
 
           dotData: FlDotData(show: true),
@@ -220,21 +221,23 @@ class HistoricoExamesScreen3State extends State<HistoricoExamesScreen3> {
       ],
       titlesData: FlTitlesData(
         bottomTitles: AxisTitles(
-          sideTitles: _bottomTitles
+          sideTitles: _bottomTitles(lista)
         ),
         topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       ),
     );
   }
-  SideTitles get _bottomTitles => SideTitles(
-    showTitles: true,
-    getTitlesWidget: (value, meta) {
-      String text = '';
-      print(value);
-      text = Utils.epochToDiaMes(value.toInt());
-      return Text(text);
-    },
-  );
+  SideTitles _bottomTitles(List<Exame> lista ) {
+    return SideTitles(
+      showTitles: true,
+      getTitlesWidget: (value, meta) {
+        String text = '';
+        print(value);
+        text = Utils.epochToDiaMes(lista[value.toInt()].data!);
+        return Text(text);
+      },
+    );
+  }
   BarChartData mainBarData(List<Exame> lista) {
     return BarChartData(
       barTouchData: BarTouchData(

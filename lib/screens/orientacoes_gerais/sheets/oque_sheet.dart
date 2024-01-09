@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 class OqueeSheet extends StatelessWidget {
 
   const OqueeSheet({Key? key}) : super(key: key);
@@ -20,15 +21,40 @@ class OqueeSheet extends StatelessWidget {
               ),
             ),
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('É comum em todo o mundo e atualmente tornou-se um problema de '
-                  'saúde pública. É conhecida como um batimento cardíaco trêmulo ou '
-                  'irregular (arritmia) que pode desenvolver coágulos sanguíneos, '
-                  'derrame, insuficiência cardíaca e outras complicações '
-                  'relacionadas ao coração. ',
-                style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
-                textAlign: TextAlign.justify,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('É uma arritmia que causa completa desorganização do ritmo elétrico do átrio. Ocorre quando os átrios (as câmaras superiores do coração) batem de forma irregular e descoordenada, em vez de baterem em um ritmo regular. Esse padrão irregular pode levar a um aumento na frequência cardíaca e afetar a capacidade eficaz do coração de bombear o sangue para o resto do corpo (Cintra; Figueiredo, 2021 e Melo et al., 2022).'
+                    '\nÉ mundialmente a arritmia de maior prevalência, afetando cerca de 3% da população adulta, com incidência nos homens e acima dos 55 anos. No Brasil, estima-se que em torno de entre 1% e 4% da população é acometida por esta doença (Melo et al., 2022)',
+                    style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(height: 8,),
+                  Text('Para maiores informações, acessar:',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.left,),
+                  InkWell(
+                    child: Text('Diretrizes Brasileiras de Fibrilação Atrial:',style: TextStyle(fontSize: 18,color: Colors.blueAccent),),
+                    onTap: ()=>launchUrl(Uri.parse("http://publicacoes.cardiol.br/2014/diretrizes/2016/02_II%20DIRETRIZ_FIBRILACAO_ATRIAL.pdf")),
+                  ),
+
+                  SizedBox(height: 8,),
+                  InkWell(
+                    child: Text('Artigo sobre Fibrilação Atrial: Fisiopatologia, Fatores de Risco e Bases Terapêuticas:',style: TextStyle(fontSize: 18,color: Colors.blueAccent),),
+                    onTap: ()=>launchUrl(Uri.parse("https://www.scielo.br/j/abc/a/48ngThJGMbXS67MGvJ3tJCn/")),
+                  ),
+                  SizedBox(height: 8,),
+                  InkWell(
+                    child: Text('Artigo sobre manejo clínico da fibrilação atrial: uma revisão integrativa das evidências atuais:',style: TextStyle(fontSize: 18,color: Colors.blueAccent),),
+                    onTap: ()=>launchUrl(Uri.parse("https://bio10publicacao.com.br/jesh/article/view/102")),
+                  ),
+                  SizedBox(height: 8,),
+                  InkWell(
+                    child: Text('Vídeo sobre a doença Fibrilação Atrial:',style: TextStyle(fontSize: 18,color: Colors.blueAccent),),
+                    onTap: ()=>launchUrl(Uri.parse("https://www.youtube.com/watch?v=NNkkzWcseA0")),
+                  ),
+                ],
               ),
             ),
           ],

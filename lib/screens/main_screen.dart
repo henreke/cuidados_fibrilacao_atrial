@@ -195,17 +195,17 @@ class _MainScreenState extends State<MainScreen> {
         ),
         tileMenu(
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const OrientacoesGeraisScreen())),
-          titulo: "Orientações Gerais",
+          titulo: "Informações Gerais sobre a doença Fibrilação Atrial",
           img: "ico/telemedicine.png"
         ),
         if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreChadScreen())),
-            titulo: "CHADS-VASC",
+            titulo: "Ferramenta CHADS-VASC",
             img: "ico/score.png"
         ),
         if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreHasBledScreen())),
-            titulo: "HAS-BLED",
+            titulo: "Ferramenta HAS-BLED",
             img: "ico/score.png"
         ),
       ],
@@ -222,7 +222,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Image.asset(img,height: 75),
               const SizedBox(width: 10,),
-              Text(titulo, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+              Flexible(child: Text(titulo, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w500),maxLines: 2)),
             ],
           ),
         ),

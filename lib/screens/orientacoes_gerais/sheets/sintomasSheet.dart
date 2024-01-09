@@ -10,26 +10,29 @@ class sintomasSheet extends StatelessWidget {
       color: Color.fromARGB(0, 255, 255, 255),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
-            Padding(
-              padding: const EdgeInsets.only(left: 16,right: 16,top: 8),
-              child: Card(
-                color: Theme.of(context).colorScheme.primary,
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: const Padding(
-                  padding: const EdgeInsets.only(left: 8,right: 8,top: 8,bottom: 8),
-                  child: Text('Você conhece os sintomas mais comuns da Fibrilação Atrial?',style: TextStyle(fontSize: 20,color: Colors.white),textAlign: TextAlign.center,),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16,right: 16,top: 8),
+                child: Card(
+                  color: Theme.of(context).colorScheme.primary,
+                  margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: const Padding(
+                    padding: const EdgeInsets.only(left: 8,right: 8,top: 8,bottom: 8),
+                    child: Text('Você conhece os sintomas mais comuns da Fibrilação Atrial?',style: TextStyle(fontSize: 20,color: Colors.white),textAlign: TextAlign.center,),
+                  ),
                 ),
               ),
             ),
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Fadiga geral no corpo',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Palpitação no coração',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('Quando uma pessoa sente uma “fraqueza” com sensação de que o corpo precisa descansar. ',
+              child: Text('Referem à sensação percebida de batimentos cardíacos anormais ou irregulares.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -37,11 +40,11 @@ class sintomasSheet extends StatelessWidget {
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Batimentos cardíacos rápidos e irregulares',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),textAlign: TextAlign.center,),
+              child: Text('Falta de Ar ao esforço',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),textAlign: TextAlign.center,),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('O coração começa a bater mais rápido que o normal e de forma desordenada.',
+              child: Text('Refere-se à dificuldade em respirar durante a prática de exercícios, subida de escadas, ou outras atividades que exigem esforço físico.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -49,11 +52,11 @@ class sintomasSheet extends StatelessWidget {
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Vibração ou “batendo” no peito',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Fraqueza e/ou Fadiga',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('O coração está batendo tão acelerado que trará a sensação de que está vibrando.',
+              child: Text('É a sensação de cansaço e falta de energia.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -65,7 +68,7 @@ class sintomasSheet extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('Cria a falsa sensação de que você ou seus arredores estão girando ou em movimento ',
+              child: Text('Sensação de desequilíbrio do corpo.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -73,11 +76,11 @@ class sintomasSheet extends StatelessWidget {
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Falta de ar',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Desmaio',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('É caracterizada pelo desconforto ou dificuldade para respirar.',
+              child: Text('Uma perda temporária de consciência que geralmente ocorre devido à diminuição temporária do fluxo sanguíneo para o cérebro.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -89,7 +92,7 @@ class sintomasSheet extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('É a sensação de apreensão, angústia, incerteza ou desconforto diante de algo desconhecido',
+              child: Text('É uma resposta natural do corpo a situações de estresse, perigo ou incerteza',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -97,28 +100,40 @@ class sintomasSheet extends StatelessWidget {
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Fraqueza',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Dor no no peito',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Desmaio ou confusão',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Apneia do Sono',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Fadiga ao fazer exercício',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Estresse',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Dor ou pressão no peito',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
+              child: Text('Hábitos de vida inadequados',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
             ),
+            const SizedBox(height: 8,),
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
-              child: Text('Se você sentir Dor ou pressão no peito chame procure uma unidade de saúde. Você pode estar tendo um ataque cardíaco. Ligue para o 192 imediatamente.',
+              child: Text('Pode-se também encontrar sintomas como pressão arterial muito baixa, problemas pulmonares decorrentes da falha do funcionamento do coração, entre outros.',
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
+              ),
+            ),
+
+            const SizedBox(height: 8,),
+            Center(
+              child: const Padding(
+                padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
+                child: Text('(Hindricks, 2020; Santos, 2023)',
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),
+                  textAlign: TextAlign.justify,
+                ),
               ),
             ),
             const SizedBox(height: 20,)

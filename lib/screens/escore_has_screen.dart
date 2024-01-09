@@ -38,7 +38,7 @@ class _EscoreHasBledScreenState extends State<EscoreHasBledScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HAS-BLED"),
+        title: Text("Ferramenta HAS-BLED"),
         centerTitle: true,
       ),
       body: ListView(
