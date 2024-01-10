@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class ChatTile extends StatelessWidget {
   final String msg;
-  const ChatTile({Key? key, required this.msg}) : super(key: key);
+  final String hora;
+  const ChatTile({Key? key, required this.msg, required this.hora}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,18 @@ class ChatTile extends StatelessWidget {
             color: Colors.blue[200],
           ),
           padding: const EdgeInsets.all(16),
-          child: Text(
-            msg,
-            style: const TextStyle(fontSize: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                msg,
+                style: const TextStyle(fontSize: 15),
+              ),
+              Text(
+                hora,
+                style: const TextStyle(fontSize: 10),
+              ),
+            ],
           ),
         ),
       ),

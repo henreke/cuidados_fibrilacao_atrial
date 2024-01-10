@@ -4,6 +4,8 @@ import 'package:cuidados_fibrilacao_atrial/data/chat.dart';
 import 'package:cuidados_fibrilacao_atrial/widgets/chat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/utils.dart';
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -40,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Orientações'),
+        title: const Text('Orientações Médicas'),
       ),
       body: StreamBuilder<List<Chat>>(
         stream: _chatManager.listChat,
@@ -57,6 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, item) {
                   return ChatTile(
                     msg:lista[item].msg!,
+                    hora: Utils.epochToBigString( lista[item].tempo?? 0),
                   );
                 }
             );

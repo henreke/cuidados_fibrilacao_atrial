@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-class ChatManager{
+class ChatEnfermagemManager{
 
   BehaviorSubject<bool> _blcisLoading =  BehaviorSubject<bool>.seeded(false);
   Stream<bool> get isLoading =>_blcisLoading.stream;
@@ -25,20 +25,20 @@ class ChatManager{
     _blcisLoading.add(true);
     List<Chat> chats = <Chat>[];
     var response = await http.post(
-      Uri.parse("${Utils.server_path}/chat/getChatPaciente.php"),
+      Uri.parse("${Utils.server_path}/chat_enfermagem/getChatPaciente.php"),
       body: json.encode({'idPaciente':uid}),
       headers: {'Content-Type': 'application/json'},
     );
-
+    print(response.body);
     List<dynamic> mapa = jsonDecode(response.body);
 
     mapa.forEach((chat) {
       chats.add(Chat(
-        id: chat['id'],
-        msg: chat['msg'],
-        visto: chat['visto'],
-        nomeEnviado: chat['nome'],
-        tempo: chat['tempo']
+          id: chat['id'],
+          msg: chat['msg'],
+          visto: chat['visto'],
+          nomeEnviado: chat['nome'],
+          tempo: chat['tempo']
       ));
     });
     _blcisLoading.add(false);
@@ -49,7 +49,7 @@ class ChatManager{
     _blcisLoading.add(true);
     List<Chat> chats = <Chat>[];
     var response = await http.post(
-      Uri.parse("${Utils.server_path}/chat/enviarChatPaciente.php"),
+      Uri.parse("${Utils.server_path}/chat_enfermagem/enviarChatPaciente.php"),
       body: json.encode({'idTo':idPaciente,'idFrom':idUser,'msg':msg}),
       headers: {'Content-Type': 'application/json'},
     );

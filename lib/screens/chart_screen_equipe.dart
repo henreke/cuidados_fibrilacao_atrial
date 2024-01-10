@@ -5,6 +5,8 @@ import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/widgets/chat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/utils.dart';
 class ChatScreenSaude extends StatefulWidget {
 
   final Paciente paciente;
@@ -65,6 +67,7 @@ class _ChatScreenSaudeState extends State<ChatScreenSaude>{
                         itemBuilder: (context, item) {
                           return ChatTile(
                             msg:lista[item].msg!,
+                            hora: Utils.epochToBigString( lista[item].tempo?? 0),
                           );
                         }
                     );
@@ -81,7 +84,7 @@ class _ChatScreenSaudeState extends State<ChatScreenSaude>{
             child: StreamBuilder<bool>(
               stream: _chatManager.isLoading,
               builder: (context, snapshot) {
-                bool enviando = snapshot.data!;
+                bool enviando = snapshot.data?? false;
                 return SizedBox(
                   //aaaheight: 70,
                   width: double.infinity,

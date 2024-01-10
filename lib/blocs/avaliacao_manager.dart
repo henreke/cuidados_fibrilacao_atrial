@@ -1,6 +1,7 @@
 import 'package:cuidados_fibrilacao_atrial/data/exame.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:cuidados_fibrilacao_atrial/data/avaliacao.dart';
+import 'package:cuidados_fibrilacao_atrial/data/avaliacao2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -23,6 +24,27 @@ class AvaliacaoManager{
     _blcisLoading.add(true);
     var response = await http.post(
       Uri.parse("${Utils.server_path}/avaliacao/cadAvaliacao.php"),
+      body: json.encode(avaliacao.toJson()),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
+    if (mapa["success"] > 0){
+      onSuccess();
+    } else {
+      onFail();
+    }
+    return mapa["success"];
+
+  }
+
+  Future<int> cadAvaliacao2({required Avaliacao2 avaliacao,required void Function() onSuccess, required void Function() onFail}) async{
+
+    _blcisLoading.add(true);
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/avaliacao/cadAvaliacao2.php"),
       body: json.encode(avaliacao.toJson()),
       headers: {'Content-Type': 'application/json'},
     );

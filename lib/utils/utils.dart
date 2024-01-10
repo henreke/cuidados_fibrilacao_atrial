@@ -11,6 +11,12 @@ class Utils{
     return '${data.day}/${data.month}/${data.year}';
   }
 
+  static String epochToBigString(int epoch){
+    int multiplicador =  epoch > 4110791043 ? 1 : 1000;
+    DateTime data =  DateTime.fromMillisecondsSinceEpoch(epoch*multiplicador);
+    return '${data.hour}:${data.minute}:${data.second}  ${data.day}/${data.month}/${data.year}';
+  }
+
   static String epochToDiaMes(int epoch){
     int multiplicador =  epoch > 4110791043 ? 1 : 1000;
     DateTime data =  DateTime.fromMillisecondsSinceEpoch(epoch*multiplicador);

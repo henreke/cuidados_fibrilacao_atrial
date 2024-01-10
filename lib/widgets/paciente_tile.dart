@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/chat_enfermagem.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames2.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames3.dart';
@@ -103,7 +104,8 @@ class PacienteTile extends StatelessWidget {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   children: [
-                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações')),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações Médicas')),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenEnfermagem(paciente: paciente!,))), child: Text('Enviar Orientações de Enfermagem')),
                     TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoMedicacoesScreen(paciente: paciente!,))), child: Text('Histórico de Adesão ao Tratamento Medicamentoso')),
                   ],
                 ),

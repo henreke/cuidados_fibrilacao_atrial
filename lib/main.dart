@@ -75,13 +75,17 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
+
             primarySwatch: Colors.green,
             snackBarTheme: const SnackBarThemeData(
                 backgroundColor: Colors.green,
                 actionTextColor: Colors.white,
                 contentTextStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.w500)
             ),
-            textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(bodyText1: GoogleFonts.pacifico(textStyle: textTheme.bodyText1))
+            textTheme: Theme.of(context).textTheme.apply(
+              fontSizeFactor: 1.3,
+              fontSizeDelta: 1.0,
+            ),
           ),
           home: const MainScreen(),
         ),
