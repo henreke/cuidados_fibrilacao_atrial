@@ -14,9 +14,13 @@ class AvaliacaoManager{
   BehaviorSubject<List<Exame>> _blcListaExame = BehaviorSubject<List<Exame>>.seeded(<Exame>[]);
   Stream<List<Exame>> get listaExamesPaciente => _blcListaExame.stream;
 
+  BehaviorSubject<List<Avaliacao2>> _blcListaAvaliacao = BehaviorSubject<List<Avaliacao2>>.seeded(<Avaliacao2>[]);
+  Stream<List<Avaliacao2>> get listaAvaliacaoPaciente => _blcListaAvaliacao.stream;
+
   void dispose(){
     _blcisLoading.close();
     _blcListaExame.close();
+    _blcListaAvaliacao.close();
   }
 
   Future<int> cadAvaliacao({required Avaliacao avaliacao,required void Function() onSuccess, required void Function() onFail}) async{
@@ -43,6 +47,7 @@ class AvaliacaoManager{
   Future<int> cadAvaliacao2({required Avaliacao2 avaliacao,required void Function() onSuccess, required void Function() onFail}) async{
 
     _blcisLoading.add(true);
+
     var response = await http.post(
       Uri.parse("${Utils.server_path}/avaliacao/cadAvaliacao2.php"),
       body: json.encode(avaliacao.toJson()),
@@ -60,7 +65,39 @@ class AvaliacaoManager{
     return mapa["success"];
 
   }
+  Future<int> getAvaliacao2({required String idUser}) async{
+    _blcisLoading.add(true);
+    List<Avaliacao2> avaliacoes = <Avaliacao2>[];
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/avaliacao/getAvaliacaoUser.php"),
+      body: json.encode({'idPaciente':idUser}),
+      headers: {'Content-Type': 'application/json'},
+    );
+    List<dynamic> mapa = jsonDecode(response.body);
+    mapa.forEach((avaliacao) {
+      avaliacoes.add(Avaliacao2(
+          sangramento: avaliacao['perg1'] == 1,
+          sangramento_txt: avaliacao['perg1_txt'],
+          manchas: avaliacao['perg2'] == 1,
+          manchas_escolha: avaliacao['perg2_txt'],
+          urgencia: avaliacao['perg3'] == 1,
+          urgencia_txt: avaliacao['perg3_txt'],
+          nova_medicacao: avaliacao['perg4'] == 1,
+          novaMedicacao_txt: avaliacao['perg4_txt'],
+          alimentacao: avaliacao['perg5'] == 1,
+          alimentacao_txt: avaliacao['perg5_txt'],
+          acrescimo_medicacao: avaliacao['perg6'] == 1,
+          acrescimoMedicacao_txt: avaliacao['perg6_txt'],
+          idPaciente: idUser,
+          data: avaliacao['data'],
 
+      ),
+      );
+    });
+    _blcListaAvaliacao.add(avaliacoes);
+    _blcisLoading.add(false);
+    return avaliacoes.length - 1;
+  }
   Future<int> updateValorExame({required Exame exame, required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
     _blcisLoading.add(true);
     var response = await http.post(

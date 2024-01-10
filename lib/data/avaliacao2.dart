@@ -41,7 +41,7 @@ class Avaliacao2 {
         'perg5': this.alimentacao ? 1 : 0,
         'perg6': this.acrescimo_medicacao ? 1 : 0,
         'perg1_txt': this.sangramento_txt.toString(),
-        'perg2_txt': this.manchas_escolha.toString(),
+        'perg2_txt': this.manchas_escolha,
         'perg3_txt': this.urgencia_txt,
         'perg4_txt': this.novaMedicacao_txt,
         'perg5_txt': this.alimentacao_txt,

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen_view.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chat_enfermagem.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
@@ -95,7 +96,7 @@ class PacienteTile extends StatelessWidget {
                   alignment: WrapAlignment.spaceBetween,
                   children: [
                     TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
-                    TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>ResultadoAvaliacaoScreen(avaliacao: paciente!.avaliacao!,))), child: const Text('Visualizar Auto Avaliação Semanal'))
+                    TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>AutoAvaliacaoScreenView(idPaciente: paciente!.uid!,))), child: const Text('Visualizar Auto Avaliação Semanal'))
                   ],
                 ),
               ),

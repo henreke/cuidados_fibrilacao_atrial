@@ -49,12 +49,20 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
         children: [
           Text("Data: ${Utils.dataToString(tempo)}"),
           Text("Hora: ${tempo.hour}:${tempo.minute}"),
-          PerguntaTile(titulo_principal: "Apresentou sangramento?",sim: widget.sangramento,titulo2: "Qual local?",txt: txtLocal,),
-          PerguntaTile2(sim: widget.manchas,escolha: widget.manchas_escolha),
-          PerguntaTile(titulo_principal: "Buscou um atendimento de urgência?",sim: widget.urgencia,titulo2: "Explique o motivo:",txt: txtUrgencia,),
-          PerguntaTile(titulo_principal: "Foi prescrito nova medicação?",sim: widget.nova_medicacao,titulo2: "Qual?",txt: txtNovaMedicacao,),
-          PerguntaTile(titulo_principal: "Houve mudança na alimentação?",sim: widget.alimentacao,titulo2: "Qual?",txt: txtAlimentacao,),
-          PerguntaTile(titulo_principal: "Houve acréscimo de alguma medicação desde a última consulta?",sim: widget.acrescimo_medicacao,titulo2: "Qual?",txt: txtAcrescimoMedicacao,),
+          PerguntaTile(titulo_principal: "Apresentou sangramento?",sim: widget.sangramento,titulo2: "Qual local?",txt: txtLocal,
+            valueSetter: (value)=>setState(()=>widget.sangramento = value),
+          ),
+          PerguntaTile2(sim: widget.manchas,escolha: widget.manchas_escolha,
+            valueSetter1: (value)=>setState(()=>widget.manchas = value),
+            valueSetter2: (value)=>setState(()=>widget.manchas_escolha = value),
+          ),
+          PerguntaTile(titulo_principal: "Buscou um atendimento de urgência?",sim: widget.urgencia,titulo2: "Explique o motivo:",txt: txtUrgencia,
+          valueSetter: (value)=>setState(()=>widget.urgencia = value)),
+          PerguntaTile(titulo_principal: "Foi prescrito nova medicação?",sim: widget.nova_medicacao,titulo2: "Qual?",txt: txtNovaMedicacao,valueSetter: (value)=>setState(()=>widget.nova_medicacao = value) ),
+          PerguntaTile(titulo_principal: "Houve mudança na alimentação?",sim: widget.alimentacao,titulo2: "Qual?",txt: txtAlimentacao,
+          valueSetter: (value)=>setState(()=>widget.alimentacao = value)),
+          PerguntaTile(titulo_principal: "Houve acréscimo de alguma medicação desde a última consulta?",sim: widget.acrescimo_medicacao,titulo2: "Qual?",txt: txtAcrescimoMedicacao,
+          valueSetter: (value)=>setState(()=>widget.acrescimo_medicacao = value)),
           const SizedBox(height: 12,),
           StreamBuilder<bool>(
               stream: avaliacao_manager.isLoading,
@@ -68,16 +76,16 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
                           idPaciente: _userManager!.uid,
                           manchas: widget.manchas,
                           sangramento: widget.sangramento,
-                        urgencia: widget.urgencia,
-                        nova_medicacao: widget.nova_medicacao,
-                        alimentacao: widget.alimentacao,
-                        acrescimo_medicacao: widget.acrescimo_medicacao,
-                        sangramento_txt: txtLocal.text,
-                        manchas_escolha: widget.manchas_escolha,
-                        urgencia_txt: txtUrgencia.text,
-                        novaMedicacao_txt: txtNovaMedicacao.text,
-                        alimentacao_txt: txtAlimentacao.text,
-                        acrescimoMedicacao_txt: txtAcrescimoMedicacao.text
+                          urgencia: widget.urgencia,
+                          nova_medicacao: widget.nova_medicacao,
+                          alimentacao: widget.alimentacao,
+                          acrescimo_medicacao: widget.acrescimo_medicacao,
+                          sangramento_txt: txtLocal.text,
+                          manchas_escolha: widget.manchas_escolha,
+                          urgencia_txt: txtUrgencia.text,
+                          novaMedicacao_txt: txtNovaMedicacao.text,
+                          alimentacao_txt: txtAlimentacao.text,
+                          acrescimoMedicacao_txt: txtAcrescimoMedicacao.text
                       );
                       avaliacao_manager.cadAvaliacao2(
                           avaliacao: avaliacao, onSuccess: () {
@@ -121,12 +129,13 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
 
 
 class PerguntaTile extends StatefulWidget {
-  PerguntaTile({Key? key, required this.titulo_principal,required this.sim, required this.titulo2,required this.txt}) : super(key: key);
+  PerguntaTile({Key? key, required this.titulo_principal,required this.sim, required this.titulo2,required this.txt, required this.valueSetter}) : super(key: key);
   final String titulo_principal;
   bool sim;
   bool enviando = false;
   TextEditingController txt;
   final String titulo2;
+  final ValueSetter valueSetter;
   @override
   State<PerguntaTile> createState() => _PerguntaTileState();
 }
@@ -147,29 +156,21 @@ class _PerguntaTileState extends State<PerguntaTile> {
                 Text("Sim"),
                 Checkbox(
                   value: widget.sim,
-                  onChanged: (value){
-                    setState(() {
-                      widget.sim = value!;
-                    });
-                  },
+                  onChanged: widget.valueSetter,
                 ),
 
                 Text("Não"),
                 Checkbox(
                   value: !widget.sim,
-                  onChanged: (value){
-                    setState(() {
-                      widget.sim = !value!;
-                    });
-                  },
+                  onChanged:(value) => widget.valueSetter(!value!),
                 ),
               ],
             ),
           ),
           if(widget.sim)txtEnvio(
-            widget.enviando,
-            widget.titulo2,
-            widget.txt
+              widget.enviando,
+              widget.titulo2,
+              widget.txt
           ),
         ],
       ),
@@ -209,10 +210,11 @@ class _PerguntaTileState extends State<PerguntaTile> {
 
 
 class PerguntaTile2 extends StatefulWidget {
-  PerguntaTile2({Key? key, required this.escolha,required this.sim}) : super(key: key);
+  PerguntaTile2({Key? key, required this.escolha,required this.sim, required this.valueSetter1, required this.valueSetter2}) : super(key: key);
   bool sim;
   int escolha;
-
+  final ValueSetter valueSetter1;
+  final ValueSetter valueSetter2;
   @override
   State<PerguntaTile2> createState() => _PerguntaTileState2();
 }
@@ -233,21 +235,13 @@ class _PerguntaTileState2 extends State<PerguntaTile2> {
                 Text("Sim"),
                 Checkbox(
                   value: widget.sim,
-                  onChanged: (value){
-                    setState(() {
-                      widget.sim = value!;
-                    });
-                  },
+                  onChanged: widget.valueSetter1,
                 ),
 
                 Text("Não"),
                 Checkbox(
                   value: !widget.sim,
-                  onChanged: (value){
-                    setState(() {
-                      widget.sim = !value!;
-                    });
-                  },
+                  onChanged:(value) => widget.valueSetter1(!value!),
                 ),
               ],
             ),
@@ -258,27 +252,21 @@ class _PerguntaTileState2 extends State<PerguntaTile2> {
               Checkbox(
                 value: widget.escolha == 0,
                 onChanged: (value){
-                  setState(() {
-                    widget.escolha = value! ? 0 : widget.escolha;
-                  });
+                  widget.valueSetter2(value! ? 0 : widget.escolha);
                 },
               ),
               Text("Moderada"),
               Checkbox(
                 value: widget.escolha == 1,
                 onChanged: (value){
-                  setState(() {
-                    widget.escolha = value! ? 1 : widget.escolha;
-                  });
+                  widget.valueSetter2(value! ? 1 : widget.escolha);
                 },
               ),
               Text("Grande"),
               Checkbox(
                 value: widget.escolha == 2,
                 onChanged: (value){
-                  setState(() {
-                    widget.escolha = value! ? 2 : widget.escolha;
-                  });
+                  widget.valueSetter2(value! ? 2 : widget.escolha);
                 },
               ),
             ],
@@ -289,4 +277,3 @@ class _PerguntaTileState2 extends State<PerguntaTile2> {
   }
 
 }
-

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen2.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen_view.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/cad_user_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_enfermagem.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chat_enfermagem.dart';
@@ -179,6 +180,11 @@ class _MainScreenState extends State<MainScreen> {
         if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreen2())),
           titulo: 'Auto Avaliação',
+          img: "ico/check-up.png",
+        ),
+        if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreenView())),
+          titulo: 'Auto AvaliaçãoView',
           img: "ico/check-up.png",
         ),
         if (_userManager?.tipo == TipoUser.PACIENTE)tileMenu(
