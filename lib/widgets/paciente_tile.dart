@@ -62,6 +62,8 @@ class PacienteTile extends StatelessWidget {
                   Text('Data: ${paciente!.ultimoExame!.data! == 0 ? '--------------' :Utils.epochToString(paciente!.ultimoExame!.data!)}'),
                 ],
               ),
+              const Text('Tempo de Intervalo Terapêutico (TTR):'),
+              Text('${paciente!.ttr!}%'),
               const SizedBox(height: 4,),
 
 

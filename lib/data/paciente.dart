@@ -13,7 +13,8 @@ class Paciente{
   late int? dtnascimento;
   late int? data_ultima_prescricao;
   late Avaliacao? avaliacao;
+  late String? ttr;
 
-  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame,this.dtnascimento,this.data_ultima_prescricao,this.avaliacao});
+  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame,this.dtnascimento,this.data_ultima_prescricao,this.avaliacao,this.ttr});
 
 }

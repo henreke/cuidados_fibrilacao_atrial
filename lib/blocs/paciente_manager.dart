@@ -23,7 +23,7 @@ class PacienteManager{
     _blcisLoading.add(true);
     List<Paciente> lista = <Paciente>[];
     var response = await http.post(
-      Uri.parse("${Utils.server_path}/pacientes/getPacienteCentroMedico.php"),
+      Uri.parse("${Utils.server_path}/pacientes/getPacienteCentroMedico2.php"),
       body: json.encode({'idCentroMedico':idCentroMedico}),
       headers: {'Content-Type': 'application/json'},
     );
@@ -66,7 +66,8 @@ class PacienteManager{
               ultimoExame: exame,
               listaMedicamentos: paciente['listaMedicamentos'],
               data_ultima_prescricao: paciente['data_ultima_prescricao'] ?? 0,
-              avaliacao: _avaliacao
+              avaliacao: _avaliacao,
+              ttr: paciente['ttr'].toString()
           )
       );
     });
