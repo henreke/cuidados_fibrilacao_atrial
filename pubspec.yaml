@@ -17,6 +17,11 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 #adicionar a referencia dos icones <a href="https://www.flaticon.com/free-icons/medical-report" title="medical-report icons">Medical-report icons created by Freepik - Flaticon</a>
+#  Flutter 3.3.2 • channel stable • https://github.com/flutter/flutter.git
+#  Framework • revision e3c29ec00c (1 year, 4 months ago) • 2022-09-14 08:46:55 -0500
+#  Engine • revision a4ff2c53d8
+#  Tools • Dart 2.18.1 • DevTools 2.15.0
+
 version: 1.0.0+1
 
 environment:
