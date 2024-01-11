@@ -7,7 +7,7 @@ class EscoreChadScreen extends StatefulWidget {
   EscoreChadScreen({Key? key, this.idPaciente  = ''}) : super(key: key);
   List<bool> checks = [false,false,false,false,false,false,false,false];
   int escore = 0;
-  String risco ="anticoagulação plena (warfarina, para INR entre 2,0 e 3,0)";
+  String risco ="Antiagregação (AAS) ou nada .";
   String idPaciente;
   @override
   State<EscoreChadScreen> createState() => _EscoreChadScreenState();
@@ -38,15 +38,16 @@ class _EscoreChadScreenState extends State<EscoreChadScreen> {
         }
       indice++;
     });
+    widget.risco = "Antiagregação (AAS) ou nada .";
     widget.escore = total;
     if (widget.escore >= 2){
-      widget.risco = "anticoagulação plena (warfarina, para INR entre 2,0 e 3,0)";
+      widget.risco = "Indicação para Anticoagulação";
     }
-    if (widget.escore == 1){
-      widget.risco = "anticoagulação plena ou antiagregação (AAS 75 a 325mg/dia) – o algoritmo da ACCP recomenda anticoagulação plena sempre que possível. ";
+    if (widget.escore == 1 && !widget.checks[7]){
+      widget.risco = "Indicação para Anticoagulação";
     }
     if (widget.escore == 0){
-      widget.risco = "antiagregação (AAS) ou nada – o benefício do uso do AAS para esse grupo não está bem estabelecido. Além disso, o uso do AAS pode levar a eventos adversos.";
+      widget.risco = "Antiagregação (AAS) ou nada .";
     }
   }
   @override

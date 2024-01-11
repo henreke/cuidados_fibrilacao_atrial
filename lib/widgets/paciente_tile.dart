@@ -7,6 +7,8 @@ import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chat_enfermagem.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/escore_chads_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/escore_chads_screen_view.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/escore_has_screen.dart';
+import 'package:cuidados_fibrilacao_atrial/screens/escore_has_screen_view.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames2.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/historico_exames3.dart';
@@ -132,6 +134,17 @@ class PacienteTile extends StatelessWidget {
                   children: [
                     TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreen(idPaciente: paciente!.uid!,))), child: Text('Ferramenta CHA2DS2-VASc')),
                     TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreenView(idPaciente: paciente!.uid!,))), child: Text('Histórico Ferramenta CHA2DS2-VASc')),
+
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  children: [
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreHasBledScreen(idPaciente: paciente!.uid!,))), child: Text('Ferramenta HAS-BLED')),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreHasBledScreenView(idPaciente: paciente!.uid!,))), child: Text('Histórico Ferramenta HAS-BLED')),
 
                   ],
                 ),
