@@ -35,7 +35,6 @@ class _AutoAvaliacaoScreenViewState extends State<AutoAvaliacaoScreenView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final UserManager userManager = Provider.of<UserManager>(context);
-    print("set state");
     if (_userManager != userManager) {
       _userManager = userManager;
       String _id = _userManager!.uid;

@@ -1,15 +1,31 @@
+import 'package:cuidados_fibrilacao_atrial/blocs/chads_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/data/chads.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 class EscoreChadScreen extends StatefulWidget {
-  EscoreChadScreen({Key? key}) : super(key: key);
+  EscoreChadScreen({Key? key, this.idPaciente  = ''}) : super(key: key);
   List<bool> checks = [false,false,false,false,false,false,false,false];
   int escore = 0;
   String risco ="anticoagulação plena (warfarina, para INR entre 2,0 e 3,0)";
+  String idPaciente;
   @override
   State<EscoreChadScreen> createState() => _EscoreChadScreenState();
 }
 
 class _EscoreChadScreenState extends State<EscoreChadScreen> {
+
+
+  UserManager? _userManager;
+  ChadsManager chads_manager = ChadsManager();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final UserManager userManager = Provider.of<UserManager>(context);
+    if (_userManager != userManager) {
+      _userManager = userManager;
+    }
+  }
 
   void CalcularEscore(){
     List<int> checks_int = [1,1,2,1,2,1,1,1];
@@ -141,6 +157,52 @@ class _EscoreChadScreenState extends State<EscoreChadScreen> {
                 Text("${widget.risco}",style: TextStyle(fontSize: 16),)
               ],
             ),
+          ),
+          StreamBuilder<bool>(
+              stream: chads_manager.isLoading,
+              builder: (context,snapshot) {
+                bool _isLoading = snapshot.hasData ? snapshot.data! : false;
+                if (!_isLoading) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      String _id = widget.idPaciente.isNotEmpty ?  widget.idPaciente : _userManager!.uid;
+                      Chads chads = Chads(
+                        idPaciente: _id,
+                        valor: 0,
+                      );
+                      chads.setValorFromList(widget.checks);
+                      chads_manager.cadChads(
+                          avaliacao: chads, onSuccess: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Sua avaliação foi enviada com sucesso!'),
+                            ));
+                      }, onFail: () {});
+                    },
+                    child: Text('Enviar'),
+                    style: ButtonStyle(
+                        textStyle: MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.pressed)){
+                            return TextStyle(color: Colors.black);
+                          }
+                          return TextStyle(color: Colors.white);
+                        }),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                        backgroundColor: MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.pressed)){
+                            return Colors.green[50];
+                          }
+                          return Theme.of(context).primaryColor;
+                        })
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.green),
+                  ),
+                );
+              }
           ),
         ],
       ),
