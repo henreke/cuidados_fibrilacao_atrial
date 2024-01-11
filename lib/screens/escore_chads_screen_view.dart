@@ -1,6 +1,7 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/chads_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/chads.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class EscoreChadScreenView extends StatefulWidget {
@@ -11,6 +12,7 @@ class EscoreChadScreenView extends StatefulWidget {
   String idPaciente;
   int indice = -1;
   int total_avaliacoes = 0;
+  DateTime tempo = DateTime.now();
   @override
   State<EscoreChadScreenView> createState() => _EscoreChadScreenViewState();
 }
@@ -74,11 +76,13 @@ class _EscoreChadScreenViewState extends State<EscoreChadScreenView> {
           if (snapshot.hasData){
             if (widget.indice >= 0){
               widget.checks = snapshot.data![widget.indice].getListFromValor();
+              widget.tempo = DateTime.fromMillisecondsSinceEpoch(snapshot.data![widget.indice].data*1000);
               CalcularEscore();
             }
           }
           return ListView(
             children: [
+              Text("Data: ${Utils.dataToString(widget.tempo)} - ${Utils.horaToString(widget.tempo)}"),
               CheckboxListTile(
                 title: Text("Insuficiência Cardíaca"),
                 value: widget.checks[0],

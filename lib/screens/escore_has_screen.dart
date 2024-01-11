@@ -1,4 +1,5 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../blocs/has_manager.dart';
@@ -20,6 +21,7 @@ class EscoreHasBledScreen extends StatefulWidget {
   int escore = 0;
   String risco = "Baixo Risco";
   String idPaciente;
+  DateTime tempo = DateTime.now();
   @override
   State<EscoreHasBledScreen> createState() => _EscoreHasBledScreenState();
 }
@@ -68,6 +70,7 @@ class _EscoreHasBledScreenState extends State<EscoreHasBledScreen> {
       ),
       body: ListView(
         children: [
+          Text("Data: ${Utils.dataToString(widget.tempo)} - ${Utils.horaToString(widget.tempo)}"),
           CheckboxListTile(
             title: Text("Hipertensão"),
             value: widget.checks[0],

@@ -5,6 +5,10 @@ class Utils{
   static String dataToString(DateTime data){
     return '${data.day}/${data.month}/${data.year}';
   }
+
+  static String horaToString(DateTime data){
+    return '${data.hour}:${data.minute}:${data.second}';
+  }
   static String epochToString(int epoch){
     int multiplicador =  epoch > 4110791043 ? 1 : 1000;
     DateTime data =  DateTime.fromMillisecondsSinceEpoch(epoch*multiplicador);

@@ -1,6 +1,7 @@
 import 'package:cuidados_fibrilacao_atrial/blocs/chads_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/chads.dart';
+import 'package:cuidados_fibrilacao_atrial/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class EscoreChadScreen extends StatefulWidget {
@@ -9,6 +10,7 @@ class EscoreChadScreen extends StatefulWidget {
   int escore = 0;
   String risco ="Antiagregação (AAS) ou nada .";
   String idPaciente;
+  DateTime tempo = DateTime.now();
   @override
   State<EscoreChadScreen> createState() => _EscoreChadScreenState();
 }
@@ -59,6 +61,7 @@ class _EscoreChadScreenState extends State<EscoreChadScreen> {
       ),
       body: ListView(
         children: [
+          Text("Data: ${Utils.dataToString(widget.tempo)} - ${Utils.horaToString(widget.tempo)}"),
           CheckboxListTile(
             title: Text("Insuficiência Cardíaca"),
             value: widget.checks[0],
