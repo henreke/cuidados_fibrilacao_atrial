@@ -14,7 +14,9 @@ class Paciente{
   late int? data_ultima_prescricao;
   late Avaliacao? avaliacao;
   late String? ttr;
-
-  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame,this.dtnascimento,this.data_ultima_prescricao,this.avaliacao,this.ttr});
+  late int? indicacao_anti;
+  late int? indicacao_data;
+  late String? medicamento;
+  Paciente({this.uid,this.nome, this.email, this.senha, this.genero,this.listaMedicamentos,this.ultimoExame,this.dtnascimento,this.data_ultima_prescricao,this.avaliacao,this.ttr,this.indicacao_anti = 0,this.indicacao_data = 0, this.medicamento = ''});
 
 }

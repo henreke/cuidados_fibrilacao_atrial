@@ -58,6 +58,7 @@ class PacienteManager{
         }
 
       }
+      String datas = paciente['data_ultima_prescricao'] ?? "0;0";
       lista.add(
           Paciente(
               uid: paciente['idPaciente'],
@@ -65,15 +66,39 @@ class PacienteManager{
               nome: paciente['nome'],
               ultimoExame: exame,
               listaMedicamentos: paciente['listaMedicamentos'],
-              data_ultima_prescricao: paciente['data_ultima_prescricao'] ?? 0,
+              data_ultima_prescricao: int.parse(datas.split(";")[0]),
+              medicamento: datas.split(";")[1],
               avaliacao: _avaliacao,
-              ttr: paciente['ttr'].toString()
+              ttr: paciente['ttr'].toString(),
+            indicacao_anti: paciente['indicacao_anti'],
+             indicacao_data: paciente['data_indicacao'],
           )
       );
     });
 
     _blcPacienteCentroMedico.add(lista);
     _blcisLoading.add(false);
+  }
+
+  Future<int> updateIndicacao({required String idUser,required int indicacao, required void Function() onSuccess, required void Function() onFail}) async{
+    _blcisLoading.add(true);
+    print("aqui_ttt");
+    var response = await http.post(
+      Uri.parse("${Utils.server_path}/pacientes/updateIndicacaoAnti.php"),
+      body: json.encode({'idPaciente':idUser,'indicacao_anti':indicacao}),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print("aqui_qqqq");
+    print(response.body);
+    var mapa = jsonDecode(response.body);
+    _blcisLoading.add(false);
+    if (mapa['success'] == 1){
+      onSuccess();
+      return 1;
+    } else{
+      onFail();
+      return 0;
+    }
   }
 
   void refreshListaPacientes(List<Paciente> lista){

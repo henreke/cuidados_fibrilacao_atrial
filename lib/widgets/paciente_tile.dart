@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cuidados_fibrilacao_atrial/blocs/paciente_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen_view.dart';
@@ -62,6 +63,31 @@ class PacienteTile extends StatelessWidget {
                   Text('Data: ${paciente!.ultimoExame!.data! == 0 ? '--------------' :Utils.epochToString(paciente!.ultimoExame!.data!)}'),
                 ],
               ),
+              const SizedBox(height: 8,),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    const Text('Indicação da Anticoagulação: '),
+                    ComboIndicacao(
+                      valueSetter: (value) {
+                        paciente!.indicacao_anti = value;
+                        PacienteManager _paciente_manager = PacienteManager();
+                        _paciente_manager.updateIndicacao(
+                            idUser: paciente!.uid!,
+                            indicacao: paciente!.indicacao_anti!,
+                            onSuccess: (){},
+                            onFail: (){});
+                      },
+                      sim: paciente!.indicacao_anti!,
+                    ),
+                  ],
+                ),
+              ),
+              if (paciente!.indicacao_data! != 0)Text("Data de Início da Anticoagulação: ${Utils.epochToString(paciente!.indicacao_data!)}"),
+              const SizedBox(height: 8,),
               const Text('Tempo de Intervalo Terapêutico (TTR):'),
               Text('${paciente!.ttr!}%'),
               const SizedBox(height: 4,),
@@ -84,6 +110,8 @@ class PacienteTile extends StatelessWidget {
                   Text('Data: ${(paciente!.avaliacao?.data ?? 0) == 0 ? '--------------' : Utils.epochToString(paciente!.avaliacao!.data)}'),
                 ],
               ),
+              const SizedBox(height: 8,),
+
               const SizedBox(height: 4,),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -91,6 +119,7 @@ class PacienteTile extends StatelessWidget {
                   alignment: WrapAlignment.spaceBetween,
                   children: [
                     TextButton(onPressed: paciente!.ultimoExame!.data == 0 ? null : ()=>visualizarExame(), child: Text('Visualizar Exame')),
+                    Text("  Medicações em Uso: ${paciente!.medicamento}"),
                     TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicações (Segunda a Domingo)')),
                   ],
                 ),
@@ -155,6 +184,33 @@ class PacienteTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ComboIndicacao extends StatefulWidget {
+  ComboIndicacao({Key? key,required this.valueSetter, required this.sim}) : super(key: key);
+  final ValueSetter valueSetter;
+  int sim;
+  @override
+  State<ComboIndicacao> createState() => _ComboIndicacaoState();
+}
+
+class _ComboIndicacaoState extends State<ComboIndicacao> {
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<int>(
+      value: widget.sim,
+      onChanged: (value){
+        widget.valueSetter(value!);
+        setState(() {
+          widget.sim = value!;
+        });
+      },
+      items: [
+        DropdownMenuItem<int>(child: Text("Sim"),value: 1,),
+        DropdownMenuItem<int>(child: Text("Não"),value: 0,),
+      ],
     );
   }
 }
