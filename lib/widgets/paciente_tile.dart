@@ -41,13 +41,13 @@ class PacienteTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Paciente:',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                  const Text('Paciente:',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   Text('Idade: ${Utils.idadeFromEpoch(paciente!.dtnascimento!)}'),
                   //Image.memory(base64Decode(paciente!.ultimoExame!.foto!)),
                 ],
               ),
               const SizedBox(height: 8,),
-              Text(paciente!.nome ?? '',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+              Text(paciente!.nome ?? '',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
               const SizedBox(height: 8,),
               const Padding(
                 padding: EdgeInsets.only(left: 8.0,right: 8.0),

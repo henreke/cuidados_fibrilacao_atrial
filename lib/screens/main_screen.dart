@@ -177,14 +177,10 @@ class _MainScreenState extends State<MainScreen> {
           titulo: 'Enviar exame',
           img: "ico/clinic-history.png",
         ),
-        if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
-          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreen2())),
-          titulo: 'Auto Avaliação',
-          img: "ico/check-up.png",
-        ),
+       
         if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
           click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreenView())),
-          titulo: 'Auto AvaliaçãoView',
+          titulo: 'Auto Avaliação',
           img: "ico/check-up.png",
         ),
         if (_userManager?.tipo == TipoUser.PACIENTE)tileMenu(
@@ -236,7 +232,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Image.asset(img,height: 75),
               const SizedBox(width: 10,),
-              Flexible(child: Text(titulo, style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w500),maxLines: 2)),
+              Flexible(child: Text(titulo, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),maxLines: 2)),
             ],
           ),
         ),

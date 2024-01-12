@@ -40,13 +40,13 @@ class _HistoricoMedicacoesScreenState extends State<HistoricoMedicacoesScreen> {
               children: [
                 TextButton(onPressed: (){
                   consultarHistorico(dias: 7);
-                }, child: Text('Útimos 7 dias')),
+                }, child: Text('Útimos 7 dias',style: TextStyle(fontSize: 16),)),
                 TextButton(onPressed: () {
                   consultarHistorico(dias: 14);
-                }, child: Text('Útimos 14 dias')),
+                }, child: Text('Útimos 14 dias',style: TextStyle(fontSize: 16))),
                 TextButton(onPressed: () {
                   consultarHistorico(dias: 30);
-                }, child: Text('Útimos 30 dias')),
+                }, child: Text('Útimos 30 dias',style: TextStyle(fontSize: 16))),
               ],
             ),
             const SizedBox(height: 8,),
@@ -86,7 +86,7 @@ class _HistoricoMedicacoesScreenState extends State<HistoricoMedicacoesScreen> {
             color: cor,
           ),
         ),
-        Text(texto,style: TextStyle(color: cor),)
+        Text(texto,style: TextStyle(color: cor,fontSize: 14),)
       ],
     );
   }

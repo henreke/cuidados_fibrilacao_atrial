@@ -22,11 +22,11 @@ class ChatTile extends StatelessWidget {
             children: [
               Text(
                 msg,
-                style: const TextStyle(fontSize: 15),
+                style: const TextStyle(fontSize: 19),
               ),
               Text(
                 hora,
-                style: const TextStyle(fontSize: 10),
+                style: const TextStyle(fontSize: 13),
               ),
             ],
           ),

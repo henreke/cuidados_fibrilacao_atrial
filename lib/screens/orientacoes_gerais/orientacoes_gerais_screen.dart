@@ -40,7 +40,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                       }
                   );
                 },
-                child: const Text('Você sabe o que é Fibrilação Atrial?'),
+                child: const Text('Você sabe o que é Fibrilação Atrial?',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 4,),
@@ -59,7 +59,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Quais os tipos de Fibrilação Atrial?'),
+              child: const Text('Quais os tipos de Fibrilação Atrial?',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 8,),
@@ -78,7 +78,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Sabe o que acontece durante a  Fibrilação Atrial?',textAlign: TextAlign.center),
+              child: const Text('Sabe o que acontece durante a  Fibrilação Atrial?',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 8,),
@@ -97,7 +97,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Principais Causas',textAlign: TextAlign.center),
+              child: const Text('Principais Causas',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 8,),
@@ -117,7 +117,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Você conhece os sintomas mais comuns da Fibrilação Atrial?',textAlign: TextAlign.center),
+              child: const Text('Você conhece os sintomas mais comuns da Fibrilação Atrial?',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 8,),
@@ -137,7 +137,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Você conhece o tratamento da Fibrilação Atrial?',textAlign: TextAlign.center),
+              child: const Text('Você conhece o tratamento da Fibrilação Atrial?',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
             const SizedBox(height: 8,),
@@ -157,7 +157,7 @@ class OrientacoesGeraisScreen extends StatelessWidget {
                     }
                 );
               },
-              child: const Text('Como prevenir e reduzir riscos de Fibrilação Atrial',textAlign: TextAlign.center),
+              child: const Text('Como prevenir e reduzir riscos de Fibrilação Atrial',style: TextStyle(fontSize: 24,),textAlign: TextAlign.center),
               style: styleButton,
             ),
           ],
