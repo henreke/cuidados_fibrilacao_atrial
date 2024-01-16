@@ -23,86 +23,86 @@ class prevenirSheet extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Fazer controle da frequência cardíaca: O controle da frequência em casa deve ser feito com a orientação e aprovação de um profissional de saúde. Caso, tenha disponível, utilize um monitor de frequência cardíaca; verifique a frequência cardíaca regularmente, em momentos específicos do dia ou quando surgirem sintomas e registre os resultados, pois isso pode ajudar o profissional de saúde a avaliar a eficácia do tratamento;',
+              child: Text('${String.fromCharCodes([0x2714])} Fazer controle da frequência cardíaca: O controle da frequência em casa deve ser feito com a orientação e aprovação de um profissional de saúde. Caso, tenha disponível, utilize um monitor de frequência cardíaca; verifique a frequência cardíaca regularmente, em momentos específicos do dia ou quando surgirem sintomas e registre os resultados, pois isso pode ajudar o profissional de saúde a avaliar a eficácia do tratamento;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Realizar controle rigoroso (Manhã e Noite) da pressão arterial: O ideal é manter uma pressão sistólica de 120 – 129  e a diastólica deve ser mantida abaixo de 80 mmHg.\nAtenção: Este valor pode variar de acordo com a sua condição clínica',
+              child: Text('${String.fromCharCodes([0x2714])} Realizar controle rigoroso (Manhã e Noite) da pressão arterial: O ideal é manter uma pressão sistólica de 120 – 129  e a diastólica deve ser mantida abaixo de 80 mmHg.\nAtenção: Este valor pode variar de acordo com a sua condição clínica',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Consumir uma dieta balanceada e equilibrada: Evite alimentos ricos em sódio (sal): O sódio pode contribuir para a retenção de líquidos e elevar a pressão arterial. Evite alimentos processados, fast food e alimentos muito salgados;',
+              child: Text('${String.fromCharCodes([0x2714])} Consumir uma dieta balanceada e equilibrada: Evite alimentos ricos em sódio (sal): O sódio pode contribuir para a retenção de líquidos e elevar a pressão arterial. Evite alimentos processados, fast food e alimentos muito salgados;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Alimentos ricos em gordura saturada: Reduza o consumo de alimentos ricos em gordura saturada, como carnes gordurosas, produtos de panificação, frituras e alimentos processados;',
+              child: Text('${String.fromCharCodes([0x2714])} Alimentos ricos em gordura saturada: Reduza o consumo de alimentos ricos em gordura saturada, como carnes gordurosas, produtos de panificação, frituras e alimentos processados;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Cafeína: Modere o consumo de café, chá e outras fontes de cafeína. Utilizar 200 a 300 miligramas de cafeína por dia, o que é aproximadamente o equivalente a uma ou duas xícaras de café;',
+              child: Text('${String.fromCharCodes([0x2714])} Cafeína: Modere o consumo de café, chá e outras fontes de cafeína. Utilizar 200 a 300 miligramas de cafeína por dia, o que é aproximadamente o equivalente a uma ou duas xícaras de café;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Álcool: O consumo excessivo de álcool pode aumentar o risco de fibrilação atrial. Discutir com seu médico durante a avaliação para uma orientação individualizada com base na sua saúde global;',
+              child: Text('${String.fromCharCodes([0x2714])} Álcool: O consumo excessivo de álcool pode aumentar o risco de fibrilação atrial. Discutir com seu médico durante a avaliação para uma orientação individualizada com base na sua saúde global;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Açúcar refinado: Reduza a ingestão de açúcares adicionados, presentes em doces, refrigerantes. Isso pode ajudar a manter o peso;',
+              child: Text('${String.fromCharCodes([0x2714])} Açúcar refinado: Reduza a ingestão de açúcares adicionados, presentes em doces, refrigerantes. Isso pode ajudar a manter o peso;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Alimentos ricos em vitamina K: Se a pessoa estiver tomando anticoagulantes, ela pode precisar monitorar a ingestão de alimentos ricos em vitamina K, como couve, espinafre e brócolis, coentro, alface pois esses alimentos podem interferir com a ação dos medicamentos;',
+              child: Text('${String.fromCharCodes([0x2714])} Alimentos ricos em vitamina K: Se a pessoa estiver tomando anticoagulantes, ela pode precisar monitorar a ingestão de alimentos ricos em vitamina K, como couve, espinafre e brócolis, coentro, alface pois esses alimentos podem interferir com a ação dos medicamentos;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Bebidas energéticas: Evitar bebidas energéticas como Red Bull, Monster Energy, entre outros, pois apresentam a cafeína e outros ingredientes que podem afetar o ritmo cardíaco;',
+              child: Text('${String.fromCharCodes([0x2714])} Bebidas energéticas: Evitar bebidas energéticas como Red Bull, Monster Energy, entre outros, pois apresentam a cafeína e outros ingredientes que podem afetar o ritmo cardíaco;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Controlar a apneia do sono através da perda de peso quando estiver relacionada à obesidade; assim como evitar o consumo de bebidas alcoólicas e o uso de sedativos pois essas substâncias podem relaxar os músculos da garganta, contribuindo para a obstrução das vias respiratórias; Posicionar-se adequadamente durante o sono como dormir de lado, em vez de costas, pois reduz a gravidade da apneia do sono em alguns casos.\nEm alguns casos, dispositivos ou estratégias podem ser usados para evitar que a pessoa durma de costas. e avaliar a necessidade do uso de CPAP, ou, seja, de uma parelho que ajuda a melhorar o sono;',
+              child: Text('${String.fromCharCodes([0x2714])} Controlar a apneia do sono através da perda de peso quando estiver relacionada à obesidade; assim como evitar o consumo de bebidas alcoólicas e o uso de sedativos pois essas substâncias podem relaxar os músculos da garganta, contribuindo para a obstrução das vias respiratórias; Posicionar-se adequadamente durante o sono como dormir de lado, em vez de costas, pois reduz a gravidade da apneia do sono em alguns casos.\nEm alguns casos, dispositivos ou estratégias podem ser usados para evitar que a pessoa durma de costas. e avaliar a necessidade do uso de CPAP, ou, seja, de uma parelho que ajuda a melhorar o sono;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Realizar atividade aeróbica, regular de moderada intensidade no mínimo de 150 minutos/semanais, que podem variar entre três vezes por semana de 50 minutos ou cinco vezes por semana de 30 minutos;',
+              child: Text('${String.fromCharCodes([0x2714])} Realizar atividade aeróbica, regular de moderada intensidade no mínimo de 150 minutos/semanais, que podem variar entre três vezes por semana de 50 minutos ou cinco vezes por semana de 30 minutos;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('\u2713 Fazer controle de peso alimentando-se adequadamente;',
+              child: Text('${String.fromCharCodes([0x2714])} Fazer controle de peso alimentando-se adequadamente;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),

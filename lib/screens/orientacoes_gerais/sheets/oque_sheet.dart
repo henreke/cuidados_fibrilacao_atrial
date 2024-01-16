@@ -27,7 +27,7 @@ class OqueeSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('É uma arritmia que causa completa desorganização do ritmo elétrico do átrio. Ocorre quando os átrios (as câmaras superiores do coração) batem de forma irregular e descoordenada, em vez de baterem em um ritmo regular. Esse padrão irregular pode levar a um aumento na frequência cardíaca e afetar a capacidade eficaz do coração de bombear o sangue para o resto do corpo (Cintra; Figueiredo, 2021 e Melo et al., 2022).'
-                    '\nÉ mundialmente a arritmia de maior prevalência, afetando cerca de 3% da população adulta, com incidência nos homens e acima dos 55 anos. No Brasil, estima-se que em torno de entre 1% e 4% da população é acometida por esta doença (Melo et al., 2022)',
+                    '\nÉ mundialmente a arritmia de maior frequência afetando cerca de 3% da população adulta acima de 55 anos em sua maioria sendo homens. No Brasil, estima-se que em torno de 4% da população têm a doença (Melo et al., 2022)',
                     style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                     textAlign: TextAlign.justify,
                   ),
