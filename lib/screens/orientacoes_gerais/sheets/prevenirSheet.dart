@@ -165,7 +165,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento'),
               ),
             ]
         ),
@@ -185,7 +185,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento.'),
               ),
             ]
         ),
@@ -205,7 +205,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento.'),
               ),
             ]
         ),
@@ -225,7 +225,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento.'),
               ),
             ]
         ),
@@ -245,7 +245,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento.'),
               ),
             ]
         ),
@@ -265,7 +265,7 @@ class prevenirSheet extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8,right: 8,top: 4),
-                child: Text('Servem para reduzir a inflamação, aliviar a dor e diminuir a febre.'),
+                child: Text('Pode aumentar o risco de sangramento.'),
               ),
             ]
         ),
