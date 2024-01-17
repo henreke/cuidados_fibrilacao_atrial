@@ -38,7 +38,7 @@ class oQueAconteceSheet extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(25.0),
               child: Text(
-                'Como resultado da atividade elétrica desordenada, o coração pode levar a uma perda significativa da eficiência da sua função cardíaca. Este impulso pode ser transmitido aos ventrículos, as câmaras inferiores do coração e isso pode resultar em uma frequência cardíaca rápida e irregular (Heinisch, R. H.; Leal; Heinrich, L. M. M, 2023).',
+                'Como resultado da atividade elétrica desordenada, o coração pode levar a uma perda significativa da eficiência da sua função cardíaca. Este impulso pode ser transmitido aos ventrículos, as câmaras inferiores do coração, e isso pode resultar em uma frequência cardíaca rápida e irregular (Heinisch, R. H.; Leal; Heinrich, L. M. M, 2023).',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),

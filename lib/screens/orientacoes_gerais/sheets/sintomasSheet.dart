@@ -100,12 +100,12 @@ class sintomasSheet extends StatelessWidget {
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Dor no no peito',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800),),
+              child: Text('Dor no peito',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800),),
             ),
 
             const Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('Apneia do Sono',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800),),
+              child: Text('Apneia Obstrutiva do Sono',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800),),
             ),
 
             const Padding(
@@ -121,7 +121,7 @@ class sintomasSheet extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(left: 25.0,right: 25.0,top: 8),
               child: Text('Pode-se também encontrar sintomas como pressão arterial muito baixa, problemas pulmonares decorrentes da falha do funcionamento do coração, entre outros.',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800),
                 textAlign: TextAlign.justify,
               ),
             ),

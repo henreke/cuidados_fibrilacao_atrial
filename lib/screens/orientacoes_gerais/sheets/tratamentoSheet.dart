@@ -33,14 +33,14 @@ class tratamentoSheet extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('${String.fromCharCodes([0x2714])} Controle da Frequência Cardíaca: Utiliza-se medicamentos, como beta-bloqueadores, bloqueadores dos canais de cálcio ou digoxina que podem ser prescritos pelo médico e ajudará no controle da frequência, na manutenção dos batimentos cardíacos em uma faixa normal e na diminuição dos sintomas;',
+              child: Text('${String.fromCharCodes([0x2714])} Controle da Frequência Cardíaca: Utiliza-se medicamentos como beta-bloqueadores, bloqueadores dos canais de cálcio ou digoxina que podem ser prescritos pelo médico e ajudará no controle da frequência, na manutenção dos batimentos cardíacos em uma faixa normal e na diminuição dos sintomas;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('${String.fromCharCodes([0x2714])} Controle do Ritmo Cardíaco: Medicamentos antiarrítmicos podem ser usados para restaurar e manter o ritmo do coração normal. No entanto, esses medicamentos podem ter efeitos colaterais, e seu uso deve ser cuidadosamente monitorado;',
+              child: Text('${String.fromCharCodes([0x2714])} Controle do Ritmo Cardíaco: Medicamentos antiarrítmicos podem ser usados para restaurar e manter o ritmo do coração normal. No entanto, esses medicamentos podem ter efeitos colaterais e seu uso deve ser cuidadosamente monitorado;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -54,7 +54,7 @@ class tratamentoSheet extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('${String.fromCharCodes([0x2714])} Cardioversão: caracteriza-se como a aplicação de um “choque elétrico” controlado sobre o coração para restaurar o ritmo do coração normal;',
+              child: Text('${String.fromCharCodes([0x2714])} Cardioversão: Caracteriza-se como a aplicação de um “choque elétrico” controlado sobre o coração para restaurar o ritmo do coração normal;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -68,7 +68,7 @@ class tratamentoSheet extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('${String.fromCharCodes([0x2714])} Implantação de Marca-Passo: Em algumas situações, pode ocorrer a necessidade da utilização do marca-passo especialmente quando há uma combinação de bradicardia (batimentos cardíacos muito lentos) associada a episódios de fibrilação atrial. Nessas situações, o marca-passo pode ser implantado para garantir que o coração mantenha uma frequência cardíaca mínima adequada, mesmo durante os episódios de fibrilação atrial;',
+              child: Text('${String.fromCharCodes([0x2714])} Implantação de Marca-Passo: Em algumas situações, pode ocorrer a necessidade da utilização do marca-passo, especialmente quando há uma combinação de bradicardia (batimentos cardíacos muito lentos) associada a episódios de fibrilação atrial. Nessas situações, o marca-passo pode ser implantado para garantir que o coração mantenha uma frequência cardíaca mínima adequada, mesmo durante os episódios de fibrilação atrial;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
@@ -82,14 +82,14 @@ class tratamentoSheet extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('${String.fromCharCodes([0x2714])} Modificação do Estilo de Vida: Mudanças no estilo de vida, como controle do peso, exercícios regulares, redução do consumo de álcool e cessação do tabagismo, podem ajudar a controlar a doença;',
+              child: Text('${String.fromCharCodes([0x2714])} Modificação do Estilo de Vida: Mudanças no estilo de vida como controle do peso, exercícios regulares, redução do consumo de álcool e cessação do tabagismo podem ajudar a controlar a doença;',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             const Padding(
               padding: EdgeInsets.all(25.0),
-              child: Text('Atenção: É importante destacar que o tratamento é individualizado e depende das características específicas de cada paciente. O acompanhamento médico regular é muito importante para ajustar o plano de tratamento conforme necessário e monitorar a eficácia e a segurança das intervenções.',
+              child: Text('${Text('Atenção:',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w800))} É importante destacar que o tratamento é individualizado e depende das características específicas de cada paciente. O acompanhamento médico regular é muito importante para ajustar o plano de tratamento conforme necessário e monitorar a eficácia e a segurança das intervenções.',
                 style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
