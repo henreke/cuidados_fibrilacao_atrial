@@ -3,12 +3,12 @@ import 'package:cuidados_fibrilacao_atrial/data/perguntas.dart';
 class Avaliacao2 {
   String idPaciente = '';
   int data = 0;
-  bool sangramento = false;
-  bool manchas = false;
-  bool urgencia = false;
-  bool nova_medicacao = false;
-  bool alimentacao = false;
-  bool acrescimo_medicacao = false;
+  int sangramento = -1;
+  int manchas = -1;
+  int urgencia = -1;
+  int nova_medicacao = -1;
+  int alimentacao = -1;
+  int acrescimo_medicacao = -1;
   int manchas_escolha = 0;
   String sangramento_txt = '';
   String urgencia_txt = '';
@@ -34,12 +34,12 @@ class Avaliacao2 {
 
   toJson() => {
         'idPaciente': this.idPaciente,
-        'perg1': this.sangramento ? 1 : 0,
-        'perg2': this.manchas ? 1 : 0,
-        'perg3': this.urgencia ? 1 : 0,
-        'perg4': this.nova_medicacao ? 1 : 0,
-        'perg5': this.alimentacao ? 1 : 0,
-        'perg6': this.acrescimo_medicacao ? 1 : 0,
+        'perg1': this.sangramento == -1 ? 0 : this.sangramento,
+        'perg2': this.manchas == -1 ? 0 : this.manchas,
+        'perg3': this.urgencia == -1 ? 0 : this.urgencia,
+        'perg4': this.nova_medicacao == -1 ? 0 : this.nova_medicacao,
+        'perg5': this.alimentacao == -1 ? 0 : this.alimentacao,
+        'perg6': this.acrescimo_medicacao == -1 ? 0 : this.acrescimo_medicacao,
         'perg1_txt': this.sangramento_txt.toString(),
         'perg2_txt': this.manchas_escolha,
         'perg3_txt': this.urgencia_txt,

@@ -78,6 +78,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                       keyboardType: TextInputType.number,
                       enabled: !isLoading,
                     ),
+                    SizedBox(height: 10,),
                     ElevatedButton(onPressed: isLoading ? null : () async{
                       XFile? foto = await _picker.pickImage(source: ImageSource.gallery);
                       final imageBytes =  await foto!.readAsBytes();
@@ -111,7 +112,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                           })
                       ),
                     ),
-
+                    SizedBox(height: 10,),
                     ElevatedButton(onPressed: isLoading ? null : () async{
                       XFile? foto = await _picker.pickImage(source: ImageSource.camera);
                       final imageBytes =  await foto!.readAsBytes();
@@ -145,7 +146,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                           })
                       ),
                     ),
-
+                    SizedBox(height: 10,),
                     ElevatedButton(
                         style: ButtonStyle(
                           textStyle: MaterialStateProperty.resolveWith((states) {

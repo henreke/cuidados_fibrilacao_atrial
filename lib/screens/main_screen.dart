@@ -179,7 +179,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
        
         if (_userManager?.tipo == TipoUser.PACIENTE) tileMenu(
-          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreenView())),
+          click: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> AutoAvaliacaoScreen2())),
           titulo: 'Auto Avaliação',
           img: "ico/check-up.png",
         ),

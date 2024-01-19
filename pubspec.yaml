@@ -22,7 +22,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #  Engine • revision a4ff2c53d8
 #  Tools • Dart 2.18.1 • DevTools 2.15.0
 
-version: 1.0.0+1
+version: 1.0.1+3
 
 environment:
   sdk: ">=2.18.1 <3.0.0"

@@ -7,12 +7,12 @@ import '../data/avaliacao2.dart';
 
 class AutoAvaliacaoScreen2 extends StatefulWidget {
   AutoAvaliacaoScreen2({Key? key}) : super(key: key);
-  bool sangramento = false;
-  bool manchas = false;
-  bool urgencia = false;
-  bool nova_medicacao = false;
-  bool alimentacao = false;
-  bool acrescimo_medicacao = false;
+  int sangramento = -1;
+  int manchas = -1;
+  int urgencia = -1;
+  int nova_medicacao = -1;
+  int alimentacao = -1;
+  int acrescimo_medicacao = -1;
   int manchas_escolha = 0;
   @override
   State<AutoAvaliacaoScreen2> createState() => _AutoAvaliacaoScreen2State();
@@ -50,7 +50,11 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
           Text("Data: ${Utils.dataToString(tempo)}"),
           Text("Hora: ${tempo.hour}:${tempo.minute}"),
           PerguntaTile(titulo_principal: "Apresentou sangramento?",sim: widget.sangramento,titulo2: "Qual local?",txt: txtLocal,
-            valueSetter: (value)=>setState(()=>widget.sangramento = value),
+            valueSetter: (value) {
+              print(value);
+              setState(() =>
+              widget.sangramento = value);
+            },
           ),
           PerguntaTile2(sim: widget.manchas,escolha: widget.manchas_escolha,
             valueSetter1: (value)=>setState(()=>widget.manchas = value),
@@ -131,7 +135,7 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
 class PerguntaTile extends StatefulWidget {
   PerguntaTile({Key? key, required this.titulo_principal,required this.sim, required this.titulo2,required this.txt, required this.valueSetter}) : super(key: key);
   final String titulo_principal;
-  bool sim;
+  int sim;
   bool enviando = false;
   TextEditingController txt;
   final String titulo2;
@@ -155,19 +159,19 @@ class _PerguntaTileState extends State<PerguntaTile> {
                 SizedBox(width: 4,),
                 Text("Sim"),
                 Checkbox(
-                  value: widget.sim,
-                  onChanged: widget.valueSetter,
+                  value: widget.sim == 1,
+                  onChanged: (value) => widget.valueSetter(1),
                 ),
 
                 Text("Não"),
                 Checkbox(
-                  value: !widget.sim,
-                  onChanged:(value) => widget.valueSetter(!value!),
+                  value: widget.sim == 0,
+                  onChanged:(value) => widget.valueSetter(0),
                 ),
               ],
             ),
           ),
-          if(widget.sim)txtEnvio(
+          if(widget.sim == 1)txtEnvio(
               widget.enviando,
               widget.titulo2,
               widget.txt
@@ -211,7 +215,7 @@ class _PerguntaTileState extends State<PerguntaTile> {
 
 class PerguntaTile2 extends StatefulWidget {
   PerguntaTile2({Key? key, required this.escolha,required this.sim, required this.valueSetter1, required this.valueSetter2}) : super(key: key);
-  bool sim;
+  int sim;
   int escolha;
   final ValueSetter valueSetter1;
   final ValueSetter valueSetter2;
@@ -234,19 +238,19 @@ class _PerguntaTileState2 extends State<PerguntaTile2> {
                 SizedBox(width: 4,),
                 Text("Sim"),
                 Checkbox(
-                  value: widget.sim,
-                  onChanged: widget.valueSetter1,
+                  value: widget.sim == 1,
+                  onChanged: (value) => widget.valueSetter1(1),
                 ),
 
                 Text("Não"),
                 Checkbox(
-                  value: !widget.sim,
-                  onChanged:(value) => widget.valueSetter1(!value!),
+                  value: widget.sim == 0,
+                  onChanged:(value) => widget.valueSetter1(0),
                 ),
               ],
             ),
           ),
-          if(widget.sim)Row(
+          if(widget.sim == 1)Row(
             children: [
               Text("Pequena"),
               Checkbox(

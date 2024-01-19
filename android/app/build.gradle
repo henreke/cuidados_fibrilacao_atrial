@@ -51,7 +51,7 @@ android {
         applicationId "br.com.hbrsoftware.cuidadosFA.cuidados_fibrilacao_atrial"
         minSdkVersion 19
         multiDexEnabled true
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

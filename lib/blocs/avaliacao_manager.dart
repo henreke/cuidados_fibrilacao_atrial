@@ -76,17 +76,17 @@ class AvaliacaoManager{
     List<dynamic> mapa = jsonDecode(response.body);
     mapa.forEach((avaliacao) {
       avaliacoes.add(Avaliacao2(
-          sangramento: avaliacao['perg1'] == 1,
+          sangramento: avaliacao['perg1'],
           sangramento_txt: avaliacao['perg1_txt'],
-          manchas: avaliacao['perg2'] == 1,
+          manchas: avaliacao['perg2'],
           manchas_escolha: avaliacao['perg2_txt'],
-          urgencia: avaliacao['perg3'] == 1,
+          urgencia: avaliacao['perg3'],
           urgencia_txt: avaliacao['perg3_txt'],
-          nova_medicacao: avaliacao['perg4'] == 1,
+          nova_medicacao: avaliacao['perg4'],
           novaMedicacao_txt: avaliacao['perg4_txt'],
-          alimentacao: avaliacao['perg5'] == 1,
+          alimentacao: avaliacao['perg5'],
           alimentacao_txt: avaliacao['perg5_txt'],
-          acrescimo_medicacao: avaliacao['perg6'] == 1,
+          acrescimo_medicacao: avaliacao['perg6'],
           acrescimoMedicacao_txt: avaliacao['perg6_txt'],
           idPaciente: idUser,
           data: avaliacao['data'],

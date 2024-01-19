@@ -36,4 +36,5 @@ class Utils{
   static int valorExameAlto = 200;
   static int valorExameBaixo = -1;
 
+
 }
