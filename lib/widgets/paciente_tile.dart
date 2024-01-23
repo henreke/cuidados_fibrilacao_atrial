@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cuidados_fibrilacao_atrial/blocs/paciente_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/data/paciente.dart';
+import 'package:cuidados_fibrilacao_atrial/data/user.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/autoavaliacao_screen_view.dart';
 import 'package:cuidados_fibrilacao_atrial/screens/chart_screen_equipe.dart';
@@ -21,10 +22,11 @@ import 'package:badges/badges.dart';
 class PacienteTile extends StatelessWidget {
 
   final Paciente? paciente;
+  final int? tipo;
   final void Function() visualizarExame;
   final void Function() alterarMedicacao;
   final void Function() marcarVisto;
-  const PacienteTile({this.paciente,required this.alterarMedicacao,required this.marcarVisto,required this.visualizarExame,Key? key}) : super(key: key);
+  const PacienteTile({this.paciente,required this.alterarMedicacao,required this.marcarVisto,required this.visualizarExame,Key? key, this.tipo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,8 @@ class PacienteTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Paciente:',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                  Text('Idade: ${Utils.idadeFromEpoch(paciente!.dtnascimento!)}'),
+                  const Text('Paciente(Nome Completo):',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                  Text('DN: ${Utils.epochToString(paciente!.dtnascimento!)}'),
                   //Image.memory(base64Decode(paciente!.ultimoExame!.foto!)),
                 ],
               ),
@@ -64,7 +66,7 @@ class PacienteTile extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8,),
-              SizedBox(
+              if(tipo == 2)SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
@@ -120,7 +122,7 @@ class PacienteTile extends StatelessWidget {
                   children: [
                     TextButton(onPressed: paciente!.ultimoExame!.data == 0 ? null : ()=>visualizarExame(), child: Text('Visualizar Exame')),
                     Text("  Medicações em Uso: ${paciente!.medicamento}"),
-                    TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicações (Segunda a Domingo)')),
+                    if(tipo == 2)TextButton(onPressed: ()=>alterarMedicacao(), child: Text('Alterar Medicações (Segunda a Domingo)')),
                   ],
                 ),
               ),
@@ -130,7 +132,7 @@ class PacienteTile extends StatelessWidget {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   children: [
-                    TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
+                    if(tipo == 2)TextButton(onPressed: ()=>marcarVisto(), child: Text('Marcar como Visto')),
                     TextButton(onPressed: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>AutoAvaliacaoScreenView(idPaciente: paciente!.uid!,))), child: const Text('Visualizar Auto Avaliação Semanal'))
                   ],
                 ),
@@ -140,8 +142,8 @@ class PacienteTile extends StatelessWidget {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   children: [
-                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações Médicas')),
-                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenEnfermagem(paciente: paciente!,))), child: Text('Enviar Orientações de Enfermagem')),
+                    if(tipo == 2)TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenSaude(paciente: paciente!,))), child: Text('Enviar Orientações Médicas')),
+                    if(tipo == 3)TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreenEnfermagem(paciente: paciente!,))), child: Text('Enviar Orientações de Enfermagem')),
                     TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>HistoricoMedicacoesScreen(paciente: paciente!,))), child: Text('Histórico de Adesão ao Tratamento Medicamentoso')),
                   ],
                 ),
@@ -163,8 +165,8 @@ class PacienteTile extends StatelessWidget {
                 child: Wrap(
                   alignment: WrapAlignment.spaceBetween,
                   children: [
-                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreen(idPaciente: paciente!.uid!,))), child: Text('Ferramenta CHA2DS2-VASc')),
-                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreenView(idPaciente: paciente!.uid!,))), child: Text('Histórico Ferramenta CHA2DS2-VASc')),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreen(idPaciente: paciente!.uid!,))), child: Text('Ferramenta CHA${String.fromCharCodes([0x2082])}DS${String.fromCharCodes([0x2082])}-VASc',style: TextStyle(fontFamily: "Montserrat",fontWeight: FontWeight.w300))),
+                    TextButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EscoreChadScreenView(idPaciente: paciente!.uid!,))), child: Text('Histórico Ferramenta CHA${String.fromCharCodes([0x2082])}DS${String.fromCharCodes([0x2082])}-VASc',style: TextStyle(fontFamily: "Montserrat",fontWeight: FontWeight.w300))),
 
                   ],
                 ),

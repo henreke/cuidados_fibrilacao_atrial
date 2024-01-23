@@ -124,7 +124,7 @@ class _EscoreHasBledScreenViewState extends State<EscoreHasBledScreenView> {
                 },
               ),
               CheckboxListTile(
-                title: Text("AVC"),
+                title: Text("Acidente Vascular Cerebral"),
                 value: widget.checks[3],
                 onChanged: (valor) {
                   setState(() {

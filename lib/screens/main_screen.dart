@@ -210,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
             click:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> EscoreChadScreen())),
-            titulo: "Ferramenta CHADS-VASC",
+            titulo: "Ferramenta CHA${String.fromCharCodes([0x2082])}DS${String.fromCharCodes([0x2082])}-VASc",
             img: "ico/score.png"
         ),
         if (_userManager?.tipo == TipoUser.MEDICO || _userManager?.tipo == TipoUser.ENFERMEIRO)tileMenu(
@@ -232,7 +232,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Image.asset(img,height: 75),
               const SizedBox(width: 10,),
-              Flexible(child: Text(titulo, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),maxLines: 2)),
+              Flexible(child: Text(titulo, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w900,fontFamily: "Montserrat"),maxLines: 2)),
             ],
           ),
         ),

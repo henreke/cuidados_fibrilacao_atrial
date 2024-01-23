@@ -63,7 +63,7 @@ class _BuscarPacientesCentroMedicoScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Atender Pacientes'),
+        title: const Text('Atendimento Pacientes'),
         centerTitle: true,
       ),
       body: ListView(
@@ -90,6 +90,7 @@ class _BuscarPacientesCentroMedicoScreenState
                   itemBuilder: (context, item) {
                     return PacienteTile(
                       paciente: lista[item],
+                      tipo: _userManager!.tipo,
                       visualizarExame:  () => Navigator.push(
                           context,
                           MaterialPageRoute(

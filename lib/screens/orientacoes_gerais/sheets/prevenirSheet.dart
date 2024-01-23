@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../utils/utils.dart';
 class prevenirSheet extends StatelessWidget {
 
   const prevenirSheet({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class prevenirSheet extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Fazer controle da frequência cardíaca: O controle da frequência em casa deve ser feito com a orientação e aprovação de um profissional de saúde. Caso tenha disponível, utilize um monitor de frequência cardíaca; verifique a frequência cardíaca regularmente, em momentos específicos do dia ou quando surgirem sintomas e registre os resultados, pois isso pode ajudar o profissional de saúde a avaliar a eficácia do tratamento;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
@@ -41,92 +43,86 @@ class prevenirSheet extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(text:'${String.fromCharCodes([0x2714])}Realizar controle rigoroso (Manhã e Noite) da pressão arterial: O ideal é manter uma pressão sistólica de 120 – 129  e a diastólica deve ser mantida abaixo de 80 mmHg.',
-                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                      style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
 
                     ),
-                    TextSpan(text:'\nAtenção:',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w800)),
+                    TextSpan(text:'\nAtenção:',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w800,color: Colors.red)),
                     TextSpan(text:' Este valor pode variar de acordo com a sua condição clínica!',
-                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                      style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
 
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('${String.fromCharCodes([0x2714])}Realizar controle rigoroso (Manhã e Noite) da pressão arterial: O ideal é manter uma pressão sistólica de 120 – 129  e a diastólica deve ser mantida abaixo de 80 mmHg.\nAtenção: Este valor pode variar de acordo com a sua condição clínica!',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
-                textAlign: TextAlign.justify,
-              ),
-            ),
+
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Consumir uma dieta balanceada e equilibrada: Evite alimentos ricos em sódio (sal), O sódio pode contribuir para a retenção de líquidos e elevar a pressão arterial. Evite alimentos processados, fast food e alimentos muito salgados;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Alimentos ricos em gordura saturada: Reduza o consumo de alimentos ricos em gordura saturada, como carnes gordurosas, produtos de panificação, frituras e alimentos processados;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Cafeína: Modere o consumo de café, chá e outras fontes de cafeína. Utilizar 200 a 300 miligramas de cafeína por dia, o que é aproximadamente o equivalente a uma ou duas xícaras de café;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Álcool: O consumo excessivo de álcool pode aumentar o risco de fibrilação atrial. Discutir com seu médico durante a avaliação para uma orientação individualizada com base na sua saúde global;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Açúcar refinado: Reduza a ingestão de açúcares adicionados, presentes em doces, refrigerantes. Isso também pode ajudar a manter um peso saudável;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Alimentos ricos em vitamina K: Se a pessoa estiver tomando anticoagulantes, ela pode precisar monitorar a ingestão de alimentos ricos em vitamina K, como couve, espinafre e brócolis, coentro, alface, pois esses alimentos podem interferir com a ação dos medicamentos;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Bebidas energéticas: Evite bebidas energéticas como Red Bull, Monster Energy, entre outros, pois apresentam a cafeína e outros ingredientes que podem afetar o ritmo cardíaco;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
-              child: Text('${String.fromCharCodes([0x2714])}Controle da apneia do sono: Este controle pode ser feito através da perda de peso, quando a apneia estiver relacionada à obesidade; assim como evitar o consumo de bebidas alcoólicas e o uso de sedativos, pois essas substâncias podem relaxar os músculos da garganta, contribuindo para a obstrução das vias respiratórias; posicionar-se adequadamente durante o sono, como dormir de lado, em vez de costas, pois reduz a gravidade da apneia do sono em alguns casos;  em alguns casos, dispositivos ou estratégias podem ser usados para evitar que a pessoa durma de costas; além disso, é importante avaliar a necessidade do uso de CPAP, ou seja, de um aparelho que ajuda a melhorar o sono;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+              child: Text('${String.fromCharCodes([0x2714])}Controle da apneia do sono: Este controle pode ser feito através da perda de peso, quando a apneia estiver relacionada à obesidade; assim como evitar o consumo de bebidas alcoólicas e o uso de sedativos, pois essas substâncias podem relaxar os músculos da garganta, contribuindo para a obstrução das vias respiratórias; posicionar-se adequadamente durante o sono, como dormir de lado, em vez de costas, pois reduz a gravidade da apneia do sono em alguns casos;\nEm alguns casos, dispositivos ou estratégias podem ser usados para evitar que a pessoa durma de costas; além disso, é importante avaliar a necessidade do uso de CPAP, ou seja, de um aparelho que ajuda a melhorar o sono;',
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Atividade Física: Realizar atividade aeróbica regular de moderada intensidade no mínimo de 150 minutos/semanais, que podem variar entre três vezes por semana de 50 minutos ou cinco vezes por semana de 30 minutos.',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25,right: 25,top: 10),
               child: Text('${String.fromCharCodes([0x2714])}Fazer controle de peso alimentando-se adequadamente;',
-                style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
                 textAlign: TextAlign.justify,
               ),
             ),
@@ -141,9 +137,9 @@ class prevenirSheet extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: [
-                    TextSpan(text:'${String.fromCharCodes([0x2714])}Atenção:',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w800)),
+                    TextSpan(text:'${String.fromCharCodes([0x2714])}Atenção:',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w800,color: Colors.red)),
                     TextSpan(text:' Sempre informe à equipe de saúde sobre todos os medicamentos, suplementos que você está tomando antes de iniciar ou modificar o tratamento com anticoagulantes.',
-                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.w500),
+                      style: TextStyle(fontSize: Utils.font_textos,fontWeight: FontWeight.w500),
 
                     ),
                   ],

@@ -124,7 +124,23 @@ class _AutoAvaliacaoScreen2State extends State<AutoAvaliacaoScreen2> {
                 );
               }
           ),
-          Text("ATENÇÃO: SE APRESENTAR UM SANGRAMENTO INTENSO, PROCURAR UM SERVIÇO DE URGÊNCIA.",style: TextStyle(fontWeight: FontWeight.bold),)
+          RichText(
+            textAlign: TextAlign.justify,
+            text: TextSpan(
+              style: const TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+              ),
+              children: [
+                TextSpan(text:'ATENÇÃO:',style: TextStyle(fontSize: 24,fontWeight: FontWeight.w800,color: Colors.red)),
+                TextSpan(text:' SE APRESENTAR UM SANGRAMENTO INTENSO, PROCURAR UM SERVIÇO DE URGÊNCIA.',
+                  style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
+
+                ),
+              ],
+            ),
+          ),
+
         ],
       ),
     );

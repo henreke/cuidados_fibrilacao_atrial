@@ -120,7 +120,7 @@ class _CadUserScreenState extends State<CadUserScreen> {
                           },
                         ),
                         ChoiceChip(
-                          label: const Text('Médica(o)'),
+                          label: const Text('Médico(a)'),
                           selected: TipoUser.MEDICO == _tipoUsuario,
                           onSelected: (bool value){
                               setState(() {
@@ -129,7 +129,7 @@ class _CadUserScreenState extends State<CadUserScreen> {
                           },
                         ),
                         ChoiceChip(
-                          label: const Text('Enfermeira(o)'),
+                          label: const Text('Enfermeiro(a)'),
                           selected: TipoUser.ENFERMEIRO == _tipoUsuario,
                           onSelected: (bool value){
                               setState(() {

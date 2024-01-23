@@ -67,7 +67,7 @@ class _EscoreChadScreenViewState extends State<EscoreChadScreenView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ferramenta CHADS-VASc"),
+        title: Text("Ferramenta CHA${String.fromCharCodes([0x2082])}DS${String.fromCharCodes([0x2082])}-VASc",style: TextStyle(fontFamily: "Montserrat",fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: StreamBuilder<List<Chads>>(

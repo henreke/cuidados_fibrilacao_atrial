@@ -174,7 +174,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                       shrinkWrap: true,
                       children: [
                         TextFormField(
-                          decoration: const InputDecoration(labelText: 'Nova Dose:'),
+                          decoration: const InputDecoration(labelText: 'Posologia:'),
                             controller: doseController,
                             keyboardType: TextInputType.number,
                           validator: (valor){
