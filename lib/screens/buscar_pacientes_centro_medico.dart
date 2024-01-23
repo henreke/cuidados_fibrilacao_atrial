@@ -110,7 +110,7 @@ class _BuscarPacientesCentroMedicoScreenState
                             _pacienteManager.refreshListaPacientes(lista);
                             ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(
-                      content: Text('Exame marcado como visto!'+lista[item].ultimoExame!.tratado.toString()),
+                      content: Text('Exame marcado como visto!'),
                       ));
                             },
                           onFail: () => ScaffoldMessenger.of(context)

@@ -174,7 +174,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                       shrinkWrap: true,
                       children: [
                         TextFormField(
-                          decoration: const InputDecoration(labelText: 'Posologia:'),
+                          decoration: const InputDecoration(labelText: 'Nova Dose:'),
                             controller: doseController,
                             keyboardType: TextInputType.number,
                           validator: (valor){
@@ -186,12 +186,12 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                           },
                         ),
                         TextFormField(
-                            decoration: const InputDecoration(labelText: 'Frequência:'),
+                            decoration: const InputDecoration(labelText: 'Posologia:'),
                             controller: frequenciaController,
                             keyboardType: TextInputType.number,
                             validator: (valor){
                               if (valor!.isEmpty){
-                                return 'Preencha a Frequência!';
+                                return 'Preencha a Posologia!';
                               } else{
                                 return null;
                               }
