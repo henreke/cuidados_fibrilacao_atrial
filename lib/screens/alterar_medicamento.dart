@@ -261,12 +261,12 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                                 },
                               ),
                               TextFormField(
-                                decoration: const InputDecoration(labelText: 'Frequência:'),
+                                decoration: const InputDecoration(labelText: 'Posologia:'),
                                 controller: frequenciaController2,
                                 keyboardType: TextInputType.number,
                                 validator: (valor){
                                   if (valor!.isEmpty){
-                                    return 'Preencha a Frequência!';
+                                    return 'Preencha a Posologia!';
                                   } else{
                                     return null;
                                   }
