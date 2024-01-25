@@ -164,7 +164,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                           })
                         ),
                         onPressed: isLoading ? null : (){
-                      Exame exame = Exame(idUser: _userManager!.uid,foto: _baseimage,extensao: _extensao,data: selectedDate.millisecondsSinceEpoch,valor: int.parse(valorController.text));
+                      Exame exame = Exame(idUser: _userManager!.uid,foto: _baseimage,extensao: _extensao,data: selectedDate.millisecondsSinceEpoch,valor: double.parse(valorController.text.replaceAll(",", ".")));
 
                       _exameManager.cadExame(exame: exame, onSuccess: (){
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

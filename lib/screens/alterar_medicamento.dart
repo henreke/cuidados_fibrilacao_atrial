@@ -86,7 +86,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                                       idMedicamento: lista_medicamentos[item]
                                           .medicamento!
                                           .id!,
-                                      dose: int.parse(doseController.text),
+                                      dose: double.parse(doseController.text.replaceAll(",", ".")),
                                       frequencia:
                                           int.parse(frequenciaController.text),
                                       idPaciente: widget.paciente.uid!,
@@ -127,10 +127,11 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: ()=>_showSheetNovo(context, () {
+          //print("Dose ${doseController2.text.replaceAll(",", ".")}");
               if (formkey2.currentState!.validate()){
                 _medicamentoManager.alterarMedicacao(
                     idMedicamento: _medicamentoEscolhido?.id ?? 0,
-                    dose: int.parse(doseController2.text),
+                    dose: double.parse(doseController2.text.replaceAll(",", ".")),
                     frequencia:
                     int.parse(frequenciaController2.text),
                     idPaciente: widget.paciente.uid!,

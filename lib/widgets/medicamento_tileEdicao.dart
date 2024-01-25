@@ -6,9 +6,9 @@ class MedicamentosTileEdicao extends StatefulWidget {
   late String? nome;
   late String? nome_medico;
   late int? data;
-  late int? dose;
+  late num? dose;
   late int? frequencia;
-  late int? dose_tomadas;
+  late num? dose_tomadas;
   late void Function() alterarMedicacao;
   late void Function() excluirMedicacao;
   MedicamentosTileEdicao({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.alterarMedicacao,required this.excluirMedicacao,required this.nome_medico}) : super(key: key);

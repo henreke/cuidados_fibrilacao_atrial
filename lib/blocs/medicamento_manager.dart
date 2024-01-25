@@ -184,7 +184,7 @@ class MedicamentoManager{
     return 0;
   }
 
-  Future<int> alterarMedicacao({int? idMedicamentoPacienteAnterior, required int idMedicamento,required int dose, required int frequencia, required String idPaciente,required String jwt,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
+  Future<int> alterarMedicacao({int? idMedicamentoPacienteAnterior, required int idMedicamento,required double dose, required int frequencia, required String idPaciente,required String jwt,required String idUser,required void Function() onSuccess, required void Function() onFail}) async{
 
     _blcisLoading.add(true);
     var response = await http.post(

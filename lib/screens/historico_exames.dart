@@ -38,7 +38,7 @@ class _HistoricoExamesScreenState extends State<HistoricoExamesScreen> {
       _exameManager.getListaExamesPaciente(id: widget.paciente!.uid!, idUser: _userManager!.uid);
     }
   }
-  BarChartGroupData generateGroupData(int x, int y) {
+  BarChartGroupData generateGroupData(int x, num y) {
     return BarChartGroupData(
       x: x,
       showingTooltipIndicators: showingTooltip == x ? [0] : [],

@@ -5,7 +5,7 @@ class Exame{
   late String? foto;
   late String? extensao;
   late int? data;
-  late int? valor;
+  late num? valor;
   late int? tratado;
   late int? data_tratado;
 

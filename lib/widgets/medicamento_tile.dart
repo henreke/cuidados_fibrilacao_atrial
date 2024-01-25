@@ -6,10 +6,10 @@ class MedicamentosTile extends StatefulWidget {
   late String? nome;
   late String? nome_medico;
   late int? data;
-  late int? dose;
+  late num? dose;
   late int? frequencia;
-  late int? dose_tomadas;
-  late int? dose_prescrita;
+  late num? dose_tomadas;
+  late num? dose_prescrita;
   late void Function() tomarMedicacao;
   MedicamentosTile({Key? key,this.nome, this.data, this.dose, this.frequencia,this.dose_tomadas,required this.tomarMedicacao,required this.nome_medico,required this.dose_prescrita}) : super(key: key);
 

@@ -52,7 +52,7 @@ class _CadUserScreenState extends State<CadUserScreen> {
                   shrinkWrap: true,
                   children: [
                     TextFormField(
-                      decoration: const InputDecoration(labelText: 'Nome:'),
+                      decoration: const InputDecoration(labelText: 'Nome Completo:'),
                       enabled: !_isLoading,
                       autocorrect: false,
                       controller: nomeController,
