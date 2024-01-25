@@ -177,7 +177,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                         TextFormField(
                           decoration: const InputDecoration(labelText: 'Nova Dose:'),
                             controller: doseController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                           validator: (valor){
                             if (valor!.isEmpty){
                               return 'Preencha a Dose!';
@@ -252,7 +252,7 @@ class _AlterarMedicamentoScreenState extends State<AlterarMedicamentoScreen> {
                               TextFormField(
                                 decoration: const InputDecoration(labelText: 'Nova Dose:'),
                                 controller: doseController2,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                                 validator: (valor){
                                   if (valor!.isEmpty){
                                     return 'Preencha a Dose!';

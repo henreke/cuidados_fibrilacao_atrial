@@ -75,7 +75,7 @@ class _EnviarExameScreenState extends State<EnviarExameScreen> {
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Valor do Resultado:'),
                       controller: valorController,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                       enabled: !isLoading,
                     ),
                     SizedBox(height: 10,),
