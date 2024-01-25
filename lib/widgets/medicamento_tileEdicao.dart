@@ -38,7 +38,7 @@ class _MedicamentosTileEdicaoState extends State<MedicamentosTileEdicao> {
                     child: Text('Medicamento:\n${widget.nome}')
                 ),
 
-                Text('${widget.frequencia} vezes ao dia.')
+                Text(widget.frequencia == 1 ? "Uma vez ao dia" : '${widget.frequencia} vezes ao dia.')
               ],
             ),
             const SizedBox(height: 8,),

@@ -3,6 +3,8 @@ import 'package:cuidados_fibrilacao_atrial/blocs/user_manager.dart';
 import 'package:cuidados_fibrilacao_atrial/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/utils.dart';
 class CadUserScreen extends StatefulWidget {
   const CadUserScreen({Key? key}) : super(key: key);
 
@@ -27,6 +29,7 @@ class _CadUserScreenState extends State<CadUserScreen> {
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   final TextEditingController nomeController = TextEditingController();
+  final TextEditingController dnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final TextEditingController confirmacaoSenhaController = TextEditingController();
@@ -60,6 +63,20 @@ class _CadUserScreenState extends State<CadUserScreen> {
                         if (nome!.isEmpty){
                           return 'Preencha seu nome';
                         }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: 'Data de Nascimento:'),
+                      enabled: !_isLoading,
+                      autocorrect: false,
+                      controller: dnController,
+                      keyboardType: TextInputType.datetime,
+                      validator: (dn){
+                        if (dn!.isEmpty){
+                          return 'Preencha a data de nascimento';
+                        }
+
                         return null;
                       },
                     ),
@@ -142,9 +159,10 @@ class _CadUserScreenState extends State<CadUserScreen> {
                     const SizedBox(height: 16,),
                     ElevatedButton(
                         onPressed: _isLoading ? null :  () async{
+
                           if (formkey.currentState!.validate()){
 
-                            Users user = Users(email: emailController.text, senha: senhaController.text,nome: nomeController.text,tipo: _tipoUsuario,dtnascimento: 0);
+                            Users user = Users(email: emailController.text, senha: senhaController.text,nome: nomeController.text,tipo: _tipoUsuario,dtnascimento: Utils.parseCompactDate(dnController.text)?.millisecondsSinceEpoch);
                             int valor = await _userManager!.cadUser(onSuccess: (){
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text('Cadastro Efetuado com sucesso!'),

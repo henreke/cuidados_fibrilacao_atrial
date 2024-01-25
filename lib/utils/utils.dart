@@ -37,4 +37,36 @@ class Utils{
   static int valorExameBaixo = -1;
 
 
+  static DateTime? parseCompactDate(String? inputString) {
+    if (inputString == null) {
+      return null;
+    }
+
+    // Assumes US mm/dd/yyyy format
+    final List<String> inputParts = inputString.split('/');
+    if (inputParts.length != 3) {
+      return null;
+    }
+
+    final int? year = int.tryParse(inputParts[2], radix: 10);
+    if (year == null || year < 1) {
+      return null;
+    }
+
+    final int? month = int.tryParse(inputParts[1], radix: 10);
+    if (month == null || month < 1 || month > 12) {
+      return null;
+    }
+
+    final int? day = int.tryParse(inputParts[0], radix: 10);
+    if (day == null || day < 1) {
+      return null;
+    }
+
+    try {
+      return DateTime(year, month, day);
+    } on ArgumentError {
+      return null;
+    }
+  }
 }
