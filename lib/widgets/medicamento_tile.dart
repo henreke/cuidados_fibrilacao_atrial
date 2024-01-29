@@ -37,7 +37,7 @@ class _MedicamentosTileState extends State<MedicamentosTile> {
                     child: Text('Medicamento:\n${widget.nome}')
                 ),
 
-                Text('${widget.frequencia} vezes ao dia.')
+                Text(widget.frequencia == 1 ? 'Uma vez ao dia' : '${widget.frequencia} vezes ao dia.')
               ],
             ),
             const SizedBox(height: 8,),
@@ -51,7 +51,7 @@ class _MedicamentosTileState extends State<MedicamentosTile> {
             const SizedBox(height: 8,),
             Text('Prescrito por:\n${widget.nome_medico ?? ''}'),
             const SizedBox(height: 8,),
-            Text(faltaTomar ? 'Ainda faltam ${widget.frequencia! - widget.dose_tomadas!} hoje.' : 'Parabéns você já tomou sua medicação completa hoje'),
+            Text(faltaTomar ? (widget.frequencia! - widget.dose_tomadas!) == 1 ? 'Ainda falta uma hoje.' :  'Ainda faltam ${widget.frequencia! - widget.dose_tomadas!} hoje.' : 'Parabéns você já tomou sua medicação completa hoje'),
             if (faltaTomar)TextButton(onPressed: ()=>widget.tomarMedicacao(), child: const Text('Tomei minha medicação')),
             const SizedBox(height: 10,),
             Row(
